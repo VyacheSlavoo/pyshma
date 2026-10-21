@@ -1,0 +1,47 @@
+{
+  "domain": null,
+  "brand": null,
+  "signature": null,
+  "founded_year": null,
+
+  "plant": {
+    "locality": null,
+    "locality_in": null,
+    "locality_from": null,
+    "region": null,
+    "district": null,
+    "district_dat": null,
+    "address": null,
+    "street": null,
+    "postal_code": null,
+    "geo": { "lat": null, "lon": null },
+    "yandex_url": "https://yandex.ru/maps/-/CXe6qB3-",
+    "yandex_org_id": null,
+    "directions": null
+  },
+
+  "phone": { "display": null, "e164": null },
+  "messengers": [],
+  "email_public": null,
+
+  "min_volume_m3": null,
+  "vat": null,
+
+  "delivery": {
+    "price_includes_delivery": null,
+    "tariff_note": null,
+    "mixer_capacity_m3": null,
+    "dispatch_note": null,
+    "waiting_note": null
+  },
+
+  "documents": ["паспорт качества", "товарно-транспортная накладная"],
+  "lab": { "has_control": true },
+
+  "hero_h1": null,
+  "mark_pages": [],
+  "social": [],
+  "reviews": { "items": [] },
+  "requisites": null,
+  "metrika_id": null
+}

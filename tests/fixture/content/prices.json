@@ -1,0 +1,32 @@
+{
+  "categories": [
+    {
+      "slug": "tovarnyy-beton",
+      "rows": [
+        { "mark": "М100", "class": "В7,5", "mobility": "П3", "frost": "F50", "water": "W2", "price": 3900 },
+        { "mark": "М150", "class": "В10", "mobility": "П3", "frost": "F75", "water": "W2", "price": 4100 },
+        { "mark": "М200", "class": "В15", "mobility": "П3", "frost": "F100", "water": "W4", "price": 4400 },
+        { "mark": "М200", "class": "В15", "mobility": "П4", "frost": "F100", "water": "W4", "price": 4500 },
+        { "mark": "М250", "class": "В20", "mobility": "П3", "frost": "F150", "water": "W6", "price": 4700 },
+        { "mark": "М300", "class": "В22,5", "mobility": "П3", "frost": "F150", "water": "W6", "price": 4950 },
+        { "mark": "М300", "class": "В22,5", "mobility": "П4", "frost": "F200", "water": "W8", "price": 5150 },
+        { "mark": "М350", "class": "В25", "mobility": "П4", "frost": "F200", "water": "W8", "price": 5400 },
+        { "mark": "М400", "class": "В30", "mobility": "П4", "frost": "F200", "water": "W10", "price": 5900 }
+      ]
+    },
+    {
+      "slug": "beton-s-pmd",
+      "rows": [
+        { "mark": "М200", "class": "В15", "mobility": "П3", "frost": "F100", "water": "W4", "pmd": -10, "price": 4900 },
+        { "mark": "М300", "class": "В22,5", "mobility": "П3", "frost": "F150", "water": "W6", "pmd": -15, "price": 5600 }
+      ]
+    },
+    {
+      "slug": "rastvory",
+      "rows": [
+        { "name": "Раствор кладочный М100", "spec": "цементно-песчаный", "unit": "м³", "price": 3600 },
+        { "name": "ЦПС (цементно-песчаная смесь)", "spec": "1:4", "unit": "м³", "price": 3300 }
+      ]
+    }
+  ]
+}

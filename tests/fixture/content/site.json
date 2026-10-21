@@ -1,0 +1,44 @@
+{
+  "domain": "https://example.ru",
+  "brand": "Бетон-Тест",
+  "signature": "ТЕСТОВЫЕ ДАННЫЕ",
+  "founded_year": 2012,
+  "plant": {
+    "locality": "Опытное",
+    "locality_in": "в Опытном",
+    "locality_from": "из Опытного",
+    "region": "Тестовская область",
+    "district": "Опытный район",
+    "district_dat": "Опытному району",
+    "address": "Тестовская область, Опытный район, пос. Опытное, ул. Заводская, 1",
+    "street": "ул. Заводская, 1",
+    "postal_code": "000000",
+    "geo": { "lat": 59.9, "lon": 30.3 },
+    "yandex_url": "https://yandex.ru/maps/-/CXe6qB3-",
+    "yandex_org_id": null,
+    "directions": "Съезд с трассы у указателя «Опытное», дальше 400 м по ул. Заводской."
+  },
+  "phone": { "display": "+7 (900) 000-00-00", "e164": "+79000000000" },
+  "messengers": [
+    { "type": "telegram", "url": "https://t.me/example_fixture" },
+    { "type": "whatsapp", "url": "https://wa.me/79000000000" }
+  ],
+  "email_public": "info@example.ru",
+  "min_volume_m3": 1,
+  "vat": "included",
+  "delivery": {
+    "price_includes_delivery": false,
+    "tariff_note": "Стоимость доставки зависит от расстояния до объекта и объёма заказа. Точную сумму называем при расчёте по адресу.",
+    "mixer_capacity_m3": 7,
+    "dispatch_note": "Время подачи миксера зависит от расстояния до объекта и загрузки завода.",
+    "waiting_note": null
+  },
+  "documents": ["паспорт качества", "товарно-транспортная накладная"],
+  "lab": { "has_control": true },
+  "hero_h1": null,
+  "mark_pages": ["М200", "М300"],
+  "social": [],
+  "reviews": { "items": [] },
+  "requisites": null,
+  "metrika_id": null
+}

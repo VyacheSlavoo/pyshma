@@ -1,0 +1,17 @@
+{
+  "cities": [
+    {
+      "slug": "probnoe", "tier": "city", "name": "Пробное", "in": "в Пробном",
+      "distance_km": 18, "travel_time": "около 30 минут",
+      "delivery_cost": 1800, "delivery_cost_unit": "за рейс",
+      "notes": ["Подъезд к объектам в центре согласуем по адресу: учитываем ограничения по массе и высоте."],
+      "faq": []
+    },
+    {
+      "slug": "obraztsovo", "tier": "settlement", "name": "Образцово", "in": "в Образцове",
+      "distance_km": 9, "travel_time": "около 15 минут",
+      "delivery_cost": null, "delivery_cost_unit": null,
+      "notes": [], "faq": []
+    }
+  ]
+}
