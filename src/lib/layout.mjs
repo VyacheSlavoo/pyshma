@@ -41,7 +41,7 @@ export function head(ctx, page) {
 <meta name="description" content="${page.description}">
 ${page.url === '/404.html' ? '' : h`<link rel="canonical" href="${canonical}">`}
 ${noindex ? raw(`<meta name="robots" content="noindex, ${ctx.fixture || ctx.preview || ctx.demo ? 'nofollow' : 'follow'}">`) : raw('<meta name="robots" content="index, follow, max-image-preview:large">')}
-<meta name="theme-color" content="#F5F3EE">
+<meta name="theme-color" content="#FFFFFF">
 <meta property="og:type" content="${page.ogType || 'website'}">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="${site.brand}">
@@ -59,9 +59,8 @@ ${noindex ? raw(`<meta name="robots" content="noindex, ${ctx.fixture || ctx.prev
 <link rel="apple-touch-icon" href="${ctx.assets.touch}">
 ${site.yandex_verification ? raw(`<meta name="yandex-verification" content="${esc(site.yandex_verification)}">`) : ''}
 <link rel="preload" href="/assets/fonts/plex-cyrillic-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/oswald-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/plex-latin-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin>
+
 <link rel="stylesheet" href="${ctx.assets.css}">
 <script>document.documentElement.className='js'${ctx.demo ? raw(';window.__DEMO__=1') : ''}</script>
 ${join(ld.map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)), '\n')}
