@@ -210,7 +210,7 @@ const allText = pages.map((p) => p.text).join('\n');
     if (!p.noindex && !/24\/7/.test(p.desc) && ['/', '/contacts/', '/dostavka/'].includes(p.url)) err(P, p.url, 'в Description нет 24/7');
   }
   // 24/7 в ключевых местах
-  if (!/class="hdr__hrs">Работаем 24\/7</.test(home.html)) err(P, '/', 'нет «Работаем 24/7» в шапке');
+  if (!/<header class="hdr"[\s\S]*?Работаем 24\/7[\s\S]*?<\/header>/.test(home.html)) err(P, '/', 'нет «Работаем 24/7» в шапке');
   for (const [url, where] of [['/', 'hero'], ['/contacts/', 'контакты']]) if (!/24\/7/.test(byUrl(url).mainText)) err(P, url, `нет 24/7 (${where})`);
   if (!/24\/7/.test(home.html.slice(home.html.indexOf('<footer')))) err(P, '/', 'нет 24/7 в футере');
   if (!home.ld.some((j) => JSON.stringify(j).includes('"openingHours":"Mo-Su 00:00-23:59"'))) err(P, '/', 'нет openingHours 24/7 в schema');
@@ -219,10 +219,10 @@ const allText = pages.map((p) => p.text).join('\n');
   for (const p of pages) for (const m of p.mainText.matchAll(/(?:минимальный заказ(?: [^.]{0,12})?\s*[—-]|заказ от|доставка от|миксером)\s*(?:от\s*)?(\d+(?:,\d+)?)\s*м³/gi)) if (m[1] !== mv) err(P, p.url, `минимальный объём «${m[0]}» ≠ ${mv}`);
   // цена «от»
   const main = ctx.mainConcrete;
-  const heroPrice = Number((home.main.match(/<p class="hero__price">[^<]*<b>([^<]*)<\/b>/) || [])[1]?.replace(/[^\d]/g, ''));
+  const heroPrice = Number((home.main.match(/class="hero__price"><b>([^<]*)<\/b>/) || [])[1]?.replace(/[^\d]/g, ''));
   if (heroPrice !== ctx.fromPrice) err(P, '/', `цена «от» в hero ${heroPrice} ≠ минимум товарного бетона ${ctx.fromPrice}`);
   const catPage = byUrl(`/catalog/${main.slug}/`);
-  const fact = Number((catPage.mainText.match(/Цена от ([\d ]+)\s*₽\/м³/) || [])[1]?.replace(/\s/g, ''));
+  const fact = Number(decode((catPage.main.match(/class="pagehead__price">от ([^<]*)₽<small>за м³/) || [])[1]).replace(/[^\d]/g, ''));
   if (fact !== ctx.fromPrice) err(P, catPage.url, `цена «от» ${fact} ≠ ${ctx.fromPrice}`);
   // все видимые цены есть в данных
   const known = new Set([...ctx.categories.flatMap((c) => c.rows.map((r) => r.price)), ...(ctx.rental ? [...ctx.rental.units, ...ctx.rental.extras].map((u) => u.price) : []), ...ctx.cities.map((c) => c.delivery_cost).filter((v) => v != null)]);
@@ -270,7 +270,7 @@ const allText = pages.map((p) => p.text).join('\n');
   for (const p of pages) for (const m of p.mainText.matchAll(/(М\d{3})\s*\((В[\d,]+)\)/g)) if (cls.get(m[1]) && cls.get(m[1]) !== m[2]) err(P, p.url, `«${m[0]}»: в прайсе ${cls.get(m[1])}`);
   // применение марок не повторяется
   const markPages = pages.filter((p) => /\/m\d{3}\/$/.test(p.url));
-  const uses = markPages.map((p) => [p.url, (p.main.match(/<ul class="checks">([\s\S]*?)<\/ul>/) || [])[1] ?? '']);
+  const uses = markPages.map((p) => [p.url, (p.main.match(/Для чего подходит[\s\S]*?<ul class="checks">([\s\S]*?)<\/ul>/) || [])[1] ?? '']);
   for (let i = 0; i < uses.length; i++) for (let j = i + 1; j < uses.length; j++) if (uses[i][1] && uses[i][1] === uses[j][1]) err(P, uses[i][0], `«для чего подходит» совпадает с ${uses[j][0]}`);
   // аренда без бетонных терминов
   const rent = byUrl('/catalog/arenda-abn/');
@@ -297,15 +297,17 @@ const allText = pages.map((p) => p.text).join('\n');
     if (!p.noindex && !/data-lead/.test(p.html) && !/\/(privacy|soglasie)\//.test(p.url)) warn(P, p.url, 'нет формы заявки');
     if (!/class="mbar/.test(p.html)) err(P, p.url, 'нет нижней панели CTA для телефона');
   }
-  const order = ['class="herob"', 'id="price"', 'Заказ, оплата и документы', 'id="faq"'];
+  const order = ['class="hero"', 'id="price"', 'id="produkciya"', 'Из чего состоит заказ', 'id="faq"', 'id="zayavka"'];
   let last = -1; for (const k of order) { const i = home.html.indexOf(k); if (i < 0) err(P, '/', `на главной нет блока ${k}`); else { if (i < last) err(P, '/', `блок ${k} стоит не по порядку`); last = i; } }
   if ((home.html.match(/id="price"/g) || []).length !== 1) err(P, '/', 'блок цен на главной не один');
   const want = ctx.categories.length + (ctx.rental ? 1 : 0);
-  if ((home.html.match(/<article class="pcard">/g) || []).length !== want) err(P, '/', `на главной карточек продукции ${(home.html.match(/<article class="pcard">/g) || []).length}, нужно ${want}`);
+  const tabsWant = ctx.categories.filter((c) => c.kind !== 'rebar').length;
+  if ((home.html.match(/class="pw__tab"/g) || []).length !== tabsWant) err(P, '/', `во вкладках прайса на главной не все разделы: нужно ${tabsWant}`);
+  if ((home.html.match(/role="tabpanel"/g) || []).length !== tabsWant) err(P, '/', 'у вкладок прайса не по панели на раздел');
   if (!byUrl('/price/') || (byUrl('/price/').html.match(/<article class="pcard">/g) || []).length !== want) err(P, '/price/', 'в разделе цен карточки продукции не по числу категорий');
-  for (const m of home.html.matchAll(/<article class="pcard">[\s\S]*?<\/article>/g)) {
-    if (!/<a href="\/catalog\/[a-z0-9\/-]+\/">/.test(m[0])) err(P, '/', 'карточка продукции без ссылки на страницу');
-    if (!/<figure class="pcard__ph"><img/.test(m[0])) err(P, '/', 'у карточки продукции нет картинки');
+  for (const m of byUrl('/price/').html.matchAll(/<article class="pcard">[\s\S]*?<\/article>/g)) {
+    if (!/<a href="\/catalog\/[a-z0-9\/-]+\/">/.test(m[0])) err(P, '/price/', 'карточка продукции без ссылки на страницу');
+    if (!/<figure class="pcard__ph"><img/.test(m[0])) err(P, '/price/', 'у карточки продукции нет картинки');
   }
   if (/<a [^>]*href="\/price\/"[^>]*>[^<]*Прайс[^<]*<\/a>/i.test(home.main) && /Цены на бетон/.test(home.main)) { /* ссылка на полный прайс допустима */ }
   const tables = new Map(); for (const p of pages.filter((x) => x.url === '/')) for (const t of p.main.matchAll(/<table class="pt">([\s\S]*?)<\/table>/g)) { if (tables.has(t[1])) err(P, p.url, 'на странице два одинаковых прайса'); tables.set(t[1], 1); }
@@ -332,7 +334,7 @@ if (args.includes('--layout')) {
     const seen = await pg.evaluate(() => {
       const inView = (el) => { if (!el) return false; const b = el.getBoundingClientRect(); return b.width > 0 && b.top >= 0 && b.top < innerHeight; };
       const txt = (re) => [...document.querySelectorAll('.hero *, .hdr *, .mbar *')].some((e) => e.children.length === 0 && re.test(e.textContent) && inView(e));
-      return { h1: inView(document.querySelector('h1')), tel: [...document.querySelectorAll('a[href^="tel:"]')].some(inView), c247: txt(/24\/7/), price: inView(document.querySelector('.hero__price')), who: txt(/Верхн/), form: inView(document.querySelector('.hero [data-open-lead], .mbar')) };
+      return { h1: inView(document.querySelector('h1')), tel: [...document.querySelectorAll('a[href^="tel:"]')].some(inView), c247: txt(/24\/7/), price: inView(document.querySelector('.hero__price')), who: txt(/Верхн/), form: inView(document.querySelector('.hero [data-order], .mbar')) };
     });
     const miss = Object.entries({ 'заголовок': seen.h1, 'телефон': seen.tel, '24/7': seen.c247, 'цена «от»': seen.price, 'откуда (завод)': seen.who }).filter(([, v]) => !v).map(([k]) => k);
     if (miss.length) err(5, `холодный взгляд ${w}px`, `в первом экране не видно: ${miss.join(', ')}`);

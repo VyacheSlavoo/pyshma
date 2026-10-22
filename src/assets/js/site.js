@@ -39,6 +39,39 @@
     });
   });
 
+  /* Вкладки прайса на главной: без JS вкладки работают как ссылки на разделы */
+  $$('[data-tabs]').forEach(function (box) {
+    var tabs = $$('[data-tab]', box);
+    var list = $('.pw__tabs', box);
+    if (list) list.setAttribute('role', 'tablist');
+    var select = function (t, focus) {
+      tabs.forEach(function (x) {
+        var on = x === t;
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        x.tabIndex = on ? 0 : -1;
+        var panel = d.getElementById(x.dataset.tab);
+        if (panel) panel.hidden = !on;
+      });
+      if (focus) t.focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.setAttribute('role', 'tab');
+      t.setAttribute('aria-controls', t.dataset.tab);
+      var panel = d.getElementById(t.dataset.tab);
+      if (panel) panel.setAttribute('aria-labelledby', t.id = 'tab-' + t.dataset.tab);
+      t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+      t.addEventListener('click', function (e) { e.preventDefault(); select(t); });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key, n = null;
+        if (k === 'ArrowDown' || k === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+        if (k === 'ArrowUp' || k === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (k === 'Home') n = tabs[0];
+        if (k === 'End') n = tabs[tabs.length - 1];
+        if (n) { e.preventDefault(); select(n, true); }
+      });
+    });
+  });
+
   /* Раскрыть аккордеон/FAQ по якорю */
   function openByHash() {
     if (!location.hash) return;

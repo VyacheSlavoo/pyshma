@@ -14,10 +14,10 @@ const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('requestfa
 await p.goto(url('index.html'), { waitUntil: 'load' });
 const bad = await p.evaluate(async () => { document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }); await new Promise((r) => setTimeout(r, 1500)); return [...document.images].filter((i) => !i.closest('template, dialog') && !(i.complete && i.naturalWidth > 0)).map((i) => i.getAttribute('src')); });
 ok(bad.length === 0, 'картинки главной загрузились', bad.slice(0, 3).join(', '));
-ok(await p.evaluate(() => { const u = document.querySelector('.hero__cta .btn svg'); return !!u && u.getBoundingClientRect().width > 0 && !!document.querySelector('symbol#i-phone'); }), 'иконки видны (спрайт встроен)');
+ok(await p.evaluate(() => { const u = document.querySelector('.hero__cta .telink svg'); return !!u && u.getBoundingClientRect().width > 0 && !!document.querySelector('symbol#i-phone'); }), 'иконки видны (спрайт встроен)');
 ok(await p.evaluate(() => document.fonts.check('600 20px Plex')), 'шрифт из CSS подключён');
-await p.locator('.pcard__t a').first().click();
-ok(/catalog\/tovarnyy-beton\/index\.html$/.test(p.url()), 'карточка ведёт на страницу продукции', p.url());
+await p.locator('a.offer__big').first().click();
+ok(/catalog\/tovarnyy-beton\/index\.html$/.test(p.url()), 'карточка товарного бетона ведёт на страницу продукции', p.url());
 await p.locator('[data-attr="mark"] input[value="М300"]').evaluate((e) => e.click());
 ok((await p.locator('[data-o="price"]').innerText()).includes('4 400'), 'конфигуратор работает с диска');
 await p.locator('a.nav__link', { hasText: 'Статьи' }).first().click();

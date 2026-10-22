@@ -7,10 +7,15 @@
 //   {{diff категория маркаА маркаБ}}   разница минимальных цен двух марок
 //   {{pmdprice марка температура}}   минимальная цена бетона с ПМД, например {{pmdprice М300 -15}}
 //   {{rent Название позиции из аренды}}   цена из rental.json, «6 000 ₽/час»
+//   {{rowprice категория марка П4 F150}}   минимальная цена марки среди строк с указанными П, F, W
+//   {{item категория Название позиции}}   цена позиции раствора или ЦПС, «4 600 ₽/м³»
+//   {{itemcost категория объём Название позиции}}   цена позиции × объём
+//   {{rebar диаметр}}, {{rebarcost диаметр тонны}}   арматура А500С: цена за тонну и стоимость массы
 //   {{from категория}}, {{date}}, {{min}}, {{phone}}, {{docs}}, {{address}}
 //   ::table категория М200,М250 | Заголовок   таблица цен (марка, класс, параметры из прайса, цена «от»)
 //   ::pmd М250,М300 | Заголовок   цены бетона с ПМД по температурам рядом с товарным бетоном
 //   ::rental | Заголовок   таблица автобетононасосов
+//   ::list категория | Заголовок   все позиции раствора или ЦПС: название, назначение, цена
 // Статья с датой позже даты сборки не попадает на сайт: так раздел остаётся «живым» без ручной публикации.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -68,6 +73,28 @@ function tokens(ctx, s, where) {
       const u = [...(ctx.rental?.units ?? []), ...(ctx.rental?.extras ?? [])].find((x) => x.name === name);
       if (!u) throw new Error(`${where}: нет позиции аренды «${name}»`);
       return `${fmtNum(u.price)}${NBSP}₽/${u.unit}`;
+    }
+    if (fn === 'rowprice') {
+      const { rows, mark } = lookup(ctx, a[0], a[1], where);
+      const want = a.slice(2);
+      const hit = rows.filter((r) => want.every((v) => [r.mobility, r.frost, r.water].includes(v)));
+      if (!hit.length) throw new Error(`${where}: нет строки ${a[0]} ${mark} ${want.join(' ')}`);
+      return `${fmtNum(minPrice(hit))}${NBSP}₽/м³`;
+    }
+    if (fn === 'item' || fn === 'itemcost') {
+      const cat = ctx.categories.find((c) => c.slug === a[0]);
+      const vol = fn === 'itemcost' ? parseFloat(String(a[1]).replace(',', '.')) : 1;
+      const name = a.slice(fn === 'itemcost' ? 2 : 1).join(' ');
+      const r = cat?.rows.find((x) => x.name === name);
+      if (!r) throw new Error(`${where}: нет позиции «${name}» в ${a[0]}`);
+      return fn === 'item' ? `${fmtNum(r.price)}${NBSP}₽/${r.unit}` : `${fmtNum(Math.round(r.price * vol))}${NBSP}₽`;
+    }
+    if (fn === 'rebar' || fn === 'rebarcost') {
+      const cat = ctx.categories.find((c) => c.kind === 'rebar');
+      const r = cat?.rows.find((x) => x.diameter === Number(a[0]) && /А500С/.test(x.group ?? x.name));
+      if (!r) throw new Error(`${where}: нет арматуры А500С диаметром ${a[0]} мм`);
+      if (fn === 'rebar') return `${fmtNum(r.price)}${NBSP}₽/т`;
+      return `${fmtNum(Math.round(r.price * parseFloat(String(a[1]).replace(',', '.'))))}${NBSP}₽`;
     }
     if (fn === 'min') return `${fmtNum(ctx.site.min_volume_m3)}${NBSP}м³`;
     if (fn === 'from') {
@@ -131,6 +158,12 @@ function directive(ctx, line, where) {
       return `<tr><td>${m}</td><td>${b.length ? `${fmtNum(minPrice(b))}${NBSP}₽` : '—'}</td>${cells}</tr>`;
     }).join('');
     return callout(ctx, title || 'Бетон с ПМД', `<table><thead>${th}</thead><tbody>${tr}</tbody></table>`, `В графах с ПМД показана минимальная цена среди позиций марки: подвижность, морозостойкость и водонепроницаемость выбираются в <a href="/catalog/beton-s-pmd/">разделе с ПМД</a>.`);
+  }
+  if (name === 'list') {
+    const cat = ctx.categories.find((c) => c.slug === a[0]);
+    if (!cat || cat.kind !== 'mortar') throw new Error(`${where}: ::list только для растворов и ЦПС`);
+    const tr = cat.rows.map((r) => `<tr><td>${esc(r.name)}</td><td>${esc(r.spec ?? '—')}</td><td>${fmtNum(r.price)}${NBSP}₽</td></tr>`).join('');
+    return callout(ctx, title || cat.menu, `<table><thead><tr><th>Состав</th><th>Для чего</th><th>Цена</th></tr></thead><tbody>${tr}</tbody></table>`, `Подбор и расчёт объёма: <a href="/catalog/${cat.slug}/">${esc(cat.menu)}</a>.`);
   }
   if (name === 'rental') {
     if (!ctx.rental) throw new Error(`${where}: в данных нет аренды`);

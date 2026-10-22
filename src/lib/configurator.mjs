@@ -95,6 +95,11 @@ export function concreteSpec(ctx, entries, { withCat = false, qtyDef = 5 } = {})
 
   return {
     kind: 'concrete', title: 'Подберите бетон и посчитайте стоимость', attrs, rows,
+    more: [
+      attrs.some((x) => x.id === 'mob') ? 'Подвижность под способ подачи: по лотку или насосом.' : 'Подвижность, морозостойкость и водонепроницаемость под вашу конструкцию.',
+      'Как миксер подъедет к опалубке и нужен ли насос.',
+      'Время подачи и интервал между машинами, если объём больше одного миксера.'
+    ],
     qty: { label: 'Объём', unit: 'м³', min: ctx.site.min_volume_m3, step: 0.5, def: Math.max(qtyDef, ctx.site.min_volume_m3) },
     what: 'Стоимость бетона', per: 'за м³', date: ctx.priceDateRu
   };
@@ -105,6 +110,7 @@ export function mortarSpec(ctx, cat) {
   const unit = cat.rows[0].unit;
   return {
     kind: 'list', title: 'Выберите состав и посчитайте стоимость',
+    more: ['Для чего смесь: кладка, монтаж, стяжка или штукатурка.', 'Объём и место выгрузки на объекте.', 'Время подачи.'],
     attrs: [{ id: 'name', label: cat.slug === 'tsps' ? 'Состав' : 'Раствор', wide: true, opts: cat.rows.map((r) => ({ v: r.name, t: r.name, s: r.spec ?? '', h: '' })) }],
     rows, qty: { label: 'Объём', unit, min: ctx.site.min_volume_m3, step: 0.5, def: Math.max(3, ctx.site.min_volume_m3) },
     what: 'Стоимость материала', per: `за ${unit}`, date: ctx.priceDateRu
@@ -117,6 +123,7 @@ export function rebarSpec(ctx, cat) {
   const rows = cat.rows.map((r) => ({ k: rebarKey(r), a: { group: r.group, dia: String(r.diameter) }, p: r.price, u: r.unit, l: r.name }));
   return {
     kind: 'rebar', title: 'Выберите диаметр и посчитайте стоимость',
+    more: ['Диаметр и класс по проекту или схеме армирования.', 'Массу в тоннах, если в проекте указаны погонные метры.', 'Самовывоз или доставка.'],
     attrs: [
       { id: 'group', label: 'Класс и сталь', opts: groups.map((g) => ({ v: g, t: g, s: '', h: '' })) },
       { id: 'dia', label: 'Диаметр, мм', opts: diams.map((d) => ({ v: String(d), t: String(d), s: '', h: '' })) }
@@ -130,6 +137,7 @@ export function rentalSpec(ctx) {
   const rows = ctx.rental.units.map((u) => ({ k: slugify(u.name), a: { name: u.name }, p: u.price, u: u.unit, l: u.name, s: u.reach_text ? `вылет стрелы ${u.reach_text}` : '' }));
   return {
     kind: 'list', title: 'Подберите насос и посчитайте стоимость',
+    more: ['Высоту и расстояние до самой дальней точки заливки.', 'Где встанет насос и как подъедут миксеры.', 'Объём заливки: от него зависит время работы.'],
     attrs: [{ id: 'name', label: 'Автобетононасос', wide: true, opts: rows.map((r) => ({ v: r.a.name, t: r.a.name, s: r.s, h: '' })) }],
     rows, qty: { label: 'Время работы', unit: 'ч', min: 1, step: 1, def: 4 },
     what: 'Стоимость аренды', per: 'за час', date: ctx.priceDateRu
@@ -151,7 +159,7 @@ export function renderConfigurator(ctx, spec, { deliveryNote, tel, lead }) {
 <p class="cfg__hint" data-hint="${a.id}">${a.opts.find((o) => o.v === def.a[a.id])?.h ?? ''}</p>
 </fieldset>`;
   return h`<div class="cfg-wrap">
-<div class="section__head"><h2 id="${id}-h">${spec.title}</h2>${lead ? h`<p>${lead}</p>` : ''}</div>
+<div class="sh"><p class="eyebrow">Подбор и расчёт</p><h2 id="${id}-h">${spec.title}</h2>${lead ? h`<p>${lead}</p>` : ''}</div>
 <section class="cfg" data-cfg aria-labelledby="${id}-h">
 <script type="application/json" data-cfg-data>${raw(json)}</script>
 <div class="cfg__mini" aria-hidden="true"><span data-o="mini-des">${def.l}</span><b data-o="mini-price">${price(def.p * spec.qty.def)}</b></div>
@@ -159,9 +167,11 @@ export function renderConfigurator(ctx, spec, { deliveryNote, tel, lead }) {
 <div class="cfg__ctl">
 <p class="cfg__chg cfg__chg--top" data-o="chg2" aria-hidden="true"></p>
 ${join(spec.attrs.map(group))}
+${spec.more?.length ? h`<div class="cfg__grp cfg__more"><p class="cfg__more-h">Что ещё уточним при заказе</p><ul class="checks">${join(spec.more.map((m) => h`<li>${m}</li>`))}</ul></div>` : ''}
 ${spec.attrs.length > 1 ? h`<p class="cfg__legend">Пунктиром отмечены значения, которых нет вместе с остальным выбором. Если нажать на такое значение, подберём ближайший вариант из прайса.</p>` : ''}
 </div>
-<div class="cfg__res"><div class="cfg__res-in">
+<div class="cfg__res"><div class="res">
+<p class="res__h">Ваш выбор</p>
 <p class="cfg__des" data-o="des">${def.l}<small data-o="sub">${def.s ?? ''}</small></p>
 <p class="cfg__price"><span data-o="price">${price(def.p)}</span><small data-o="per">${spec.per}</small></p>
 <p class="cfg__date">Цена на <time datetime="${ctx.priceDateIso}">${spec.date}</time></p>
@@ -174,7 +184,7 @@ ${spec.attrs.length > 1 ? h`<p class="cfg__legend">Пунктиром отмеч
 <p class="cfg__chg" role="status" aria-live="polite" data-o="chg"></p>
 <div class="cfg__act">
 <button type="button" class="btn btn--primary" data-open-lead hidden data-item="${def.l}" data-volume="${fmtNum(spec.qty.def)}${NBSP}${spec.qty.unit}">Оставить заявку</button>
-<a class="btn btn--ghost" href="${tel}">Позвонить</a>
+<a class="btn btn--light" href="${tel}">Позвонить</a>
 </div>
 <button type="button" class="cfg__link" data-copy hidden>Скопировать ссылку на этот выбор</button>
 </div></div>

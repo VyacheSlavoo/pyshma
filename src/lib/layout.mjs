@@ -41,7 +41,7 @@ export function head(ctx, page) {
 <meta name="description" content="${page.description}">
 <link rel="canonical" href="${canonical}">
 ${noindex ? raw('<meta name="robots" content="noindex, nofollow">') : raw('<meta name="robots" content="index, follow, max-image-preview:large">')}
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#F5F3EE">
 <meta property="og:type" content="${page.ogType || 'website'}">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="${site.brand}">
@@ -59,7 +59,7 @@ ${noindex ? raw('<meta name="robots" content="noindex, nofollow">') : raw('<meta
 <link rel="apple-touch-icon" href="${ctx.assets.touch}">
 ${site.yandex_verification ? raw(`<meta name="yandex-verification" content="${esc(site.yandex_verification)}">`) : ''}
 <link rel="preload" href="/assets/fonts/plex-cyrillic-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/plex-latin-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/oswald-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${ctx.assets.css}">
 <script>document.documentElement.className='js'${ctx.demo ? raw(';window.__DEMO__=1') : ''}</script>
 ${join(ld.map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)), '\n')}
@@ -71,11 +71,11 @@ export function navItems(ctx) {
   const groups = new Map();
   for (const c of ctx.categories) {
     if (!groups.has(c.group)) groups.set(c.group, []);
-    groups.get(c.group).push({ name: c.menu, url: `/catalog/${c.slug}/` });
+    groups.get(c.group).push({ name: c.menu, url: `/catalog/${c.slug}/`, from: Math.min(...c.rows.map((r) => r.price)) });
   }
   if (ctx.rental) {
     if (!groups.has(ctx.rental.group)) groups.set(ctx.rental.group, []);
-    groups.get(ctx.rental.group).push({ name: 'Аренда автобетононасоса', url: '/catalog/arenda-abn/' });
+    groups.get(ctx.rental.group).push({ name: 'Аренда автобетононасоса', url: '/catalog/arenda-abn/', from: Math.min(...ctx.rental.units.map((u) => u.price)) });
   }
   const items = [{ name: 'Цены', url: '/price/' }];
   items.push({ name: 'Продукция', url: '/price/', sub: [...groups].map(([title, links]) => ({ title, links })), mega: true });
@@ -90,9 +90,11 @@ function navHtml(ctx, page) {
   const cur = (u) => (page.url === u || (u.startsWith('/catalog/') && page.url.startsWith(u)) || (u === '/stati/' && page.url.startsWith(u)) ? 'page' : null);
   return join(navItems(ctx).map((it) => h`<li${it.sub ? raw(' class="has-sub"') : ''}>
 <a class="nav__link" href="${it.url}"${cur(it.url) && !it.sub ? raw(' aria-current="page"') : it.sub && page.url.startsWith('/catalog/') ? raw(' aria-current="true"') : ''}>${it.name}${it.sub ? icon(ctx, 'chev') : ''}</a>${it.sub ? h`<button type="button" class="sub-toggle" aria-expanded="false" aria-label="Показать разделы продукции">${icon(ctx, 'chev')}</button>` : ''}
-${it.sub ? h`<div class="sub sub--mega">${join(it.sub.map((g) => h`<div class="sub__col"><span class="sub__h">${g.title}</span><ul>${join(g.links.map((l) => h`<li><a href="${l.url}"${cur(l.url) ? raw(' aria-current="page"') : ''}>${l.name}</a></li>`))}</ul></div>`))}</div>` : ''}
+${it.sub ? h`<div class="sub sub--mega">${join(it.sub.map((g) => h`<div class="sub__col"><span class="sub__h">${g.title}</span><ul>${join(g.links.map((l) => h`<li><a href="${l.url}"${cur(l.url) ? raw(' aria-current="page"') : ''}>${l.name}${l.from ? h`<small>от ${fmtNum(l.from)}</small>` : ''}</a></li>`))}</ul></div>`))}</div>` : ''}
 </li>`));
 }
+
+export const brandHtml = (ctx, sub) => h`<span class="brand__mark" aria-hidden="true">БМ</span><span class="brand__t"><b>${ctx.site.brand}</b>${sub}</span>`;
 
 export function header(ctx, page) {
   const { site } = ctx;
@@ -101,11 +103,11 @@ ${ctx.fixture ? h`<div class="fixture-banner">ТЕСТОВЫЕ ДАННЫЕ: с�
 ${ctx.demo ? h`<div class="fixture-banner fixture-banner--preview">ДЕМО ДЛЯ ТЕСТИРОВАНИЯ: заявки никуда не отправляются, почта не подключена. Не для публикации</div>` : ''}
 ${ctx.preview ? h`<div class="fixture-banner fixture-banner--preview">ПРЕДПРОСМОТР: не для публикации. Не заполнено, подставлено временно: ${ctx.assumed.join(', ') || 'ничего'}</div>` : ''}
 <header class="hdr"><div class="container hdr__in">
-<a class="brand" href="/" aria-label="${site.brand}: на главную"><b>${site.brand}</b><small class="brand__sub">Бетонный завод, ${site.plant.locality}</small><small class="brand__hrs">${HOURS_TEXT}</small></a>
+<a class="brand" href="/" aria-label="${site.brand}: на главную">${brandHtml(ctx, h`<small class="brand__sub">Бетонный завод, ${site.plant.locality}</small><small class="brand__hrs">${HOURS_TEXT}</small>`)}</a>
 <nav class="nav" id="nav" aria-label="Основное меню"><ul class="nav__list">${navHtml(ctx, page)}</ul></nav>
 <div class="hdr__r">
-<span class="hdr__hrs">${HOURS_TEXT}</span>
-<a class="hdr__tel" href="${telHref(ctx)}">${site.phone.display}</a>
+<a class="hdr__tel" href="${telHref(ctx)}"><b>${icon(ctx, 'phone')}${site.phone.display}</b><small>${HOURS_TEXT}, без выходных</small></a>
+<a class="btn btn--primary btn--sm" href="${String(page.main ?? '').includes('id="zayavka"') ? '#zayavka' : '/contacts/#zayavka'}" data-order>Заявка</a>
 </div>
 <a class="btn btn--primary btn--sm callbtn" href="${telHref(ctx)}" aria-label="Позвонить ${site.phone.display}">${icon(ctx, 'phone')}<span class="callbtn__t">Позвонить</span></a>
 <button class="burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Меню" data-icons="${ctx.assets.icons}"><svg class="i" aria-hidden="true"><use href="${ctx.assets.icons}#i-menu"/></svg></button>
@@ -129,7 +131,7 @@ export function footer(ctx) {
   return h`<footer class="ftr"><div class="container">
 <div class="ftr__grid">
 <div>
-<a class="brand" href="/"><b>${site.brand}</b><small>Бетонный завод ${site.plant.locality_in}</small></a>
+<a class="brand" href="/">${brandHtml(ctx, h`<small>Бетонный завод ${site.plant.locality_in}</small>`)}</a>
 <p>${site.plant.address}.<br>${HOURS_FULL}.</p>
 <p><a class="ftr__phone" href="${telHref(ctx)}">${site.phone.display}</a></p>
 </div>
@@ -157,49 +159,29 @@ const captchaHtml = () => h`<div class="cap"><label class="field"><span>Пров
 <input type="hidden" name="ct" value=""></div>`;
 const noJsNote = (ctx) => h`<p class="nojs-note">Форма работает с включённым JavaScript. Без него позвоните: <a href="${telHref(ctx)}">${ctx.site.phone.display}</a>.</p>`;
 
-export function leadForm(ctx, { title = 'Получить расчёт', sub = null, source = 'site', item = null, compact = false, tag = 'h2' } = {}) {
+export function leadForm(ctx, { title = 'Оставить заявку', sub = null, source = 'site', item = null, compact = false, tag = 'h2', id = null } = {}) {
   const hd = tag === 'h2' ? h`<h2>${title}</h2>` : h`<h3>${title}</h3>`;
   const m = messengers(ctx);
-  return h`<div class="form">
+  return h`<div class="form"${id ? raw(` id="${esc(id)}"`) : ''}>
+<p class="eyebrow">Заявка</p>
 ${hd}
-<p class="form__sub">${sub ?? 'Оставьте телефон, объём и адрес объекта. Мы перезвоним и назовём стоимость с доставкой.'}</p>
+<p class="form__sub">${sub ?? 'Оставьте телефон, объём и адрес объекта. Перезвоним и назовём стоимость с доставкой.'}</p>
 <form action="/send.php" method="post" data-lead data-phone="${ctx.site.phone.display}" novalidate>
 ${noJsNote(ctx)}
-<label class="field"><span>Телефон</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+7" required maxlength="18"></label>
-${compact ? '' : h`<div class="field--row">
-<label class="field"><span>Объём</span><input type="text" name="volume" inputmode="decimal" placeholder="от ${fmtNum(ctx.site.min_volume_m3)} м³" maxlength="24"></label>
+<div class="fgrid">
+<label class="field${compact ? ' field--full' : ''}"><span>Телефон</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+7" required maxlength="18"></label>
+${compact ? '' : h`<label class="field"><span>Объём</span><input type="text" name="volume" inputmode="decimal" placeholder="от ${fmtNum(ctx.site.min_volume_m3)} м³" maxlength="24"></label>
 <label class="field"><span>Что заказать</span><input type="text" name="item" value="${item ?? ''}" placeholder="например, бетон М300" maxlength="120"></label>
-</div>
 <label class="field"><span>Адрес доставки</span><input type="text" name="address" autocomplete="street-address" placeholder="город, улица или СНТ" maxlength="200"></label>`}
+</div>
 ${captchaHtml()}
 ${honey(source)}
 ${consentHtml(ctx)}
-<button class="btn btn--primary btn--block" type="submit">Получить расчёт</button>
+<button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
 <div class="form__msg" role="status" aria-live="polite"></div>
 </form>
-<div class="form__alt">
-<a class="btn btn--ghost btn--sm" href="${telHref(ctx)}">${icon(ctx, 'phone')}${ctx.site.phone.display}</a>
-${m.map((x) => h`<a class="btn btn--ghost btn--sm" href="${x.url}" rel="noopener" target="_blank">${icon(ctx, x.icon)}${x.label}</a>`)}
-</div>
+${m.length ? h`<div class="form__alt">${m.map((x) => h`<a class="btn btn--ghost btn--sm" href="${x.url}" rel="noopener" target="_blank">${icon(ctx, x.icon)}${x.label}</a>`)}</div>` : ''}
 </div>`;
-}
-
-// Горизонтальная форма под первым экраном.
-export function leadStrip(ctx, { source = 'home-strip' } = {}) {
-  return h`<section class="quote"><div class="container quote__in">
-<div><h2>Рассчитать стоимость</h2><p>Телефон, объём и адрес объекта.</p></div>
-<form class="qform" action="/send.php" method="post" data-lead data-phone="${ctx.site.phone.display}" novalidate>
-${noJsNote(ctx)}
-<label class="field"><span>Телефон</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+7" required maxlength="18"></label>
-<label class="field"><span>Объём</span><input type="text" name="volume" inputmode="decimal" placeholder="от ${fmtNum(ctx.site.min_volume_m3)} м³" maxlength="24"></label>
-<label class="field"><span>Адрес доставки</span><input type="text" name="address" autocomplete="street-address" placeholder="город, улица или СНТ" maxlength="200"></label>
-${captchaHtml()}
-<button class="btn btn--primary" type="submit">Получить расчёт</button>
-${honey(source)}
-<div class="consent">${consentHtml(ctx)}</div>
-<div class="form__msg" role="status" aria-live="polite"></div>
-</form>
-</div></section>`;
 }
 
 export function leadTemplate(ctx) {
@@ -215,10 +197,10 @@ export function crumbsHtml(ctx, page) {
 }
 
 // ---------- FAQ ----------
-export function faq(ctx, items, { title = 'Частые вопросы', id, sand = false } = {}) {
+export function faq(ctx, items, { title = 'Что обычно спрашивают', id, band = false, note } = {}) {
   if (!items?.length) return '';
-  return h`<section class="section${sand ? ' section--sand' : ''}"${id ? raw(` id="${id}"`) : ''}><div class="container">
-<div class="section__head"><h2>${title}</h2></div>
+  return h`<section class="section${band ? ' section--band' : ''}"${id ? raw(` id="${id}"`) : ''}><div class="container">
+<div class="sh sh--row"><div><p class="eyebrow">Вопросы и ответы</p><h2>${title}</h2></div><p>${note ?? h`Если нужного вопроса нет, позвоните: <a href="${telHref(ctx)}">${ctx.site.phone.display}</a>. ${HOURS_TEXT}.`}</p></div>
 <div class="faq">${join(items.map(([q, a]) => h`<details><summary>${q}${icon(ctx, 'chev', 'chev')}</summary><div class="faq__a"><p>${a}</p></div></details>`))}</div>
 </div></section>`;
 }
