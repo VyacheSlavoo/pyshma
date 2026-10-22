@@ -73,7 +73,8 @@ const allText = pages.map((p) => p.text).join('\n');
   const shingles = (t) => { const w = t.toLowerCase().replace(/[^а-яa-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean); const s = new Set(); for (let i = 0; i + 4 < w.length; i++) s.add(w.slice(i, i + 5).join(' ')); return s; };
   const geo = [home, ...ctx.cities.map((c) => byUrl(c.url)), byUrl('/dostavka/')].filter(Boolean);
   for (let i = 0; i < geo.length; i++) for (let j = i + 1; j < geo.length; j++) {
-    const a = shingles(geo[i].mainText), b = shingles(geo[j].mainText);
+    const noCta = (pg) => strip(pg.main.replace(/<section class="cta">[\s\S]*$/, '')); // форма и оплата одинаковы на всех страницах сайта
+    const a = shingles(noCta(geo[i])), b = shingles(noCta(geo[j]));
     const inter = [...a].filter((x) => b.has(x)).length; const sim = inter / Math.min(a.size, b.size);
     if (sim > 0.75) err(P, `${geo[i].url} ~ ${geo[j].url}`, `тексты геостраниц совпадают на ${Math.round(sim * 100)}%: риск каннибализации`);
     else if (sim > 0.5) warn(P, `${geo[i].url} ~ ${geo[j].url}`, `тексты геостраниц похожи на ${Math.round(sim * 100)}%`);

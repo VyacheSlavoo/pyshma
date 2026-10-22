@@ -124,7 +124,7 @@ function glossary(ctx, cat, full) {
   return h`<section class="section section--band" id="pfw"><div class="container"><div class="split split--top">
 <div>
 ${sh('Обозначения', 'Что означают П, F и W в прайсе')}
-<p><b>П: подвижность смеси</b> (ГОСТ 7473-2010). Её меряют осадкой конуса: чем выше число, тем жиже смесь.</p>
+<p><b>П: подвижность смеси</b> (классы по ГОСТ 7473-2010, замер по ГОСТ 10181). Её меряют осадкой конуса: чем выше число, тем жиже смесь.</p>
 ${slumpScale()}
 <ul class="checks">${join(MOBILITY.map(([k, v, use]) => h`<li><b>${k}</b>, ${v}: ${use}.</li>`))}</ul>
 </div>

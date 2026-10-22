@@ -114,7 +114,7 @@ export function cityCards(ctx, list = ctx.cities, { origin = false } = {}) {
   if (!list.length && !origin) return '';
   return h`<ul class="dirs">
 ${origin ? h`<li><div class="dirs__row"><b>${plant.locality}</b><span>завод, самовывоз: ${plant.address}</span></div></li>` : ''}
-${join(list.map((c) => h`<li>${cityOpen(c) ? raw(`<a href="${c.url}">`) : raw('<div class="dirs__row">')}<b>${c.name}</b><span>${[c.distance_km != null ? `${fmtNum(c.distance_km)}${NBSP}км от завода` : null, c.travel_time, c.distance_km == null && !c.travel_time ? `доставка с завода ${plant.locality_from}` : null].filter(Boolean).join(', ')}</span>${raw(cityOpen(c) ? '</a>' : '</div>')}</li>`))}
+${join(list.map((c) => h`<li>${cityOpen(c) ? raw(`<a href="${c.url}">`) : raw('<div class="dirs__row">')}<b>${c.name}</b><span>${[c.distance_km != null ? (c.distance_kind === 'line' ? `около ${fmtNum(c.distance_km)}${NBSP}км по прямой от завода` : `${fmtNum(c.distance_km)}${NBSP}км от завода`) : null, c.direction ? `${c.direction}` : null, c.travel_time, c.distance_km == null && !c.travel_time ? `доставка с завода ${plant.locality_from}` : null].filter(Boolean).join(', ')}</span>${raw(cityOpen(c) ? '</a>' : '</div>')}</li>`))}
 </ul>`;
 }
 

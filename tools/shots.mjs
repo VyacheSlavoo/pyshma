@@ -44,11 +44,20 @@ for (const w of widths) {
         }
       }
       const small = (window.innerWidth >= 700 ? [] : [...document.querySelectorAll('a.btn, button.btn, .nav__link, .mbar .btn')]).filter((el) => { const b = el.getBoundingClientRect(); return b.width && b.height && (b.height < 40 || b.width < 40) && getComputedStyle(el).display !== 'none'; }).map((el) => `${el.textContent.trim().slice(0, 20)} ${Math.round(el.getBoundingClientRect().width)}x${Math.round(el.getBoundingClientRect().height)}`);
+      // текст, сжатый в узкий столбик (слово ломается по буквам): ширина меньше трёх кеглей при высоте больше трёх строк
+      const squeezed = [...document.querySelectorAll('body *')].filter((el) => {
+        if (el.closest('dialog, template, svg, .sr, .table-wrap')) return false;
+        const t = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join('').trim();
+        if (t.length < 5) return false;
+        const cs = getComputedStyle(el), b = el.getBoundingClientRect(), fs = parseFloat(cs.fontSize), lh = parseFloat(cs.lineHeight) || fs * 1.3;
+        return b.width < fs * 3.5 && b.height > lh * 3;
+      }).slice(0, 3).map((el) => el.textContent.trim().slice(0, 24));
       const broken = [...document.images].filter((i) => !i.closest('dialog, template') && i.complete && i.naturalWidth === 0).map((i) => i.currentSrc || i.src);
-      return { scrollW: document.documentElement.scrollWidth, vw, over, small: small.slice(0, 4), broken };
+      return { scrollW: document.documentElement.scrollWidth, vw, over, small: small.slice(0, 4), broken, squeezed };
     });
     if (r.scrollW > r.vw + 1) problems.push(`${w}px ${url}: горизонтальный скролл ${r.scrollW}>${r.vw}; ${r.over.join('; ')}`);
     else if (r.over.length) problems.push(`${w}px ${url}: элементы за краем: ${r.over.join('; ')}`);
+    if (r.squeezed.length) problems.push(`${w}px ${url}: текст сжат в узкий столбик: ${r.squeezed.join('; ')}`);
     if (r.broken.length) problems.push(`${w}px ${url}: не загрузились картинки: ${r.broken.join('; ')}`);
     if (r.small.length) problems.push(`${w}px ${url}: мелкие тап-зоны: ${r.small.join('; ')}`);
     const name = `${url === '/' ? 'home' : url.replace(/^\/|\/$|\.html$/g, '').replace(/\//g, '_')}-${w}.png`;

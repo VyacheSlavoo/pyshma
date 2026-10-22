@@ -1,17 +1,8 @@
 {
   "cities": [
-    {
-      "slug": "ekaterinburg",
-      "tier": "city",
-      "name": "Екатеринбург",
-      "in": "в Екатеринбурге",
-      "distance_km": null,
-      "travel_time": null,
-      "delivery_cost": null,
-      "delivery_cost_unit": null,
-      "notes": [],
-      "faq": [],
-      "to": "в Екатеринбург"
-    }
+    { "slug": "ekaterinburg", "tier": "city", "name": "Екатеринбург", "in": "в Екатеринбурге", "to": "в Екатеринбург", "of": "Екатеринбурга", "lat": 56.8389, "lon": 60.6057, "travel_time": null, "delivery_cost": null, "delivery_cost_unit": null, "notes": [], "faq": [] },
+    { "slug": "sredneuralsk", "tier": "city", "name": "Среднеуральск", "in": "в Среднеуральске", "to": "в Среднеуральск", "of": "Среднеуральска", "lat": 56.9833, "lon": 60.4700, "travel_time": null, "delivery_cost": null, "delivery_cost_unit": null, "notes": [], "faq": [] },
+    { "slug": "berezovskiy", "tier": "city", "name": "Берёзовский", "in": "в Берёзовском", "to": "в Берёзовский", "of": "Берёзовского", "lat": 56.9050, "lon": 60.7950, "travel_time": null, "delivery_cost": null, "delivery_cost_unit": null, "notes": [], "faq": [] },
+    { "slug": "aramil", "tier": "city", "name": "Арамиль", "in": "в Арамили", "to": "в Арамиль", "of": "Арамили", "lat": 56.6990, "lon": 60.8330, "travel_time": null, "delivery_cost": null, "delivery_cost_unit": null, "notes": [], "faq": [] }
   ]
 }

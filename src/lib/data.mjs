@@ -131,14 +131,29 @@ export function loadData({ contentDir, now, fixture = false, preview = false }) 
     if (units.length) rental = { slug: 'arenda-abn', ...CATEGORY_DEFS['arenda-abn'], units, extras };
   }
 
-  // Города
+  // Города. Расстояние по прямой считается из координат завода и центра города (поле distance_km можно задать вручную:
+  // тогда это дорожное расстояние, и distance_kind ставится «road»). Время в пути и цену доставки не считаем: их вписывает владелец.
   const cities = [];
+  const plantGeo = site.plant.geo;
+  const rad = (d) => (d * Math.PI) / 180;
+  const COMPASS = ['к северу', 'к северо-востоку', 'к востоку', 'к юго-востоку', 'к югу', 'к юго-западу', 'к западу', 'к северо-западу'];
   for (const [i, c] of (citiesRaw.cities || []).entries()) {
     for (const f of ['slug', 'tier', 'name', 'in']) if (!c[f]) errors.push(`cities.json: cities[${i}].${f} не заполнено`);
     if (c.tier && !['city', 'settlement'].includes(c.tier)) errors.push(`cities.json: cities[${i}].tier: city или settlement`);
-    cities.push({ notes: [], faq: [], ...c, url: c.tier === 'settlement' ? `/dostavka/${c.slug}/` : `/${c.slug}/` });
+    const city = { notes: [], faq: [], ...c, url: c.tier === 'settlement' ? `/dostavka/${c.slug}/` : `/${c.slug}/` };
+    if (city.distance_km == null && c.lat != null && c.lon != null && plantGeo) {
+      const dLat = rad(c.lat - plantGeo.lat), dLon = rad(c.lon - plantGeo.lon);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(plantGeo.lat)) * Math.cos(rad(c.lat)) * Math.sin(dLon / 2) ** 2;
+      city.distance_km = Math.round(2 * 6371 * Math.asin(Math.sqrt(a)));
+      city.distance_kind = 'line';
+      const y = Math.sin(dLon) * Math.cos(rad(c.lat));
+      const x = Math.cos(rad(plantGeo.lat)) * Math.sin(rad(c.lat)) - Math.sin(rad(plantGeo.lat)) * Math.cos(rad(c.lat)) * Math.cos(dLon);
+      const bearing = ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360;
+      city.direction = COMPASS[Math.round(bearing / 45) % 8];
+    } else if (city.distance_km != null) city.distance_kind = 'road';
+    cities.push(city);
   }
-  if (cities.filter((c) => c.tier === 'city').length > 2) warnings.push('cities.json: больше двух приоритетных городов — ТЗ рекомендует 1–2');
+  if (cities.filter((c) => c.tier === 'city').length > 4) warnings.push('cities.json: больше четырёх городов с отдельными страницами: каждой нужны свои данные, иначе это дорвеи');
   if (new Set(cities.map((c) => c.slug)).size !== cities.length) errors.push('cities.json: повторяющиеся slug');
 
   // Фото

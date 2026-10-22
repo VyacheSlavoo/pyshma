@@ -429,6 +429,20 @@ details[open]>summary .chev{transform:rotate(180deg)}
 .jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font:condensed 600 1rem/1 var(--fd)}
 .jump a:first-child{background:var(--ink);color:#fff}
 @media (hover:hover){.jump a:hover{background:var(--acc);border-color:var(--acc);color:#fff}}
+.sits{display:grid;gap:16px}
+.sit{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--acc);padding:22px 24px}
+.sit h3{font-size:1.2rem;margin-bottom:8px}
+.sit p{margin:0;color:var(--ink-2);font-size:.97rem}
+.exs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ex{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--acc);padding:24px 26px;box-shadow:var(--shadow-s)}
+.ex h3{font-size:1.25rem;margin-bottom:4px}
+.ex__d{color:var(--muted);font-size:.93rem;margin:0 0 16px}
+.ex__n{margin:0 0 16px;display:grid;gap:0}
+.ex__n>div{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--line);font-size:.95rem}
+.ex__n dt{color:var(--ink-2)}
+.ex__n dd{margin:0;font-weight:600;white-space:nowrap}
+.ex__c{margin:auto 0 0;font:condensed 650 1.9rem/1 var(--fd);color:var(--acc-d)}
+.ex__c small{font:400 .85rem var(--f);color:var(--muted);margin-left:6px}
 .marklinks{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:30px}
 .marklinks>span{font-size:.95rem;color:var(--muted);margin-right:6px}
 
@@ -534,9 +548,9 @@ table.mx{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 /* ===== Направления доставки ===== */
 .dirs{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
 .dirs li{margin:0;border-top:1px solid var(--line)}
-.dirs a,.dirs .dirs__row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;align-items:baseline;padding:16px 0;color:var(--ink);text-decoration:none}
+.dirs a,.dirs .dirs__row{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 24px;align-items:baseline;padding:16px 0;color:var(--ink);text-decoration:none}
 .dirs b{font:condensed 600 1.25rem/1.2 var(--fd)}
-.dirs span{font-size:.93rem;color:var(--muted)}
+.dirs span{font-size:.93rem;color:var(--muted);text-align:right}
 @media (hover:hover){.dirs a:hover b{color:var(--acc-d)}}
 
 /* ===== Нижний блок: оплата и заявка ===== */
@@ -671,6 +685,7 @@ dialog.modal::backdrop{background:rgba(20,28,38,.6)}
   .cfg__grid{grid-template-columns:minmax(0,1fr)}
   .cfg__res{position:static}
   .pgrid,.agrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .exs{grid-template-columns:minmax(0,1fr)}
   .pgroup-rest{grid-template-columns:minmax(0,1fr);gap:60px}
   .photos{grid-template-columns:repeat(2,minmax(0,1fr))}
   .reviews{grid-template-columns:minmax(0,1fr)}
@@ -818,6 +833,7 @@ dialog.modal::backdrop{background:rgba(20,28,38,.6)}
   .kv>:nth-last-child(-n+2){border-bottom:0}
   .kv dd:last-child{border-bottom:1px solid var(--line)}
   .dirs a,.dirs .dirs__row{grid-template-columns:minmax(0,1fr)}
+  .dirs span{text-align:left}
   .more>details>summary{font-size:1.15rem;grid-template-columns:minmax(0,1fr) 24px}
   .more>details>summary small{display:none}
   .table-wrap{border:0;background:transparent;border-radius:0;box-shadow:none}

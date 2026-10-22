@@ -25,7 +25,7 @@ const preview = args.includes('--preview');
 const demo = args.includes('--demo'); // сборка для просмотра с диска: относительные ссылки, форма работает вхолостую
 const dateArg = args.find((a) => a.startsWith('--date='));
 const now = dateArg ? new Date(`${dateArg.slice(7)}T00:00:00Z`) : new Date();
-const contentDir = path.join(root, fixture ? 'tests/fixture/content' : 'content');
+const contentDir = process.env.CONTENT_DIR ? path.resolve(process.env.CONTENT_DIR) : path.join(root, fixture ? 'tests/fixture/content' : 'content');
 const outDir = path.join(root, fixture ? 'dist-fixture' : preview ? 'dist-preview' : demo ? 'dist-demo' : 'dist');
 // Демо-сборка открывается с диска или с любого адреса: корневые ссылки (/price/, /assets/...) становятся относительными.
 function relativize(html, url) {

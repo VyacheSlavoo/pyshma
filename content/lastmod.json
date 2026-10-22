@@ -1,6 +1,6 @@
 {
  "/": {
-  "h": "044a8222c71d5359",
+  "h": "a14016dd864e8388",
   "d": "2026-10-22"
  },
  "/price/": {
@@ -8,75 +8,91 @@
   "d": "2026-10-22"
  },
  "/catalog/tovarnyy-beton/": {
-  "h": "d666a6e46601da8d",
+  "h": "eeb59a7c1fb11121",
   "d": "2026-10-22"
  },
  "/catalog/beton-s-pmd/": {
-  "h": "1751885e415a601a",
+  "h": "aa3f05b414e154bd",
   "d": "2026-10-22"
  },
  "/catalog/fibrobeton/": {
-  "h": "80e1836a5300a11a",
+  "h": "f1dfbe838a7fc9c6",
   "d": "2026-10-22"
  },
  "/catalog/gidrotehnicheskiy-beton/": {
-  "h": "114a67da7ff4672c",
+  "h": "32309af793549661",
   "d": "2026-10-22"
  },
  "/catalog/beton-na-melkom-share/": {
-  "h": "88bbcdd42e636dfd",
+  "h": "45d2a69df349f9d3",
   "d": "2026-10-22"
  },
  "/catalog/keramzitobeton/": {
-  "h": "95846f2158f669c1",
+  "h": "1bb4a188a5941c43",
   "d": "2026-10-22"
  },
  "/catalog/suhoy-beton/": {
-  "h": "7e871168a31c5b22",
+  "h": "a1dafb287cff89bb",
   "d": "2026-10-22"
  },
  "/catalog/rastvory/": {
-  "h": "da65185a656497e8",
+  "h": "93f7d31190aa3c0d",
   "d": "2026-10-22"
  },
  "/catalog/tsps/": {
-  "h": "6b652498dbd39dec",
+  "h": "eee1a4b7eb712fe0",
   "d": "2026-10-22"
  },
  "/catalog/armatura/": {
-  "h": "80dd0f0ca06a5814",
+  "h": "b0e4d06357987c71",
   "d": "2026-10-22"
  },
  "/catalog/tovarnyy-beton/m200/": {
-  "h": "2e38ace664a591c9",
+  "h": "42122d05a79a1012",
   "d": "2026-10-22"
  },
  "/catalog/tovarnyy-beton/m250/": {
-  "h": "d93b41ccfa087951",
+  "h": "86d8460532e19423",
   "d": "2026-10-22"
  },
  "/catalog/tovarnyy-beton/m300/": {
-  "h": "dc44e71e9db8231a",
+  "h": "1c7deee99a87c8dd",
   "d": "2026-10-22"
  },
  "/catalog/tovarnyy-beton/m350/": {
-  "h": "34d4db50ab4fbc28",
+  "h": "3c8c4afd613519c5",
   "d": "2026-10-22"
  },
  "/catalog/arenda-abn/": {
-  "h": "bd5e3418b5afbae4",
+  "h": "bc5d8830a38f01e8",
   "d": "2026-10-22"
  },
  "/dostavka/": {
-  "h": "35542414e9148c89",
+  "h": "a0f252769e031dbb",
   "d": "2026-10-22"
  },
  "/gallery/": {
   "h": "46ec64cf1e06661a",
   "d": "2026-10-22"
  },
+ "/ekaterinburg/": {
+  "h": "09f81c15480b60ac",
+  "d": "2026-10-22"
+ },
+ "/sredneuralsk/": {
+  "h": "764066179f8f659f",
+  "d": "2026-10-22"
+ },
+ "/berezovskiy/": {
+  "h": "4c92c30df683ee9b",
+  "d": "2026-10-22"
+ },
+ "/aramil/": {
+  "h": "eb009d58a639d654",
+  "d": "2026-10-22"
+ },
  "/stati/": {
-  "h": "b41d23629194d31e",
+  "h": "9bc96df1d075b7e0",
   "d": "2026-10-22"
  },
  "/contacts/": {
