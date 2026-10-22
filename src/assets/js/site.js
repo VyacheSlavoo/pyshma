@@ -36,6 +36,7 @@
   }
   function bindForm(form) {
     var msg = $('.form__msg', form), btn = $('button[type=submit]', form);
+    if (!msg.id) msg.id = 'fm' + Math.random().toString(36).slice(2, 8);
     var phone = $('input[name=phone]', form);
     var ts = $('input[name=ts]', form);
     if (ts) ts.value = String(startedAt);
@@ -52,7 +53,8 @@
       msg.className = 'form__msg';
       if (!form.checkValidity()) { form.reportValidity(); return; }
       var digits = (phone.value.match(/\d/g) || []).length;
-      if (digits < 10) { msg.textContent = 'Проверьте номер телефона: нужно 10 цифр после +7.'; msg.className = 'form__msg is-err'; phone.focus(); return; }
+      if (digits < 10) { msg.textContent = 'Проверьте номер телефона: нужно 10 цифр после +7.'; msg.className = 'form__msg is-err'; phone.setAttribute('aria-invalid', 'true'); phone.setAttribute('aria-describedby', msg.id); phone.focus(); return; }
+      phone.removeAttribute('aria-invalid');
       btn.disabled = true;
       var fd = new FormData(form);
       fd.set('ts', String(startedAt));

@@ -1,3 +1,16 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "slug": "ekaterinburg",
+      "tier": "city",
+      "name": "Екатеринбург",
+      "in": "в Екатеринбурге",
+      "distance_km": null,
+      "travel_time": null,
+      "delivery_cost": null,
+      "delivery_cost_unit": null,
+      "notes": [],
+      "faq": []
+    }
+  ]
 }

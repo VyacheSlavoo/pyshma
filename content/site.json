@@ -1,32 +1,38 @@
 {
-  "domain": null,
-  "brand": null,
+  "domain": "https://verhnyaya-pyshma.ekaterinburgbeton.ru",
+  "brand": "Бетон Микс",
   "signature": null,
   "founded_year": null,
-
-  "plant": {
-    "locality": null,
-    "locality_in": null,
-    "locality_from": null,
-    "region": null,
-    "district": null,
-    "district_dat": null,
-    "address": null,
-    "street": null,
-    "postal_code": null,
-    "geo": { "lat": null, "lon": null },
-    "yandex_url": "https://yandex.ru/maps/-/CXe6qB3-",
-    "yandex_org_id": null,
-    "directions": null
+  "main_site": {
+    "name": "Бетон Микс в Екатеринбурге",
+    "url": "https://ekaterinburgbeton.ru/"
   },
-
-  "phone": { "display": null, "e164": null },
+  "plant": {
+    "locality": "Верхняя Пышма",
+    "locality_in": "в Верхней Пышме",
+    "locality_from": "из Верхней Пышмы",
+    "region": "Свердловская область",
+    "district": "городской округ Верхняя Пышма",
+    "district_dat": "Верхней Пышме и окрестностям",
+    "address": "Свердловская область, Верхняя Пышма, улица Обогатителей, 8",
+    "street": "улица Обогатителей, 8",
+    "postal_code": null,
+    "geo": {
+      "lat": 56.953581,
+      "lon": 60.584952
+    },
+    "yandex_url": "https://yandex.ru/maps/-/CXe6qB3-",
+    "yandex_org_id": "1363947198",
+    "directions": null,
+    "card_name": "Бетонно-растворный узел"
+  },
+  "phone": {
+    "display": "+7 (343) 298-10-71",
+    "e164": "+73432981071"
+  },
   "messengers": [],
-  "email_public": null,
-
-  "min_volume_m3": null,
-  "vat": null,
-
+  "email_public": "betonniy.zavod@yandex.ru",
+  "min_volume_m3": 1,
   "delivery": {
     "price_includes_delivery": null,
     "tariff_note": null,
@@ -34,14 +40,64 @@
     "dispatch_note": null,
     "waiting_note": null
   },
-
-  "documents": ["паспорт качества", "товарно-транспортная накладная"],
-  "lab": { "has_control": true },
-
+  "documents": [
+    "паспорт качества",
+    "товарно-транспортная накладная"
+  ],
+  "lab": {
+    "has_control": false
+  },
   "hero_h1": null,
-  "mark_pages": [],
+  "mark_pages": [
+    "М200",
+    "М250",
+    "М300",
+    "М350"
+  ],
   "social": [],
-  "reviews": { "items": [] },
+  "reviews": {
+    "items": [
+      {
+        "author": "neecanic",
+        "text": "Цементно-песчаные смеси у них отличные. Использовали для стяжки полов в новостройке. Схватывается равномерно, трещин нет. Спасибо за работу!",
+        "date": "2026-10-18",
+        "source_url": "https://yandex.ru/maps/-/CXe6qB3-"
+      },
+      {
+        "author": "Дмитрий Андреев",
+        "text": "Обратился за раствором для заливки ленты под забор. Согласовали объем, стоимость и время доставки. Очень ответственно подошли к доставке. Оценили возможность подъезда к месту выгрузки. Доставили все вовремя. Водитель очень качественно организовал разгрузку, Максимально минимизировав долю ручного труда. Рекомендую данную компанию.",
+        "date": "2026-06-29",
+        "source_url": "https://yandex.ru/maps/-/CXe6qB3-"
+      },
+      {
+        "author": "Дарья .",
+        "text": "Нужен был бетон с особыми свойствами для бассейна. В этой компании пошли навстречу и приготовили именно ту смесь, которая требовалась. Привезли в назначенное время, качество на уровне. Бассейн получился герметичным и прочным. Очень доволен результатом. Спасибо за индивидуальный подход и высокое качество работы.",
+        "date": "2025-11-12",
+        "source_url": "https://yandex.ru/maps/-/CXe6qB3-"
+      }
+    ]
+  },
   "requisites": null,
-  "metrika_id": null
+  "metrika_id": null,
+  "card": {
+    "categories": [
+      "Бетон, бетонные изделия"
+    ],
+    "hours_on_card": "ежедневно, 9:00 AM–10:00 PM",
+    "pickup": true,
+    "delivery": true,
+    "payment": [
+      "предоплата",
+      "наличными",
+      "банковским переводом",
+      "безналичная",
+      "онлайн"
+    ],
+    "pay_by_card": true,
+    "rating": {
+      "value": 4.7,
+      "count": 17
+    },
+    "fetched_at": "2026-10-22T00:15:18.240Z"
+  }
 }

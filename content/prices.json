@@ -1,3 +1,1660 @@
 {
-  "categories": []
+  "categories": [
+    {
+      "slug": "tovarnyy-beton",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "price": 3500
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "price": 3700
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "price": 4020
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "price": 4200
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "price": 4400
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "price": 4700
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "price": 5000
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "price": 5300
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "price": 5500
+        },
+        {
+          "mark": "М550",
+          "class": "В40",
+          "price": 5950
+        }
+      ]
+    },
+    {
+      "slug": "beton-s-pmd",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П3",
+          "frost": "F75",
+          "water": "W2",
+          "price": 3700,
+          "pmd": -5
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W2",
+          "price": 3750,
+          "pmd": -5
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П3",
+          "frost": "F75",
+          "water": "W2",
+          "price": 3800,
+          "pmd": -10
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W2",
+          "price": 3850,
+          "pmd": -10
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П3",
+          "frost": "F75",
+          "water": "W2",
+          "price": 3950,
+          "pmd": -15
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W2",
+          "price": 4000,
+          "pmd": -15
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W2",
+          "price": 4050,
+          "pmd": -5
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W2",
+          "price": 4100,
+          "pmd": -5
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W2",
+          "price": 4100,
+          "pmd": -10
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W2",
+          "price": 4150,
+          "pmd": -10
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W2",
+          "price": 4400,
+          "pmd": -15
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W2",
+          "price": 4450,
+          "pmd": -15
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4150,
+          "pmd": -5
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4200,
+          "pmd": -5
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4400,
+          "pmd": -10
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4450,
+          "pmd": -10
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4850,
+          "pmd": -15
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4900,
+          "pmd": -15
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4250,
+          "pmd": -5
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4300,
+          "pmd": -5
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4700,
+          "pmd": -10
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4750,
+          "pmd": -10
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W6",
+          "price": 5300,
+          "pmd": -15
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W6",
+          "price": 5350,
+          "pmd": -15
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4450,
+          "pmd": -5
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4500,
+          "pmd": -5
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 5000,
+          "pmd": -10
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 5050,
+          "pmd": -10
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 5750,
+          "pmd": -15
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 5800,
+          "pmd": -15
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4650,
+          "pmd": -5
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4700,
+          "pmd": -5
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 5300,
+          "pmd": -10
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 5600,
+          "pmd": -10
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 6200,
+          "pmd": -15
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 6250,
+          "pmd": -15
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W10",
+          "price": 4650,
+          "pmd": -5
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W10",
+          "price": 5650,
+          "pmd": -10
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W10",
+          "price": 6650,
+          "pmd": -15
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5050,
+          "pmd": -5
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W10",
+          "price": 5900,
+          "pmd": -10
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W12",
+          "price": 6700,
+          "pmd": -15
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5150,
+          "pmd": -5
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W12",
+          "price": 6000,
+          "pmd": -10
+        }
+      ]
+    },
+    {
+      "slug": "fibrobeton",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П1",
+          "frost": "F75",
+          "water": "W2",
+          "price": 4150
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П2",
+          "frost": "F75",
+          "water": "W2",
+          "price": 4200
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П3",
+          "frost": "F75",
+          "water": "W2",
+          "price": 4250
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W2",
+          "price": 4320
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П1",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4320
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П2",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4350
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4400
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4450
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П1",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4420
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П2",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4450
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П3",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4500
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4550
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П1",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4520
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П1",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4720
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П2",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4750
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4800
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4850
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П1",
+          "frost": "F150",
+          "water": "W8",
+          "price": 4820
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П2",
+          "frost": "F150",
+          "water": "W8",
+          "price": 4850
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W8",
+          "price": 4900
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W8",
+          "price": 4950
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П1",
+          "frost": "F150",
+          "water": "W10",
+          "price": 4970
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П2",
+          "frost": "F150",
+          "water": "W10",
+          "price": 5000
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W10",
+          "price": 5050
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W10",
+          "price": 5100
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П1",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5120
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П2",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5250
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5200
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5150
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П1",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5270
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П2",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5300
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П3",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5350
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5400
+        }
+      ]
+    },
+    {
+      "slug": "gidrotehnicheskiy-beton",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W4",
+          "price": 3950
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W4",
+          "price": 4150
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4250
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4350
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W8",
+          "price": 4550
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W10",
+          "price": 4650
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 4800
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 4950
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5100
+        }
+      ]
+    },
+    {
+      "slug": "beton-na-melkom-share",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W2",
+          "price": 4250
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": "F75",
+          "water": "W4",
+          "price": 4450
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W4",
+          "price": 4550
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П4",
+          "frost": "F100",
+          "water": "W6",
+          "price": 4650
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W6",
+          "price": 4850
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": null,
+          "price": 4950
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W10",
+          "price": 5100
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5250
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П4",
+          "frost": "F150",
+          "water": "W12",
+          "price": 5400
+        }
+      ]
+    },
+    {
+      "slug": "keramzitobeton",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 4150
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 4200
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 4250
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 4300
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 4350
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 4400
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 4450
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 4500
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 4650
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 4700
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 4800
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 5150
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 5350
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 5550
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 6100
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 6150
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 6200
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П4",
+          "frost": null,
+          "water": null,
+          "price": 6250
+        }
+      ]
+    },
+    {
+      "slug": "suhoy-beton",
+      "rows": [
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П2",
+          "frost": null,
+          "water": null,
+          "price": 3770
+        },
+        {
+          "mark": "М100",
+          "class": "В7,5",
+          "mobility": "П3",
+          "frost": null,
+          "water": null,
+          "price": 3800
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": null,
+          "frost": null,
+          "water": "W4",
+          "price": 4000
+        },
+        {
+          "mark": "М150",
+          "class": "В12,5",
+          "mobility": "П3",
+          "frost": null,
+          "water": "W4",
+          "price": 3970
+        },
+        {
+          "mark": "М200",
+          "class": "В15",
+          "mobility": "П3",
+          "frost": null,
+          "water": "W6",
+          "price": 4150
+        },
+        {
+          "mark": "М250",
+          "class": "В20",
+          "mobility": "П2",
+          "frost": null,
+          "water": "W4",
+          "price": 4200
+        },
+        {
+          "mark": "М300",
+          "class": "В22,5",
+          "mobility": "П2",
+          "frost": null,
+          "water": "W6",
+          "price": 4400
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П3",
+          "frost": null,
+          "water": "W8",
+          "price": 4450
+        },
+        {
+          "mark": "М350",
+          "class": "В25",
+          "mobility": "П4",
+          "frost": null,
+          "water": "W8",
+          "price": 4550
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П4",
+          "frost": null,
+          "water": "W10",
+          "price": 4600
+        },
+        {
+          "mark": "М400",
+          "class": "В30",
+          "mobility": "П5",
+          "frost": null,
+          "water": "W10",
+          "price": 4650
+        },
+        {
+          "mark": "М450",
+          "class": "В35",
+          "mobility": "П4",
+          "frost": null,
+          "water": "W12",
+          "price": 4750
+        },
+        {
+          "mark": "М500",
+          "class": "В40",
+          "mobility": "П2",
+          "frost": null,
+          "water": "W10",
+          "price": 4800
+        }
+      ]
+    },
+    {
+      "slug": "rastvory",
+      "rows": [
+        {
+          "name": "Кладочный раствор М50",
+          "spec": "Кладка неответственных стен и перегородок, заделка швов",
+          "unit": "м³",
+          "price": 4500
+        },
+        {
+          "name": "Кладочный раствор М75",
+          "spec": "Кладка кирпича и блоков в стенах и перегородках",
+          "unit": "м³",
+          "price": 4600
+        },
+        {
+          "name": "Кладочный раствор М100",
+          "spec": "Кладка стен и перегородок, стяжка пола",
+          "unit": "м³",
+          "price": 4700
+        },
+        {
+          "name": "Кладочный раствор М150",
+          "spec": "Кладка нагруженных стен, устройство подушек под фундамент",
+          "unit": "м³",
+          "price": 5100
+        },
+        {
+          "name": "Монтажный раствор М100",
+          "spec": "Кладка кирпича и блоков, стяжка, выравнивание, штукатурка",
+          "unit": "м³",
+          "price": 4800
+        },
+        {
+          "name": "Монтажный раствор М150",
+          "spec": "Заливка полов, укладка плитки, кладка стен из кирпича и ячеистых блоков",
+          "unit": "м³",
+          "price": 5150
+        },
+        {
+          "name": "Монтажный раствор М200",
+          "spec": "Кладка стен и перегородок, стяжка, черновая штукатурка",
+          "unit": "м³",
+          "price": 5450
+        },
+        {
+          "name": "Монтажный раствор М75",
+          "spec": "Монтаж и кладка там, где не нужна высокая прочность",
+          "unit": "м³",
+          "price": 4600
+        }
+      ]
+    },
+    {
+      "slug": "tsps",
+      "rows": [
+        {
+          "name": "ЦПС 1:1 М400",
+          "spec": "Повышенные требования к прочности, морозо- и влагостойкости",
+          "unit": "м³",
+          "price": 6200
+        },
+        {
+          "name": "ЦПС 1:2 М300",
+          "spec": "Стяжки, несущие и нагруженные элементы",
+          "unit": "м³",
+          "price": 5400
+        },
+        {
+          "name": "ЦПС 1:3 М300",
+          "spec": "Стяжки и заливка, стены, нагруженные основания",
+          "unit": "м³",
+          "price": 4900
+        },
+        {
+          "name": "ЦПС 1:4 М200",
+          "spec": "Кладка, штукатурка, заливка полов и лестниц",
+          "unit": "м³",
+          "price": 4100
+        },
+        {
+          "name": "ЦПС 1:5 М150",
+          "spec": "Ремонтно-отделочные работы общего назначения",
+          "unit": "м³",
+          "price": 3900
+        },
+        {
+          "name": "ЦПС 1:6 М100",
+          "spec": "Заделка выбоин, кладка, выравнивание поверхностей",
+          "unit": "м³",
+          "price": 3600
+        },
+        {
+          "name": "ЦПС 1:8 М75",
+          "spec": "Основание под брусчатку и тротуарную плитку",
+          "unit": "м³",
+          "price": 3400
+        },
+        {
+          "name": "ЦПС 1:10 М50",
+          "spec": "Основание под брусчатку и тротуарную плитку, черновые работы",
+          "unit": "м³",
+          "price": 3200
+        },
+        {
+          "name": "ЦПС 1:15 М25",
+          "spec": "Штукатурные работы, засыпки",
+          "unit": "м³",
+          "price": 3100
+        },
+        {
+          "name": "ЦПС 1:20 М25",
+          "spec": "Штукатурные работы, засыпки",
+          "unit": "м³",
+          "price": 2900
+        }
+      ]
+    },
+    {
+      "slug": "armatura",
+      "rows": [
+        {
+          "name": "Арматура 8 мм А3 А500С",
+          "diameter_mm": 8,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 44000
+        },
+        {
+          "name": "Арматура 10 мм А3 А500С",
+          "diameter_mm": 10,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 42000
+        },
+        {
+          "name": "Арматура 12 мм А3 А500С",
+          "diameter_mm": 12,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 41000
+        },
+        {
+          "name": "Арматура 14 мм А3 А500С",
+          "diameter_mm": 14,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 41000
+        },
+        {
+          "name": "Арматура 6 мм А3 А500С",
+          "diameter_mm": 6,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 47000
+        },
+        {
+          "name": "Арматура 16 мм А3 А500С",
+          "diameter_mm": 16,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 40000
+        },
+        {
+          "name": "Арматура 18 мм А3 А500С",
+          "diameter_mm": 18,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 40000
+        },
+        {
+          "name": "Арматура 20 мм А3 А500С",
+          "diameter_mm": 20,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 40000
+        },
+        {
+          "name": "Арматура 22 мм А3 А500С",
+          "diameter_mm": 22,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 39000
+        },
+        {
+          "name": "Арматура 25 мм А3 А500С",
+          "diameter_mm": 25,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 41000
+        },
+        {
+          "name": "Арматура 28 мм А3 А500С",
+          "diameter_mm": 28,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 42000
+        },
+        {
+          "name": "Арматура 32 мм А3 А500С",
+          "diameter_mm": 32,
+          "rebar_class": "А3",
+          "steel": "А500С",
+          "group": "А3 А500С",
+          "unit": "т",
+          "price": 39500
+        },
+        {
+          "name": "Арматура 8 мм А1 А240",
+          "diameter_mm": 8,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 47200
+        },
+        {
+          "name": "Арматура 10 мм А1 А240",
+          "diameter_mm": 10,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 43500
+        },
+        {
+          "name": "Арматура 12 мм А1 А240",
+          "diameter_mm": 12,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 32500
+        },
+        {
+          "name": "Арматура 14 мм А1 А240",
+          "diameter_mm": 14,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 33300
+        },
+        {
+          "name": "Арматура 6 мм А1 А240",
+          "diameter_mm": 6,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 47700
+        },
+        {
+          "name": "Арматура 16 мм А1 А240",
+          "diameter_mm": 16,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 31900
+        },
+        {
+          "name": "Арматура 18 мм А1 А240",
+          "diameter_mm": 18,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 31900
+        },
+        {
+          "name": "Арматура 20 мм А1 А240",
+          "diameter_mm": 20,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 31900
+        },
+        {
+          "name": "Арматура 22 мм А1 А240",
+          "diameter_mm": 22,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 36500
+        },
+        {
+          "name": "Арматура 25 мм А1 А240",
+          "diameter_mm": 25,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 36500
+        },
+        {
+          "name": "Арматура 28 мм А1 А240",
+          "diameter_mm": 28,
+          "rebar_class": "А1",
+          "steel": "А240",
+          "group": "А1 А240",
+          "unit": "т",
+          "price": 40400
+        },
+        {
+          "name": "Арматура 10 мм А3 Н/Д",
+          "diameter_mm": 10,
+          "rebar_class": "А3",
+          "steel": "Н/Д",
+          "group": "немерная Н/Д",
+          "unit": "т",
+          "price": 38900
+        },
+        {
+          "name": "Арматура 12 мм А3 Н/Д",
+          "diameter_mm": 12,
+          "rebar_class": "А3",
+          "steel": "Н/Д",
+          "group": "немерная Н/Д",
+          "unit": "т",
+          "price": 38300
+        },
+        {
+          "name": "Арматура 14 мм А3 Н/Д",
+          "diameter_mm": 14,
+          "rebar_class": "А3",
+          "steel": "Н/Д",
+          "group": "немерная Н/Д",
+          "unit": "т",
+          "price": 30700
+        },
+        {
+          "name": "Арматура 16 мм А3 Н/Д",
+          "diameter_mm": 16,
+          "rebar_class": "А3",
+          "steel": "Н/Д",
+          "group": "немерная Н/Д",
+          "unit": "т",
+          "price": 32800
+        },
+        {
+          "name": "Арматура 8 мм А3 25Г2С",
+          "diameter_mm": 8,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 53500
+        },
+        {
+          "name": "Арматура 10 мм А3 25Г2С",
+          "diameter_mm": 10,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54300
+        },
+        {
+          "name": "Арматура 12 мм А3 25Г2С",
+          "diameter_mm": 12,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 14 мм А3 25Г2С",
+          "diameter_mm": 14,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 16 мм А3 25Г2С",
+          "diameter_mm": 16,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 18 мм А3 25Г2С",
+          "diameter_mm": 18,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 20 мм А3 25Г2С",
+          "diameter_mm": 20,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 22 мм А3 25Г2С",
+          "diameter_mm": 22,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 25 мм А3 25Г2С",
+          "diameter_mm": 25,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 28 мм А3 25Г2С",
+          "diameter_mm": 28,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 32 мм А3 25Г2С",
+          "diameter_mm": 32,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 36 мм А3 25Г2С",
+          "diameter_mm": 36,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 40 мм А3 25Г2С",
+          "diameter_mm": 40,
+          "rebar_class": "А3",
+          "steel": "25Г2С",
+          "group": "А3 25Г2С",
+          "unit": "т",
+          "price": 54700
+        },
+        {
+          "name": "Арматура 8 мм А3 А500",
+          "diameter_mm": 8,
+          "rebar_class": "А3",
+          "steel": "А500",
+          "group": "А3 А500",
+          "unit": "т",
+          "price": 39600
+        },
+        {
+          "name": "Арматура 10 мм А3 А500",
+          "diameter_mm": 10,
+          "rebar_class": "А3",
+          "steel": "А500",
+          "group": "А3 А500",
+          "unit": "т",
+          "price": 40500
+        },
+        {
+          "name": "Арматура 12 мм А3 А500",
+          "diameter_mm": 12,
+          "rebar_class": "А3",
+          "steel": "А500",
+          "group": "А3 А500",
+          "unit": "т",
+          "price": 39600
+        },
+        {
+          "name": "Арматура 14 мм А3 А500",
+          "diameter_mm": 14,
+          "rebar_class": "А3",
+          "steel": "А500",
+          "group": "А3 А500",
+          "unit": "т",
+          "price": 30900
+        }
+      ]
+    }
+  ]
 }

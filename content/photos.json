@@ -1,3 +1,237 @@
 {
-  "photos": []
+  "photos": [
+    {
+      "file": "uzel-silosy.jpg",
+      "alt": "Бетонно-растворный узел: два цементных силоса и цементовоз на территории завода",
+      "role": "hero",
+      "caption": "Цементные силосы на территории узла",
+      "source": {
+        "yandex_photo_n": 1,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/9837233/2a0000018a4c78730e09ac2514536d2eae5a/XXXL"
+      }
+    },
+    {
+      "file": "abn-podacha.jpg",
+      "alt": "Автобетононасос подаёт бетон на плиту, рабочие на армокаркасе",
+      "role": "fleet",
+      "caption": "Подача бетона автобетононасосом",
+      "source": {
+        "yandex_photo_n": 9,
+        "author": "Анастасия Лапина",
+        "url": "https://avatars.mds.yandex.net/get-altay/13220786/2a00000192676af97d5d44a6165a5f5a9c65/XXXL"
+      }
+    },
+    {
+      "file": "mikser-v-nasos.jpg",
+      "alt": "Выгрузка бетона из автобетоносмесителя в приёмный бункер бетононасоса",
+      "role": "fleet",
+      "caption": "Выгрузка из миксера в бункер насоса",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.08.17.jpg"
+      }
+    },
+    {
+      "file": "abn-podacha-plita.jpg",
+      "alt": "Автобетононасос подаёт бетон на армированную плиту, рядом автобетоносмесители",
+      "role": "fleet",
+      "caption": "Подача бетона на армированную плиту",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.07.03.jpg"
+      }
+    },
+    {
+      "file": "uzel-territoriya.jpg",
+      "alt": "Цементные силосы и подъезд к ним на территории бетонного узла",
+      "role": "plant",
+      "caption": "Подъезд к силосам",
+      "source": {
+        "yandex_photo_n": 7,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/6314780/2a0000018983a43e9b01b42f3cd076a9f132/XXXL"
+      }
+    },
+    {
+      "file": "abn-strela-vylet.jpg",
+      "alt": "Автобетононасос с раскрытой стрелой на строительной площадке",
+      "role": "fleet",
+      "caption": "Автобетононасос с раскрытой стрелой",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.07.38.jpg"
+      }
+    },
+    {
+      "file": "mikser-zhelob.jpg",
+      "alt": "Желоб автобетоносмесителя в момент выгрузки бетона",
+      "role": "fleet",
+      "caption": "Выгрузка бетона из миксера",
+      "source": {
+        "yandex_photo_n": 5,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/9663145/2a00000189acb2392bba524a6a7a924d2ddb/XXXL"
+      }
+    },
+    {
+      "file": "uzel-pomeschenie.jpg",
+      "alt": "Технологическое помещение узла: ёмкость для воды и трубопроводы",
+      "role": "plant",
+      "caption": "Технологическое помещение",
+      "source": {
+        "yandex_photo_n": 10,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/9717139/2a00000189acb38a9ddd1bed6c0055b5bef5/XXXL"
+      }
+    },
+    {
+      "file": "abn-strela.jpg",
+      "alt": "Стрела автобетононасоса над опалубкой фундамента",
+      "role": "fleet",
+      "caption": "Стрела автобетононасоса",
+      "source": {
+        "yandex_photo_n": 14,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/9954022/2a00000189acb283d947255c95c97adf0beb/XXXL"
+      }
+    },
+    {
+      "file": "plita-opalubka.jpg",
+      "alt": "Залитая фундаментная плита в опалубке на участке с жилой застройкой",
+      "role": "object",
+      "caption": "Фундаментная плита",
+      "source": {
+        "yandex_photo_n": 2,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/9916116/2a00000189acb1e74a50bf9b0ca8271e3e7e/XXXL"
+      }
+    },
+    {
+      "file": "plita-uchastok.jpg",
+      "alt": "Фундаментная плита после заливки рядом с жилой застройкой",
+      "role": "object",
+      "caption": "Плита после заливки",
+      "source": {
+        "yandex_photo_n": 18,
+        "author": "Анастасия Лапина",
+        "url": "https://avatars.mds.yandex.net/get-altay/13200126/2a00000194142d444886b0090f0efa43f07c/XXXL"
+      }
+    },
+    {
+      "file": "armokarkas.jpg",
+      "alt": "Армокаркас в опалубке перед заливкой плиты",
+      "role": "object",
+      "caption": "Армирование плиты перед заливкой",
+      "source": {
+        "yandex_photo_n": 19,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/13237301/2a00000190972eb5c94c061cae06bd839dbc/XXXL"
+      }
+    },
+    {
+      "file": "pol-pomeschenie.jpg",
+      "alt": "Бетонный пол в помещении после заливки",
+      "role": "object",
+      "caption": "Бетонный пол в помещении",
+      "source": {
+        "yandex_photo_n": 6,
+        "author": "Анастасия Лапина",
+        "url": "https://avatars.mds.yandex.net/get-altay/15340601/2a00000194142e7fef2669aafbc756d69281/XXXL"
+      }
+    },
+    {
+      "file": "opalubka-lenta.jpg",
+      "alt": "Опалубка ленточного фундамента перед заливкой",
+      "role": "object",
+      "caption": "Опалубка ленточного фундамента",
+      "source": {
+        "yandex_photo_n": 15,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/13325287/2a0000018ee60de8611d33da44d0cdf206a2/XXXL"
+      }
+    },
+    {
+      "file": "plita-vid-sboku.jpg",
+      "alt": "Залитая плита фундамента, вид от края опалубки",
+      "role": "object",
+      "caption": "Монолитная плита",
+      "source": {
+        "yandex_photo_n": 17,
+        "author": "Moinakleiki",
+        "url": "https://avatars.mds.yandex.net/get-altay/9728306/2a00000189acb1bf5892f665646bb04f74e2/XXXL"
+      }
+    },
+    {
+      "file": "plita-gotovaya.jpg",
+      "alt": "Готовая монолитная плита на участке",
+      "role": "object",
+      "caption": "Готовая плита",
+      "source": {
+        "yandex_photo_n": 21,
+        "author": "Анастасия Лапина",
+        "url": "https://avatars.mds.yandex.net/get-altay/11381866/2a0000018bd7b84d8f470076a245fd955090/XXXL"
+      }
+    },
+    {
+      "file": "abn-mikseri.jpg",
+      "alt": "Автобетононасос и автобетоносмесители у плиты с армированием",
+      "role": "fleet",
+      "caption": "Насос и миксеры на объекте",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.06.54.jpg"
+      }
+    },
+    {
+      "file": "abn-opalubka.jpg",
+      "alt": "Стрела автобетононасоса над опалубкой плиты",
+      "role": "fleet",
+      "caption": "Подача бетона в опалубку",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.08.41.jpg"
+      }
+    },
+    {
+      "file": "zima-mikser-nasos.jpg",
+      "alt": "Зимняя заливка: автобетоносмеситель и автобетононасос на снегу",
+      "role": "fleet",
+      "caption": "Работа зимой",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.10.18.jpg"
+      }
+    },
+    {
+      "file": "abn-gorod.jpg",
+      "alt": "Автобетононасос у многоэтажного здания на городском объекте",
+      "role": "fleet",
+      "caption": "Автобетононасос на городском объекте",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "photo_2026-07-28_15.45.36.jpeg"
+      }
+    },
+    {
+      "file": "plita-svezhaya.jpg",
+      "alt": "Свежезалитая плита и автобетоносмесители на заднем плане",
+      "role": "object",
+      "caption": "Свежезалитая плита",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "2026-06-30_03.05.44.jpg"
+      }
+    },
+    {
+      "file": "beton-v-tachke.jpg",
+      "alt": "Бетонная смесь с щебнем в строительной тачке на объекте",
+      "role": "object",
+      "caption": "Бетон на объекте",
+      "source": {
+        "google_drive": "img2.zip",
+        "original": "photo_2026-08-25_15.46.26.jpeg"
+      }
+    }
+  ]
 }

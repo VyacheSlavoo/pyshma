@@ -17,10 +17,11 @@ export function baseGraph(ctx) {
         '@type': 'Organization', '@id': orgId(ctx), name: site.brand, url: `${origin}/`,
         logo: `${origin}${ctx.assets.logo}`, telephone: site.phone.e164,
         ...(site.email_public ? { email: site.email_public } : {}),
-        foundingDate: String(site.founded_year)
+        ...(site.founded_year ? { foundingDate: String(site.founded_year) } : {})
       },
       {
         '@type': 'LocalBusiness', '@id': lbId(ctx), name: site.brand, url: `${origin}/`,
+        ...(site.plant.card_name ? { alternateName: site.plant.card_name } : {}),
         image: `${origin}${ctx.assets.og}`, telephone: site.phone.e164,
         ...(site.email_public ? { email: site.email_public } : {}),
         address: {
@@ -55,12 +56,11 @@ export function faqLd(items) {
 }
 
 export function offerLd(ctx, { name, price, url, unitCode = 'MTQ', unitText }) {
-  const vat = ctx.site.vat === 'none' ? {} : { valueAddedTaxIncluded: ctx.site.vat === 'included' };
   return {
     '@type': 'Offer', name, price: String(price), priceCurrency: 'RUB',
     priceValidUntil: isoDate(ctx.priceValidUntil), availability: 'https://schema.org/InStock', url: ctx.origin + url,
     seller: { '@id': lbId(ctx) },
-    priceSpecification: { '@type': 'UnitPriceSpecification', price: String(price), priceCurrency: 'RUB', ...(unitText ? { unitText } : { unitCode }), ...vat }
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: String(price), priceCurrency: 'RUB', ...(unitText ? { unitText } : { unitCode }) }
   };
 }
 
@@ -71,7 +71,7 @@ export function sitemapXml(ctx, pages) {
 }
 
 export function robotsTxt(ctx) {
-  if (ctx.fixture) return 'User-agent: *\nDisallow: /\n';
+  if (ctx.fixture || ctx.preview) return 'User-agent: *\nDisallow: /\n';
   return `User-agent: *\nAllow: /\nDisallow: /send.php\nDisallow: /spasibo/\n\nSitemap: ${ctx.origin}/sitemap.xml\n`;
 }
 
@@ -102,19 +102,24 @@ RewriteRule ^ https://${host}%{REQUEST_URI} [R=301,L]
 
 # 3. /index.html, /index.htm, /index.php -> /
 RewriteCond %{THE_REQUEST} \\s/(.*/)?index\\.(?:html?|php)[\\s?] [NC]
-RewriteRule ^ /%1 [R=301,L,NE]
+RewriteRule ^ https://${host}/%1 [R=301,L,NE]
 
 # 4. отдельной страницы /catalog/ нет, полный прайс лежит в /price/
-RewriteRule ^catalog/?$ /price/ [R=301,L]
+RewriteRule ^catalog/?$ https://${host}/price/ [R=301,L]
+
+# 5. каталог без слэша на конце -> со слэшем, сразу на https основного хоста
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ https://${host}/$1/ [R=301,L]
 </IfModule>
 
 <IfModule mod_authz_core.c>
-<FilesMatch "^(send\\.config\\.php|.*\\.log|\\.htaccess)$">
+<FilesMatch "^(send\\.config.*\\.php|.*\\.log|\\.htaccess)$">
 Require all denied
 </FilesMatch>
 </IfModule>
 <IfModule !mod_authz_core.c>
-<FilesMatch "^(send\\.config\\.php|.*\\.log|\\.htaccess)$">
+<FilesMatch "^(send\\.config.*\\.php|.*\\.log|\\.htaccess)$">
 Order allow,deny
 Deny from all
 </FilesMatch>

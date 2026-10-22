@@ -2,20 +2,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { normMark, normClass, markSlug, getPath, isoDate, monthStart, monthEnd } from './util.mjs';
-import { classFor, MARK_ORDER } from './marks.mjs';
+import { classFor, markNum } from './marks.mjs';
 import { CATEGORY_DEFS, CONCRETE_KINDS } from './categories.mjs';
 
 const readJson = (dir, name) => JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
 
+// Обязательные факты. Год основания, НДС и условия доставки в цене не обязательны: чего нет, то на сайте не пишем.
 const REQUIRED = [
   ['domain', 'основной домен с https://'],
   ['brand', 'название на сайте'],
-  ['founded_year', 'с какого года работает производство'],
   ['plant.locality', 'населённый пункт завода'],
-  ['plant.locality_in', 'он же с предлогом («в Ульяновке»)'],
-  ['plant.locality_from', 'он же с «из» («из Ульяновки»)'],
+  ['plant.locality_in', 'он же с предлогом («в Верхней Пышме»)'],
+  ['plant.locality_from', 'он же с «из» («из Верхней Пышмы»)'],
   ['plant.region', 'регион'],
-  ['plant.district_dat', 'район в дательном падеже («Тосненскому району»)'],
+  ['plant.district_dat', 'зона доставки в дательном падеже («Верхней Пышме и окрестностям»)'],
   ['plant.address', 'адрес завода как в Яндекс Бизнесе'],
   ['plant.street', 'улица и дом (schema.org)'],
   ['plant.geo.lat', 'широта завода'],
@@ -23,12 +23,18 @@ const REQUIRED = [
   ['plant.yandex_url', 'ссылка на карточку в Яндекс Картах'],
   ['phone.display', 'телефон для показа'],
   ['phone.e164', 'телефон для tel: (+7...)'],
-  ['min_volume_m3', 'минимальный объём заказа'],
-  ['vat', 'НДС: included | excluded | none'],
-  ['delivery.price_includes_delivery', 'входит ли доставка в цену бетона: true или false']
+  ['min_volume_m3', 'минимальный объём заказа']
 ];
 
-export function loadData({ contentDir, now, fixture = false }) {
+// Значения, которые подставляются только в режиме предпросмотра и всегда подсвечиваются плашкой на сайте.
+export const PREVIEW_DEFAULTS = {
+  domain: 'https://preview.invalid',
+  min_volume_m3: 1
+};
+
+const compact = (rows, key) => rows.filter((r) => r[key] !== null && r[key] !== undefined && r[key] !== '');
+
+export function loadData({ contentDir, now, fixture = false, preview = false }) {
   const site = readJson(contentDir, 'site.json');
   const pricesRaw = readJson(contentDir, 'prices.json');
   const citiesRaw = readJson(contentDir, 'cities.json');
@@ -38,6 +44,13 @@ export function loadData({ contentDir, now, fixture = false }) {
 
   const errors = [];
   const warnings = [];
+  const assumed = [];
+
+  if (preview) {
+    for (const [k, v] of Object.entries(PREVIEW_DEFAULTS)) {
+      if (site[k] === null || site[k] === undefined || site[k] === '') { site[k] = v; assumed.push(k); }
+    }
+  }
 
   for (const [p, label] of REQUIRED) {
     const v = getPath(site, p);
@@ -46,7 +59,6 @@ export function loadData({ contentDir, now, fixture = false }) {
   if (site.domain && (!/^https:\/\/[^/]+$/.test(site.domain) || /\/\/www\./.test(site.domain))) {
     errors.push('site.json: domain должен быть вида https://example.ru (без слэша в конце и без www)');
   }
-  if (site.vat && !['included', 'excluded', 'none'].includes(site.vat)) errors.push('site.json: vat должен быть included, excluded или none');
   if (site.phone?.e164 && !/^\+7\d{10}$/.test(site.phone.e164)) errors.push('site.json: phone.e164 должен быть вида +7XXXXXXXXXX');
   for (const m of site.messengers || []) {
     if (!['telegram', 'whatsapp', 'max', 'viber'].includes(m.type) || !/^https:\/\//.test(m.url || '')) errors.push(`site.json: messengers: нужен type и рабочий https-url (${JSON.stringify(m)})`);
@@ -81,6 +93,9 @@ export function loadData({ contentDir, now, fixture = false }) {
         if (seen.has(key)) warnings.push(`${where}: дубль позиции ${row.mark} ${row.mobility ?? ''}`);
         seen.add(key);
         rows.push(row);
+      } else if (def.kind === 'rebar') {
+        if (!r.name || !r.diameter_mm) { errors.push(`${where}: для арматуры нужны name и diameter_mm`); return; }
+        rows.push({ name: r.name, diameter: r.diameter_mm, rebarClass: r.rebar_class ?? null, steel: r.steel ?? null, group: r.group ?? null, unit: r.unit || 'т', price: Math.round(r.price) });
       } else {
         if (!r.name) { errors.push(`${where}: нет названия`); return; }
         rows.push({ name: r.name, spec: r.spec || null, unit: r.unit || 'м³', price: Math.round(r.price), note: r.note || null });
@@ -88,8 +103,7 @@ export function loadData({ contentDir, now, fixture = false }) {
     });
     if (!rows.length) { warnings.push(`prices.json: категория ${c.slug} пуста, страница не будет создана`); continue; }
     if (CONCRETE_KINDS.has(def.kind)) {
-      rows.sort((a, b) => MARK_ORDER.indexOf(a.mark) - MARK_ORDER.indexOf(b.mark) || (a.pmd ?? 0) - (b.pmd ?? 0) || a.price - b.price);
-      // класс одной марки в пределах сайта должен быть один
+      rows.sort((a, b) => markNum(a.mark) - markNum(b.mark) || Math.abs(a.pmd ?? 0) - Math.abs(b.pmd ?? 0) || String(a.mobility).localeCompare(String(b.mobility)) || a.price - b.price);
     }
     categories.push({ slug: c.slug, ...def, rows });
   }
@@ -98,23 +112,23 @@ export function loadData({ contentDir, now, fixture = false }) {
   // Согласованность марка ↔ класс по всему сайту
   const classByMark = new Map();
   for (const c of categories) for (const r of c.rows) {
-    if (!r.cls) continue;
-    if (classByMark.has(r.mark) && classByMark.get(r.mark) !== r.cls) errors.push(`prices.json: марка ${r.mark} встречается с разными классами (${classByMark.get(r.mark)} и ${r.cls})`);
+    if (!r.mark || !r.cls) continue;
+    if (classByMark.has(r.mark) && classByMark.get(r.mark) !== r.cls) errors.push(`prices.json: марка ${r.mark} встречается с разными классами (${classByMark.get(r.mark)} и ${r.cls}), категория ${c.slug}`);
     else classByMark.set(r.mark, r.cls);
   }
 
-  // Аренда АБН
+  // Аренда: АБН (по часам или сменам) и дополнительные позиции
   let rental = null;
   if (rentalRaw.available) {
     const units = (rentalRaw.units || []).filter(Boolean);
+    const extras = (rentalRaw.extras || []).filter(Boolean);
     if (!units.length) errors.push('rental.json: available=true, но список units пуст');
     for (const [i, u] of units.entries()) {
-      for (const f of ['name', 'reach_m', 'capacity_m3h', 'pipe_diameter_mm']) if (u[f] == null) errors.push(`rental.json: units[${i}].${f} не заполнено`);
-      if (u.price_shift == null && u.price_hour == null) errors.push(`rental.json: units[${i}] — нужна цена price_shift или price_hour`);
+      if (!u.name) errors.push(`rental.json: units[${i}].name не заполнено`);
+      if (!(u.price > 0) || !u.unit) errors.push(`rental.json: units[${i}] — нужны price и unit (час, смена)`);
     }
-    if (units.length) {
-      rental = { slug: 'arenda-abn', ...CATEGORY_DEFS['arenda-abn'], units };
-    }
+    for (const [i, u] of extras.entries()) if (!u.name || !(u.price > 0) || !u.unit) errors.push(`rental.json: extras[${i}] — нужны name, price, unit`);
+    if (units.length) rental = { slug: 'arenda-abn', ...CATEGORY_DEFS['arenda-abn'], units, extras };
   }
 
   // Города
@@ -147,16 +161,13 @@ export function loadData({ contentDir, now, fixture = false }) {
     if (!mainConcrete || !mainConcrete.rows.some((r) => r.mark === m)) errors.push(`site.json: mark_pages содержит ${m}, но в категории ${mainConcrete?.slug} такой марки нет`);
   }
 
+  const positions = categories.reduce((n, c) => n + c.rows.length, 0) + (rental ? rental.units.length + rental.extras.length : 0);
   const priceDate = monthStart(now);
-  const ctx = {
-    site, texts, categories, rental, cities, photos, fixture, errors, warnings,
+  return {
+    site, texts, categories, rental, cities, photos, fixture, preview, assumed, errors, warnings,
     origin: site.domain,
     host: site.domain ? new URL(site.domain).host : null,
     now, priceDate, priceValidUntil: monthEnd(now), priceDateIso: isoDate(priceDate),
-    mainConcrete, fromPrice, markPages,
-    classByMark
+    mainConcrete, fromPrice, markPages, positions, classByMark
   };
-  return ctx;
 }
-
-export const T = (ctx, key, fallback) => (ctx.texts[key] !== undefined ? ctx.texts[key] : fallback);

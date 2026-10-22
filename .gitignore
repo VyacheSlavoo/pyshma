@@ -1,8 +1,8 @@
 node_modules/
-dist/
 dist-fixture/
 .cache/
 *.log
 send.config.php
 .DS_Store
 tests/fixture/content/photos/
+dist-preview/

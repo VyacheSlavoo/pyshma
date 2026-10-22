@@ -1,0 +1,2930 @@
+{
+  "fetched_at": "2026-10-22T00:15:18.240Z",
+  "source": "https://yandex.com/maps/org/betonno_rastvorny_uzel/1363947198",
+  "org": {
+    "id": "1363947198",
+    "title": "Бетонно-растворный узел",
+    "address": "Верхняя Пышма, ул. Обогатителей, 8",
+    "fullAddress": "Свердловская область, Верхняя Пышма, улица Обогатителей, 8",
+    "coordinates": [
+      60.584952,
+      56.953581
+    ],
+    "phones": [
+      {
+        "number": "+7 (343) 298-10-71",
+        "type": "phone",
+        "value": "+73432981071",
+        "info": "Бетонный завод"
+      }
+    ],
+    "categories": [
+      {
+        "id": "184107671",
+        "name": "Бетон, бетонные изделия",
+        "class": "industrial enterprise",
+        "seoname": "concrete_concrete_products",
+        "pluralName": "Бетонные изделия"
+      }
+    ],
+    "workingTimeText": "ежедневно, 9:00 AM–10:00 PM",
+    "urls": [
+      "https://betonno-rastvornyjuzel.clients.site/"
+    ],
+    "compositeAddress": {
+      "country": "Россия",
+      "area": "городской округ Верхняя Пышма",
+      "locality": "Верхняя Пышма",
+      "street": "улица Обогатителей",
+      "house": "8"
+    },
+    "ratingData": {
+      "ratingCount": 17,
+      "ratingValue": 4.699999809265137,
+      "reviewCount": 16
+    },
+    "seoname": "uralelektromed",
+    "features": [
+      {
+        "id": "petfriendly",
+        "value": [
+          {
+            "id": "allowed_with_all_animals",
+            "name": "разрешено со всеми животными"
+          }
+        ],
+        "name": "посещение с животными",
+        "type": "enum",
+        "important": false
+      },
+      {
+        "id": "street_entrance",
+        "value": true,
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "concrete",
+        "value": true,
+        "name": "бетон",
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "pickup",
+        "value": true,
+        "name": "Самовывоз",
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "wheelchair_access",
+        "value": [
+          {
+            "id": "unavailable",
+            "name": "недоступно"
+          }
+        ],
+        "name": "доступность входа на инвалидной коляске",
+        "type": "enum",
+        "important": false
+      },
+      {
+        "id": "payment_method",
+        "value": [
+          {
+            "id": "prepayment",
+            "name": "предоплата"
+          },
+          {
+            "id": "cash",
+            "name": "наличными"
+          },
+          {
+            "id": "wire_transfer",
+            "name": "банковским переводом"
+          },
+          {
+            "id": "cashless_payment",
+            "name": "безналичная"
+          },
+          {
+            "id": "online_payment",
+            "name": "онлайн"
+          }
+        ],
+        "name": "способ оплаты",
+        "type": "enum",
+        "important": false
+      },
+      {
+        "id": "payment_by_credit_card",
+        "value": true,
+        "name": "Оплата картой",
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "delivery",
+        "value": true,
+        "name": "доставка",
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "concrete_grade",
+        "value": [
+          {
+            "id": "concrete_m50",
+            "name": "бетон м50"
+          },
+          {
+            "id": "concrete_m100",
+            "name": "бетон м100"
+          },
+          {
+            "id": "concrete_m150",
+            "name": "бетон м150"
+          },
+          {
+            "id": "concrete_m200",
+            "name": "бетон м200"
+          },
+          {
+            "id": "concrete_m250",
+            "name": "бетон м250"
+          },
+          {
+            "id": "concrete_m300",
+            "name": "бетон м300"
+          },
+          {
+            "id": "concrete_m350",
+            "name": "бетон м350"
+          },
+          {
+            "id": "concrete_m400",
+            "name": "бетон м400"
+          },
+          {
+            "id": "concrete_m450",
+            "name": "бетон м450"
+          },
+          {
+            "id": "concrete_m500",
+            "name": "бетон м500"
+          },
+          {
+            "id": "concrete_m550",
+            "name": "бетон м550"
+          },
+          {
+            "id": "concrete_m600",
+            "name": "бетон м600"
+          },
+          {
+            "id": "concrete_m650",
+            "name": "бетон м650"
+          },
+          {
+            "id": "concrete_m700",
+            "name": "бетон м700"
+          },
+          {
+            "id": "cement_mortar_m50",
+            "name": "цементный раствор м50"
+          },
+          {
+            "id": "cement_mortar_m75",
+            "name": "цементный раствор м75"
+          },
+          {
+            "id": "cement_mortar_m100",
+            "name": "цементный раствор м100"
+          },
+          {
+            "id": "cement_mortar_m150",
+            "name": "цементный раствор м150"
+          },
+          {
+            "id": "cement_mortar_m200",
+            "name": "цементный раствор м200"
+          },
+          {
+            "id": "expanded_clay_concrete_m50",
+            "name": "керамзитобетон м50"
+          },
+          {
+            "id": "expanded_clay_concrete_m75",
+            "name": "керамзитобетон м75"
+          },
+          {
+            "id": "expanded_clay_concrete_m100",
+            "name": "керамзитобетон м100"
+          },
+          {
+            "id": "expanded_clay_concrete_m150",
+            "name": "керамзитобетон м150"
+          },
+          {
+            "id": "expanded_clay_concrete_m200",
+            "name": "керамзитобетон м200"
+          },
+          {
+            "id": "expanded_clay_concrete_m300",
+            "name": "керамзитобетон м300"
+          }
+        ],
+        "name": "марка",
+        "type": "enum",
+        "important": false
+      },
+      {
+        "id": "promotions",
+        "value": [
+          {
+            "id": "discounts",
+            "name": "скидки"
+          },
+          {
+            "id": "promotions",
+            "name": "акции"
+          },
+          {
+            "id": "special_offers",
+            "name": "спецпредложения"
+          },
+          {
+            "id": "bonuses",
+            "name": "бонусы"
+          },
+          {
+            "id": "gifts",
+            "name": "подарки"
+          }
+        ],
+        "name": "акции",
+        "type": "enum",
+        "important": false
+      },
+      {
+        "id": "Possible_with_dog",
+        "value": true,
+        "name": "Можно с собакой",
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "guarantee",
+        "value": true,
+        "name": "гарантия",
+        "type": "bool",
+        "important": false
+      },
+      {
+        "id": "wheelchair_accessible_vocabulary",
+        "value": [
+          {
+            "id": "wheelchair_accessible_na",
+            "name": "недоступно"
+          }
+        ],
+        "name": "доступность помещения на инвалидной коляске",
+        "type": "enum",
+        "important": false
+      }
+    ]
+  },
+  "goods": [
+    {
+      "categoryName": "Без категории",
+      "categoryItems": [
+        {
+          "title": "Услуга транспортерной ленты 17 метров",
+          "description": "Цена указана за 1 час работы. Минимальная смена 2 часа",
+          "price": "7000",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.j6vcqn3hb0vyaIC4u3b0z6vpWidSiSTj8CSr0aoiWRQ"
+        },
+        {
+          "title": "Услуга транспортерной ленты 12 метров",
+          "description": "Цена указана за 1 час работы. Минимальная смена 2 часа",
+          "price": "6000",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.RbkAihZZfqdDpnxKlFdXMI6PIVDCQMT2hYmsrK5dzc8"
+        },
+        {
+          "title": "Бетон с ПМД-10 М350 B25 F150 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5600",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.o2fIAK1893Eb1AF75uUD2WFwKuA-EpB6ka1wGFIBGk4"
+        }
+      ]
+    },
+    {
+      "categoryName": "Фибробетон",
+      "categoryItems": [
+        {
+          "title": "Фибробетон М100 B7,5 F75 W2 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.YvpPkk-W_e9l6d1btoEqhlk8wj2WxclOKKmvzuXin0Y"
+        },
+        {
+          "title": "Фибробетон М100 B7,5 F75 W2 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.vtEzPt5OKgFjmQc6CmgpRy5wyKliVfPGkkx-tLM9s3c"
+        },
+        {
+          "title": "Фибробетон М100 B7,5 F75 W2 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.DjipTRpjyF73EViCuuOrSRD6cHftpZw5uTXLd13KdmM"
+        },
+        {
+          "title": "Фибробетон М100 B7,5 F75 W2 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4320",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.cDJFEzUQwga0FWNpOK4_lLPc-F6m-AljE0SOjl2wmjk"
+        },
+        {
+          "title": "Фибробетон М150 B12,5 F100 W4 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4320",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1._kD5qR8pHoZVAa25RdACX89Y-v5EX5KxNmNL6KsjJZc"
+        },
+        {
+          "title": "Фибробетон М150 B12,5 F100 W4 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4350",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ppUENPgA4d2_vy2oEWrGiFU-_-fSf8rlRQ78nIdDtB8"
+        },
+        {
+          "title": "Фибробетон М150 B12,5 F100 W4 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.jDyJPVR6kckhpdRG8xdrnvtaRUHamOyirbM1KQWGVHg"
+        },
+        {
+          "title": "Фибробетон М150 B12,5 F100 W4 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.YJysc97guxW3g2WA8rWYTSB8oDVNol21aTRAn_Bp3fU"
+        },
+        {
+          "title": "Фибробетон М200 B15 F100 W4 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4420",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ybgTFy6tFeq0okSmgrvwd4xUf-I9KaAMP7zz_hsiuxU"
+        },
+        {
+          "title": "Фибробетон М200 B15 F100 W4 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Q6-4iqnw68P_H5LW4EWXwaq4qauroV1FL1Jn30EzM8M"
+        },
+        {
+          "title": "Фибробетон М200 B15 F100 W4 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4500",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.SZxzEMb8LKFF4-K3Fk0y39CCiHa7UK0nNC4osrNiyyo"
+        },
+        {
+          "title": "Фибробетон М200 B15 F100 W4 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.5MuYxJugIIeduoY494CwFj56vjQ-d8vtFk45zxOqXDk"
+        },
+        {
+          "title": "Фибробетон М250 B20 F100 W6 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4520",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.1TMHVfEN-dMidtMrx1Qr3ohD-u-2hY3FuAXOxeHXBuE"
+        },
+        {
+          "title": "Фибробетон М250 B20 F100 W6 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ojOqtW-3vI6ZeHcQvypmeNihp477d-RDfVM8rsKsMt0"
+        },
+        {
+          "title": "Фибробетон М250 B20 F100 W6 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4600",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.GY573KzRxux19VHFLLdtnzOt8P0DjEMqnqN6e6WCssQ"
+        },
+        {
+          "title": "Фибробетон М250 B20 F100 W6 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.DU40HZ524m7K-iLDO3PZC59KxDS-QDFXZU77Y0Lvl_E"
+        },
+        {
+          "title": "Фибробетон М300 B22,5 F150 W6 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4720",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.pgjPp7ftcCwdhQwN-NP6GWIhYmlDqrWP4SDAmq-tioA"
+        },
+        {
+          "title": "Фибробетон М300 B22,5 F150 W6 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4750",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.kb-el29jf2xLxtczCbIOEdpLSCD9Hvar5ANwSBUhbYY"
+        },
+        {
+          "title": "Фибробетон М300 B22,5 F150 W6 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.844HgAa2tMkb9vcQ7UIhKU3_8SrJBse-XdirArtWvcA"
+        },
+        {
+          "title": "Фибробетон М300 B22,5 F150 W6 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4850",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.cE-GPEPwPp2D9FfRxP5eLqaja1YHi5epQCly7oV1kVw"
+        },
+        {
+          "title": "Фибробетон М350 B25 F150 W8 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4820",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Nw4Z7jnQlikB1Pn5XWDosaJ_Z-GBniEJeh42IVyhbHE"
+        },
+        {
+          "title": "Фибробетон М350 B25 F150 W8 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4850",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.p6sl8lVwVLTNS2CfNBJv48krlH5ZXwN8gHsHCehRfvs"
+        },
+        {
+          "title": "Фибробетон М350 B25 F150 W8 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4900",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.fBf44QM8TYvb-y1EVlUKZfla3naJP0ZvTd0YMCKEX3g"
+        },
+        {
+          "title": "Фибробетон М350 B25 F150 W8 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.jPwADb0-kwb6cYqgzJcGtlfVyAYURXnJzMF-2uK9ybk"
+        },
+        {
+          "title": "Фибробетон М400 B30 F150 W10 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "4970",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.l-4UQB5qs1aai1F7-bc_FYtp-vr_cQy1kKb-OrKAPUI"
+        },
+        {
+          "title": "Фибробетон М400 B30 F150 W10 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5000",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RVR446IlRVgTgoEUM2MScZVP0mvMVgbVTNMFewOY8KY"
+        },
+        {
+          "title": "Фибробетон М400 B30 F150 W10 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5050",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.vZle1KwBCNxKpYW5NuiEVV6soNg8DzQPJ333MtDnCGM"
+        },
+        {
+          "title": "Фибробетон М400 B30 F150 W10 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.xOvI7AYrLxrOOlcLd1bO7al2pidwGdgGqoVugbRk3XE"
+        },
+        {
+          "title": "Фибробетон М450 B35 F150 W12 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5120",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.niQjSBLOcjXryhiweqQDdC9x0hBNp0yizV4VQ3rqHzU"
+        },
+        {
+          "title": "Фибробетон М450 B35 F150 W12 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.H1pldg_HKIqVdMkxbEQzMTkqt9TLyG6p27RxBTCILms"
+        },
+        {
+          "title": "Фибробетон М450 B35 F150 W12 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.uGM_0W-t1_Sb6wCnTva4OQzdt4jCKrm2qVuCglzT1f4"
+        },
+        {
+          "title": "Фибробетон М450 B35 F150 W12 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.9vl-SsKcYBz-vzHHDxMoSkWYNzmVxe7mVH57uLFcMlI"
+        },
+        {
+          "title": "Фибробетон М500 B35 F150 W12 П1",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5270",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Zgx5fb900AxlNnok-8duh-p9tWNoSKQHrEpiBr63nUU"
+        },
+        {
+          "title": "Фибробетон М500 B35 F150 W12 П2",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5300",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.7_R0N_kidN6RHUFxnfqHi3k8tgx9AHl6g2Zapj5y7VQ"
+        },
+        {
+          "title": "Фибробетон М500 B35 F150 W12 П3",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5350",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.LhktHiDOjGO7r1qZzCIYF2RjAqvrkaBaclIhm0uBQGY"
+        },
+        {
+          "title": "Фибробетон М500 B35 F150 W12 П4",
+          "description": "Трещиностойкость, которая недоступна товарному бетону. Повышенная прочность при растяжении. Фибробетон получается при добавлении в бетонную смесь армирующих волокон- фибры.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17853b1754e4e28b44b3e1bc1d/{size}",
+          "price": "5400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.5VJpZOC2B81oCGhYTK3uJ3fgw2FOSaXA3oCyF9FOGj0"
+        }
+      ]
+    },
+    {
+      "categoryName": "Сухой бетон",
+      "categoryItems": [
+        {
+          "title": "Сухой бетон B7,5 M100 П2 W3",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "3770",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.6hIYI4YrZq1g-9Y4mm6W3K_bL2Hrsb9lDAtB_vVH2CM"
+        },
+        {
+          "title": "Сухой бетон B7,5 M100 П3 W3",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "3800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.dRDFgoqNiQ3swLXzA6LSxR3AJmkOv6OTwGtTbcVU0U8"
+        },
+        {
+          "title": "Сухой бетон B10 M150 П3 W4",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "3970",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.zA6SJP9QSNnaYqKXhauJyj2bwE_ZQ38KKMPpiiYGCLk"
+        },
+        {
+          "title": "Сухой бетон B12,5 M150 W4",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4000",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.gpYxUgvinNI5aD0A0qcfZwl62pJTHoqCr1qoZC5rIhU"
+        },
+        {
+          "title": "Сухой бетон B15 M200 П3 W6",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.s3d380VmhffhmZvTl-clFJqmwom4ijNscOFTzg_DScw"
+        },
+        {
+          "title": "Сухой бетон B20 M250 П2 W4",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.JNnx6OkLD0aKcuaLH87cDruB7Ingon3lRNh18nzGiXg"
+        },
+        {
+          "title": "Сухой бетон B22,5 M300 П2 W6",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.8RUNG_dCBCCof5ceoWGy7NnwjlJC1LT4O4xY9Eel458"
+        },
+        {
+          "title": "Сухой бетон B25 M350 П3 W8",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.SvnTW4Zmr40ljcwyk_vemAgNDN_h0dfwRmvwxJzNJfc"
+        },
+        {
+          "title": "Сухой бетон B25 M350 П4 W8",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.BDjXAmZX_oS4aOQlYZxHnwuN32n5NhYIpVwI-LAzv8c"
+        },
+        {
+          "title": "Сухой бетон B30 M400 П4 W10",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4600",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RUTEbXCvTQx_Aj4LnT6401v-E5Wts57SIYSluI45MkQ"
+        },
+        {
+          "title": "Сухой бетон B30 M400 П5 W10",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.UpLybNxGXfPAOwyifnD4re-iqBfZdsF_u1kk2ySGvO0"
+        },
+        {
+          "title": "Сухой бетон В35 М400 П4 W10",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.fGtJQq4McYNv0aTijYCjdrSuxYz9dEYJknwJzHnVOkI"
+        },
+        {
+          "title": "Сухой бетон B35 M450 П4 W12",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4750",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.5jbwKd55snJK-bya9oQt0DxH1pLBw0DKSvqBYF7vKu4"
+        },
+        {
+          "title": "Сухой бетон B40 M500 П2 W10",
+          "description": "Материал используют,когда планируются небольшие работы или поэтапное строительство, либо затруднен подъезд спецтехники. Применен в монтаже и реставрации декоративных элементов, при стяжке пола и заливке фундамента, для монолитных и ж/б конструкций...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11efb5fb72ebac09b663661414/{size}",
+          "price": "4800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.1QbxorJxqjsbwCoGAEG-wikt4M8GkFElhUqv2MklAsg"
+        }
+      ]
+    },
+    {
+      "categoryName": "Бетон (доставка бетона)",
+      "categoryItems": [
+        {
+          "title": "Бетон Товарный B 7,5 М100",
+          "description": "Бетон B7,5 M100 обладает невысокой прочностью, поэтому имеет узкую сферу применения. Раствор используют: для создания подготовительного слоя, для установки плит или фундаментных лент, во время заливки подушки фундамента.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f146b7e4b6f01d12799b34e/{size}",
+          "price": "3500",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RjFFRqDVuL2s0znbOjmUGpWni71ri0o22GP9cX7PQ60"
+        },
+        {
+          "title": "Бетон Товарный B12,5 М150",
+          "description": "Бетон B12,5 M150 используется при установке пешеходных зон и тротуаров с умеренной проходимостью, садовых дорожек, стяжки между черновым полом и финишным покрытием, установке заборов. Так же используется для бетонирования дорожных бордюров, огражд...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/2757887/2a00000172a9179ced112916f430e9bbff62/{size}",
+          "price": "3700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.OxZS_hMy72yRj5FMZ0B_JDr_D7dKaOFyQLhMCF_78ss"
+        },
+        {
+          "title": "Бетон Товарный B15 М200",
+          "description": "Бетон B15 M200 пригоден как основа для ленточных фундаментов под небольшие дома, полов, перекрытий, ограждений, колодцев. Также его часто используют для изготовления  монолитных пешеходных дорожек.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14139de9d63c5550ae5ed0/{size}",
+          "price": "4020",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.XhHVHTp3hz2QpnoVrMBSGBrvSTm3kAJHHvCIKv7Df6s"
+        },
+        {
+          "title": "Бетон Товарный B20 М250",
+          "description": "Бетон B20 M250 предназначен для укладки тротуарных покрытий, заливки фундаментов под заборы и невысокие здания, сооружения оснований для трасс с небольшим трафиком. Используется для стяжки пола, также подходит для заливки фундаментов.",
+          "price": "4200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.YfzuDP_joUMIapX693Kom0epN8_kxJ9RByOgQwHacoA"
+        },
+        {
+          "title": "Бетон Товарный B22,5 М300",
+          "description": "Бетон B22,5 M300 используется при возведении стен, при строительстве ленточных, свайно-ростверковых и других монолитных фундаментов. При изготовлении заборов, лестниц, для заливки отмосток, площадок и т.п.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189265985f28a9e2c77f8f13e9cbb/{size}",
+          "price": "4400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1._vfS9nfFVKnsxFqxfhIjBySDHjrBMdUNJHoqKiy9F0s"
+        },
+        {
+          "title": "Бетон Товарный B25 М350",
+          "description": "Бетон B25 M350 используется для устройства монолитных фундаментов, столбчатых и плитных фундаментов, изготовления бетонных лестниц, ригелей, балок, многопустотных плит перекрытий, колон.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f145128fda18f51b8f2c50b/{size}",
+          "price": "4700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.a3ytWm_mj_UcT1afwFqBvsD-ulcR5JEt6liTKIyVMrg"
+        },
+        {
+          "title": "Бетон Товарный B30 М400",
+          "description": "Бетон B30 M400 используется для элементов, подвергающихся высоким нагрузкам: мостовые конструкции, несущие опоры на эстакадах.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9240521/2a0000018906fcb03268502b80b6bee0bc8c/{size}",
+          "price": "5000",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.MD18o1WNrIgLtASfWn73y0Jzj6j6dRy6FwA2rpp5iyI"
+        },
+        {
+          "title": "Бетон Товарный B35 M450",
+          "description": "Бетон B35 M450 используется для постройки строений со специальными требованиями.Гарантирует прочность, длительный срок эксплуатации. Элементы, подвергающиеся высоким нагрузкам: мостовые конструкции, несущие опоры на эстакадах.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/11939409/2a0000018d886ef77e5139b5e85595fabeee/{size}",
+          "price": "5300",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.AyAvYTSV46dZbAgbIWuoQhh7HQ5JLLNXJ7bT4egXQ0k"
+        },
+        {
+          "title": "Бетон Товарный B40 M500",
+          "description": "Бетон B40 M500 повышенной прочности рассчитан на возведение объектов с высокими требованиями к нагрузкам в процессе эксплуатации: мостовые конструкции, несущиеопоры на эстакадах.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c128658adf47291721d2c96901d/{size}",
+          "price": "5500",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.uQ7ffaSLA9lWD9Fq4udhgyUvY5x49UlCS27DDquILDU"
+        },
+        {
+          "title": "Бетон Товарный B40 М550",
+          "description": "Бетон B40 M550 повышенной прочности рассчитан на возведение объектов с высокими требованиями к нагрузкам в процессе эксплуатации: мостовые конструкции, несущие опоры на эстакадах.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5373629/2a00000183f029b3c2171d981e43be9b9af3/{size}",
+          "price": "5950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.YeWawwbtV9ralfk85-CiOOQtq74nmnM6iHjjg0bolfU"
+        }
+      ]
+    },
+    {
+      "categoryName": "Раствор (кладочный, штукатурный) гост 28013-98",
+      "categoryItems": [
+        {
+          "title": "Кладочный раствор М50",
+          "description": "Сооружение кладок из кирпича, камня шлакоблоков, пенобетона.Обустройство стяжки перекрытий. Штукатурка вертикальных поверхностей. Заделка сколов, щелей, трещин.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c178450e1b6cf0db45bbbe56a5a/{size}",
+          "price": "4500",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.AEYVqMd0AIkE-vNqeqKUuTl95q56pqosr9s9Pu7umZw"
+        },
+        {
+          "title": "Кладочный раствор М75",
+          "description": "Кладочный раствор М75 используется в монтажных работах для скрепления друг с другом кладочных блоков при возведении несущих и ограждающих стен.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5393394/2a0000018c178450688f727d31107b93e180/{size}",
+          "price": "4600",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.10gUeMZ79MdYpG6QkGaz8iXQAq0SvCbXyu7L9D7oIEc"
+        },
+        {
+          "title": "Кладочный раствор М100",
+          "description": "Кладочный раствор М100 применяется как связуещее вещество при кладке стен и перегородок из керамических,бетонных, керамзито-бетонных блоков,газоблоков, кирпича. Для стяжки и выравнивания полов.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17844f34fe5638b158ec46c791/{size}",
+          "price": "4700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ay1Z3op7mpxpB4RwA1nKfSB75RTrSCrWDBwr8YLona8"
+        },
+        {
+          "title": "Кладочный раствор М150",
+          "description": "Кладочный раствор М150 для возведения зданий малоэтажности разных типов, обустройство подушек для фундамента,строительство дорог, пешеходных дорожек и стоянок.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17844f309c18bfa5159cbc1e66/{size}",
+          "price": "5100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.wtuwfyv4BnnfKtjyCfOhqJJ1XnMr_zYQi92mUy0jEPU"
+        }
+      ]
+    },
+    {
+      "categoryName": "Бетон на мелком щебне",
+      "categoryItems": [
+        {
+          "title": "Бетон на мелком щебне М100 B7,5 F75 W2 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "4250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.JD32sz_WvR8xqp5X-zAmUemkuHn3D-cwT-s7UBwWUtI"
+        },
+        {
+          "title": "Бетон на мелком щебне М150 B12,5 F75 W4 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.7BeO6IgAn8fX7FYs8pMMlbyEsimWeyRL_35tys0mOCc"
+        },
+        {
+          "title": "Бетон на мелком щебне М200 B15 F100 W4 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "4550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.IuxLi-qLgvbY7YWbv7Yhk3NDrIpawNLnYy7OciW7_7U"
+        },
+        {
+          "title": "Бетон на мелком щебне М250 B20 F100 W6 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.OsTpOFDHwPoRJQC97Q_3gSiSsi1zSlZuiQCzigMKJ34"
+        },
+        {
+          "title": "Бетон на мелком щебне М300 B22,5 F150 W6 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "4850",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.7Rkw9GW4qeoDnfpAwWL0pDkc4r120L60Bn0JHan9r9Y"
+        },
+        {
+          "title": "Бетон на мелком щебне М350 B25 F150 W28 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "4950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.m9l5LLCewtMq1SFZaHBceKtZBK5DWjeXYYa6pOQ6jOQ"
+        },
+        {
+          "title": "Бетон на мелком щебне М400 B30 F150 W10 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "5100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.H2OtYr52ZSmrzc9lOk3YG4lJRFynQWl-m43JTxtxgok"
+        },
+        {
+          "title": "Бетон на мелком щебне М450 B35 F150 W12 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "5250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.E1-xCDwPpOBcW_lmLZzHYtxTddLx4FW2A6K2cLIcET4"
+        },
+        {
+          "title": "Бетон на мелком щебне М500 B40 F150 W12 П4",
+          "description": "Основная задача щебенки- повысить прочность бетона. Ее добавление не позволяет воде разделять песок с цементом., повышается сопротивление бетона к нагрузкам, за счет хорошего сцепления с камнями бетон не трескается.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee72ecbb33204b59c8f43/{size}",
+          "price": "5400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.F0tnk9d4cuiZZTSVgG8Cx48qrEUYvCQcDSMMiOzStnA"
+        }
+      ]
+    },
+    {
+      "categoryName": "Гидротехнический бетон",
+      "categoryItems": [
+        {
+          "title": "Гидротехнический бетон М100 F75 W4 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "3950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.lJVR-cwukeHn3p5VJzVemXvdl69PP6nD8tYEyMnW5K4"
+        },
+        {
+          "title": "Гидротехнический бетон М150 F75 W4 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.tR4srNKNhawEbJCeJg_dBcTmwKWbU3aenAYDfoW3yhQ"
+        },
+        {
+          "title": "Гидротехнический бетон М200 F100 W6 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.c8DMYX-PT9jODLEgMkG1FwZBJC0Q-DOivy8PzgC-WZE"
+        },
+        {
+          "title": "Гидротехнический бетон М250 F100 W6 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4350",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.s2TrqMqLxp6rdO6bA1OKweKBQWIgjcmcY1LmaTsr4Cc"
+        },
+        {
+          "title": "Гидротехнический бетон М300 F100 W8 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.jg7hqiBvoRLUCnpONLIabE0dxJKNNnIr7CQ3bEDAe1Q"
+        },
+        {
+          "title": "Гидротехнический бетон М350 F150 W10 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.rhlxKVGdTHfl_sUmVsGlQkFEgP8ssB-cpQOteJiPB3I"
+        },
+        {
+          "title": "Гидротехнический бетон М400 F150 W12 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.lns7KBhPmAl5SiwXBegsG7BMUQtRkvUFB4au0T-RuMQ"
+        },
+        {
+          "title": "Гидротехнический бетон М450 F150 W12 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "4950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.CA3DIklOxH_svOQozCaI5xHql8hQ020FBb3zqtJok8Q"
+        },
+        {
+          "title": "Гидротехнический бетон М500 F150 W12 П4",
+          "description": "Состоит из гидрофобного сульфатостойкого, пластифицированного цемента.Такой вид материала придает конструкции максимальную устойчивость к агрессивному воздействию влажности, применяется для строительства сооружений в условиях сурового климата и пе...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844ee24ed11fd946cb08799c/{size}",
+          "price": "5100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.dl9L41n4lhmB1GnmOBTWU1suBetRMqBKmAPEP5P3UbQ"
+        }
+      ]
+    },
+    {
+      "categoryName": "Арматура А3 А500С",
+      "categoryItems": [
+        {
+          "title": "Арматура 8мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "44000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.nG69YELsLm9MTFfzZCWkEvqsttY4_rWKAcqQmDo3JXI"
+        },
+        {
+          "title": "Арматура 10мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "42000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.M9zfkZ9G2ricSAg4PE4JCeaTrkG0u1yA63A0SfJKspw"
+        },
+        {
+          "title": "Арматура 12мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "41000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.JJ3EMdFKOGNdHsYhhW_IkUo4xW7bBMKSkusYNEaqTKI"
+        },
+        {
+          "title": "Арматура 14мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "41000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.QCgvbyTNOaces-qfEhvcJqJN0EFQS6m1691Ol7K2tO0"
+        },
+        {
+          "title": "Арматура 6мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "47000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1._pPWaf-VmP3bBmTQEYEjm1qd_VSxQysu1vT2TQ-cO40"
+        },
+        {
+          "title": "Арматура 16мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "40000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ZM-5Kg8U7CZzmsXuFOg-ZDfpv6_RCKKVRMEi_B5LKgY"
+        },
+        {
+          "title": "Арматура 18мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "40000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ZdK5NOrlm-FwFuuz8AQ1rZ1XfSFWJSEOqsFQY6wMdc4"
+        },
+        {
+          "title": "Арматура 20мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "40000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.I-EV8DxQvgVuD7MIlLy4OoqCOplJ-DacbAV2CEGKvzY"
+        },
+        {
+          "title": "Арматура 22мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "39000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.G8Sz-5FgcJlmcKNYUoXFSq3PQj6dGNyR6kZ4sP93ziQ"
+        },
+        {
+          "title": "Арматура 25мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "41000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.OU8t8WbSDu_CQiIYMEpGlw7VG6fB-gbHSmOKr2vZ8yU"
+        },
+        {
+          "title": "Арматура 28мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "42000",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.1w0xtZPRnZKAllc7hWg5JIm-2NEZ_jpUXYt9JlxLiAY"
+        },
+        {
+          "title": "Арматура 32мм А3 А500С",
+          "description": "Арматура А3 А500С относится к классу стальной арматуры с повышенной прочностью. Она производится из углеродистой стали и соответствует стандарту ГОСТ 5781-82. Арматура A3 А500С обладает высокой прочностью на растяжение, что делает ее идеальным мат...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "39500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.Y1sGXu0A-oulAdJgSuhRw6ZrkR1B5shwCMZ51CU-SIc"
+        }
+      ]
+    },
+    {
+      "categoryName": "Арматура А1 А240",
+      "categoryItems": [
+        {
+          "title": "Арматура 8мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "47200",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.OBeTpIzMsatKXB_HweZv20A97zk8Q4tfPLXPbHC04vE"
+        },
+        {
+          "title": "Арматура 10мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "43500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.tv7DT-xqlx50SWGuzQJmgsJZJucDgTshsV9o2alJGP4"
+        },
+        {
+          "title": "Арматура 12мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "32500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.mzV4PiqY6mvl4t8E3GENOmAxENiryx5Fx4WQpW512Yc"
+        },
+        {
+          "title": "Арматура 14мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "33300",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.odxLAUok365e4iE5LQsgQ2TX7dYwjXda4duRxj3iRj4"
+        },
+        {
+          "title": "Арматура 6мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "47700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.aDGeCMmmbaybdWoJiuOO_pkl1zkIup1f2DhQbpFlAp8"
+        },
+        {
+          "title": "Арматура 16мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "31900",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.R5-CRRsSeehsEUCIM1tuJ7vhWshcIFj8MtsuB9baYoY"
+        },
+        {
+          "title": "Арматура 18мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "31900",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ASmmW4MKrpNXs7q1Eg1zE2nGbrI-xHAR0q8ayJvcj20"
+        },
+        {
+          "title": "Арматура 20мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "31900",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.N-rl3BDyRiyzosdbxKRew62h2iJOYC6cRaZ6c-8EfYc"
+        },
+        {
+          "title": "Арматура 22мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "36500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.gtKdE1ZNKL7zcbJnKcdu22RIVY2AUaNPRRaQ3vE9A00"
+        },
+        {
+          "title": "Арматура 25мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "36500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.JVHIgt8JPPV8at5mI0ig99tfHFPToFl5sH_q6ZR_-O8"
+        },
+        {
+          "title": "Арматура 28мм А1 А240",
+          "description": "Арматура класса А1 (А240) – это стальные пруты с гладкой поверхностью, которые применяются преимущественно в строительстве для армирования конструкций из железобетона. Данные изделия изготавливаются в соответствии со стандартом ГОСТ 5781-82 из угл...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018dd09f14172a3dd28ba246732b30/{size}",
+          "price": "40400",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.1iWP38Hqo_DE9XVw9FT7k7WcZ71vbMn6WpFUI-IhNBA"
+        }
+      ]
+    },
+    {
+      "categoryName": "Арматура немерная Н/Д",
+      "categoryItems": [
+        {
+          "title": "Арматура 10мм А3 Н/Д",
+          "description": "Арматура немерная А3 обладает высокой прочностью и устойчивостью к внешним воздействиям. Она способна выдерживать значительные нагрузки и гарантировать долговечность конструкций. Благодаря своей надежности, она широко применяется в строительстве з...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f13a5895fa5f5c5f0e64c4a/{size}",
+          "price": "38900",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.r0HVnnPAcsMjQwJY0KtubdPdMOc0vgyX8Heq1lwEW6A"
+        },
+        {
+          "title": "Арматура 12мм А3 Н/Д",
+          "description": "Арматура немерная А3 обладает высокой прочностью и устойчивостью к внешним воздействиям. Она способна выдерживать значительные нагрузки и гарантировать долговечность конструкций. Благодаря своей надежности, она широко применяется в строительстве з...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f13a5895fa5f5c5f0e64c4a/{size}",
+          "price": "38300",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.gokNaFRgTZJd02OrgyQXpr9GF67IoG0fdGMUu3UmB7k"
+        },
+        {
+          "title": "Арматура 14мм А3 Н/Д",
+          "description": "Арматура немерная А3 обладает высокой прочностью и устойчивостью к внешним воздействиям. Она способна выдерживать значительные нагрузки и гарантировать долговечность конструкций. Благодаря своей надежности, она широко применяется в строительстве з...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f13a5895fa5f5c5f0e64c4a/{size}",
+          "price": "30700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.uUqbZcFF6PWU3_ckmvchFYTGC0_lNOu5-udxU1RPp7k"
+        },
+        {
+          "title": "Арматура 16мм А3Н/Д",
+          "description": "Арматура немерная А3 обладает высокой прочностью и устойчивостью к внешним воздействиям. Она способна выдерживать значительные нагрузки и гарантировать долговечность конструкций. Благодаря своей надежности, она широко применяется в строительстве з...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f13a5895fa5f5c5f0e64c4a/{size}",
+          "price": "32800",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.bUu6KYj-don6o4-1XvLC49qqyKsFj_jjh4qRHzGOKuw"
+        }
+      ]
+    },
+    {
+      "categoryName": "Арматура А3 25Г2С",
+      "categoryItems": [
+        {
+          "title": "Арматура 8мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "53500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ZSepJuUldjNG5GKp7KGzD7KosEJCn6e05Uxw5VAsPhc"
+        },
+        {
+          "title": "Арматура 10мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54300",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.4nXIY8bT4-js5UeEhpuwRMeXscP1LyrneEiyXnRdAS0"
+        },
+        {
+          "title": "Арматура 12мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.fSQYfMYcO1akoXRMzWdkShQT7v_Ri3gyFbfQYhHU3Iw"
+        },
+        {
+          "title": "Арматура 14мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.A6c7PmttuaUSmpBIBCBdLIcECT9J-bjgou9JMeGD_fE"
+        },
+        {
+          "title": "Арматура 16мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ehwHmFjYGaaa-L0B7oJXepUYjPRgU1RKLWXTeVmisiE"
+        },
+        {
+          "title": "Арматура 18мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.9UIkaR9P06CMZlje9tVt6NgWPklj9ybdJTpDnAW6kU8"
+        },
+        {
+          "title": "Арматура 20мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.i0hdg5p_ARqKxOMnGbxXnWDBNQiE68qrP4DVHOTEAqE"
+        },
+        {
+          "title": "Арматура 22мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ojlyudZDc8wKpuPq0GhcIqbff75D4zhUyZrV5jcQt3k"
+        },
+        {
+          "title": "Арматура 25мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.kY3jaoQpQMVjXc3HZnM0QYapX6f5KLetArAmbIwfs3U"
+        },
+        {
+          "title": "Арматура 28мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.ON-GEWybPKp4AQcSG62O1-nqJH7Vqf5dn_yq5uGWvj8"
+        },
+        {
+          "title": "Арматура 32мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.xmVQS1exTI3cNTgEz5bDhUd43pmH3M3GLiKl0t_J-vc"
+        },
+        {
+          "title": "Арматура 36мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.UPccwguXIM7KUR_UUoHoULE4-Hi9TjBrKdSSgtFAcxg"
+        },
+        {
+          "title": "Арматура 40мм А3 25Г2С",
+          "description": "Арматура А3 25Г2С – это надежный и прочный материал, который обеспечивает безопасность и долговечность конструкций. Высокая устойчивость к внешним воздействиям и удобство обработки делают его одним из предпочтительных выборов в строительстве и про...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9685839/2a00000189aab4947c712a80feac24b4be4b/{size}",
+          "price": "54700",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.gSiTdf-yfWSOYfHYnDtVnNJoNwaeqq68V9STi85XZSw"
+        }
+      ]
+    },
+    {
+      "categoryName": "Арматура А3 А500",
+      "categoryItems": [
+        {
+          "title": "Арматура 8мм А3 А500",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f139a822b5a7037d82adc52/{size}",
+          "price": "39600",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.KZsCmABHJ7ii7WFM2mBUVGeUFM0Y5-thWt6czs6dDTk"
+        },
+        {
+          "title": "Арматура 10мм А3 А500",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f139a822b5a7037d82adc52/{size}",
+          "price": "40500",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.xEJgnYbDFAbHr3TslxaTpHMbdDnv26Y8hFy3f7RQHtw"
+        },
+        {
+          "title": "Арматура 12мм А3 А500",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f139a822b5a7037d82adc52/{size}",
+          "price": "39600",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.oeiRtxWwp4whrjUVHWugBip4ktTc4p2cu47eV7AK0X0"
+        },
+        {
+          "title": "Арматура 14мм А3 А500",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/13009487/2a0000018dd09f139a822b5a7037d82adc52/{size}",
+          "price": "30900",
+          "volume": "1 т",
+          "currency": "₽",
+          "matchKey": "v1.nHsVGxORrMB94xS8M6_2CApVFrRZ1OJfCiJHPDUEQrw"
+        }
+      ]
+    },
+    {
+      "categoryName": "Бетон по схеме Г",
+      "categoryItems": [
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "4250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.UYJlYfWqarY0JYv7Tq0aNiAebBiRJpQzDBgkri7wdNY"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.XQIaqL3DQjiDQwzYL2CGzULtlgsIpF2mK9MfetLADl0"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "4550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.YKdGUQVIvt36GQDTMzY7sYC2p5DtDPvAR4zU8RRC39E"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "4750",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.0HESNlLn8hGxMIPvrmt1vn9OYAjjof4TAKK4KwHSDA4"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "4850",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.VwroQ77dKiQOV4sfLF1sYDpFvnkm4inU48gUzmAi3kk"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "4950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.hOpqATOHaLUjCR6bgggzoZJW3czhBuIQ6_c9MvSKUo8"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "5100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.VaK-0YnvXIqhCrQrQTSYBD__6-Nt881xeAjbg3bbebI"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "5250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.S3VFmUGLwLrkCfhH1KmW2kL_xrwAIIogKWKFl7afN6w"
+        },
+        {
+          "title": "Бетон по схеме Г М100 B7,5 F75 W2 П4",
+          "description": "Преимущества использования бетона по схеме Г заключаются в его уникальной износостойкости, прочности и надежности. Этот тип бетона может выдержать огромные  нагрузки и механические воздействия, здания, мосты, транспортные сооружения и дороги.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c11df54cf12f6676eed55c57fa2/{size}",
+          "price": "5400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.UmE70xGcezndjYPTCYHYyfoyU8LFGzjQBCRtJolW3B8"
+        }
+      ]
+    },
+    {
+      "categoryName": "Аренда автобетононасоса (АБН)",
+      "categoryItems": [
+        {
+          "title": "Аренда автобетононасоса (АБН) 16-18м.",
+          "description": "Автобетононасосы диапазона 16-18 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c178451043fde07795f90850249/{size}",
+          "price": "3000",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.OkJX0QuywwBB5UVCPindO2lTVz2TY3rmhVDYChBsqMQ"
+        },
+        {
+          "title": "Аренда автобетононасоса (АБН) 20-24м.",
+          "description": "Автобетононасосы диапазона 20-24 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c17844f5fe51ac2817c8d8cfd84/{size}",
+          "price": "3200",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.oXgZ6P1L_mnia1yBw3GRI4FnbaKA_fA1hrAFS-OS4bk"
+        },
+        {
+          "title": "Аренда автобетононасоса (АБН) 26-32м.",
+          "description": "Автобетононасосы диапазона 26-32 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10118156/2a0000018c17844f30fb4aa0276b7f989ee8/{size}",
+          "price": "3500",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.oC46mQ8wDLUJsT3tt0OycuZ96EI5xPMYTe0AbxggxsQ"
+        },
+        {
+          "title": "Аренда автобетононасоса (АБН) 34-38м.",
+          "description": "Автобетононасосы диапазона 34-38 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018c178450f9e4b064744d07291b97/{size}",
+          "price": "3900",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.XDh7j8dt2283SKU1Yu7K6uCWOoyD2337R6psXs_HaSo"
+        },
+        {
+          "title": "Аренда автобетононасоса (АБН) 40-46м.",
+          "description": "Автобетононасосы диапазона 40-46 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/1530321/2a0000016999fb3a0e93c85f5fcee74054f3/{size}",
+          "price": "4300",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.Nw_Utlus8BbtS65r_BvdYnbVSVVCWxgFhW1PC2sMC68"
+        },
+        {
+          "title": "Аренда автобетононасоса (АБН) 48-52м.",
+          "description": "Автобетононасосы диапазона 48-52 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5280674/2a0000018c17844fcca74122dd9258ded2e9/{size}",
+          "price": "4500",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.OiMdXyrLfdmYpRc4OnvBe1BAOL4Hy79oxryixKXxVC0"
+        },
+        {
+          "title": "Аренда автобетононасоса (АБН) 54-58м.",
+          "description": "Автобетононасосы диапазона 54-58 метров представляют собой современные строительные машины, предназначенные для перекачки бетона на высоту. Они незаменимы в строительной отрасли, позволяя эффективно и быстро осуществлять бетонирование зданий и соо...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c17844f33c05efcf7b6ee378d0b/{size}",
+          "price": "5000",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1._WvKlIoFrXx_9RdK4RykBMfEg0vTChJzr-xoMmQOwYE"
+        }
+      ]
+    },
+    {
+      "categoryName": "Керамзитобетон (легкий)",
+      "categoryItems": [
+        {
+          "title": "Керамзитобетон M100 (В7,5) П3",
+          "description": "Керамзитобетон М100 (B7,5). Значительное снижение массы конструкции. Содержит цемент, песок,воду и керамзит в определенных пропорциях. Из-за повышения гибкости конструкции,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепрониц...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.JlW6cDzJ8Qv-pxZQU_d88gs9O8dJ3MnsZBamaujxz90"
+        },
+        {
+          "title": "Керамзитобетон М100 (B7,5) П4",
+          "description": "Значительное снижение массы конструкции. Из-за повышения гибкости конструкции,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.tdoFq-5gK-e09uJIpKS1_Vidiik-8F0PiYNihUit7Ho"
+        },
+        {
+          "title": "Керамзитобетон B12,5 M150 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.arTD3O5m7nO0prHfLInix-BE72w09VvggtTXCppgJ9s"
+        },
+        {
+          "title": "Керамзитобетон B12,5 M150 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4300",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.l_4HCr9HuyE6o_uUWN_rNm2bJsdaIl6hnoENzHdTFXQ"
+        },
+        {
+          "title": "Керамзитобетон B15 M200 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4350",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.-RhG6a8dLf-Jcpw61hkofQnHuO3fxfBPIFDHHmsYow4"
+        },
+        {
+          "title": "Керамзитобетон B15 M200 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.8f_vj0yf7wmi09ZzzUUnAGTS1hJLmaLnvSPDqTGVk78"
+        },
+        {
+          "title": "Керамзитобетон B20 M250 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RHu6F0uzq9AnozkC9ja-tUT5LohEUMpaEOhLyb8rCts"
+        },
+        {
+          "title": "Керамзитобетон B20 M250 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4500",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.drQXp45e8gKgZEyoHUhbMZLKG4-eY1Y3sYd0L-98ZmQ"
+        },
+        {
+          "title": "Керамзитобетон B22,5 M300 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.8wbN8-3RgN_JA2HVEe6ooFKhADq1HiWSqCrZLzTJgaQ"
+        },
+        {
+          "title": "Керамзитобетон B22,5 M300 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.OXwu5e5ky6om0PdbXy1DGhZXmn9IbseTq5ZPTo5b9Ak"
+        },
+        {
+          "title": "Керамзитобетон B25 M350 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "4800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.NTBEyZ4ihdi6GjRDA9lfoR4STtXjNqbJPCaWS262Zfc"
+        },
+        {
+          "title": "Керамзитобетон B25 M350 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "5150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.DOBzJhJ4dJpppoqNwknXBRGHydTGYhSQuBehsft7JuM"
+        },
+        {
+          "title": "Керамзитобетон B30 M400 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "5350",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.XHapuv4e01yZfO8mwWVZnzCkwDMgPkudM6SS-ZqvtwM"
+        },
+        {
+          "title": "Керамзитобетон B30 M400 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "5550",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.dPlA2rWKGEwLzSWQecdnTk6qS28z9CD4CUxirY7cSOs"
+        },
+        {
+          "title": "Керамзитобетон B35 M450 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "6100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Zm3_llxrnfevoPMdocwgbdGEpednG2wYE1rfNnnnyUo"
+        },
+        {
+          "title": "Керамзитобетон B35 M450 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "6150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.x3ksuH9nJ3GpzUTKxOuXnkeMV5rQLBVcmi83gScDWsE"
+        },
+        {
+          "title": "Керамзитобетон B40 М500 П3",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "6200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.th7_leu-Mxt6-jbuiGFXK9Tl0wfLHBQ7vPlKKe8K36M"
+        },
+        {
+          "title": "Керамзитобетон B40 М500 П4",
+          "description": "Значительное снижениемассы конструкции. Из-за повышения гибкости конструкци,повышается и сейсмостойкость. Низкая теплопередача. Повышенная водонепроницаемость.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018c11e8851c198038527e13280b7d/{size}",
+          "price": "6250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Vas7LYKXWOI8sevl6rkFuaZL-wDONM1NK9kEbtAGgcM"
+        }
+      ]
+    },
+    {
+      "categoryName": "Аренда доп. Бетоноводов (Шланги)",
+      "categoryItems": [
+        {
+          "title": "Аренда доп. бетоноводов (АБН)",
+          "description": "С помощью беоноводов мы можем провести магистраль до 150м, что позволяет залить бетон в самые дальние труднодоступные точки.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10118156/2a0000018c17844fa868ac32827d4a85d201/{size}",
+          "price": "350",
+          "volume": "1 м",
+          "currency": "₽",
+          "matchKey": "v1.KOeFNL5sejoGwtMb8BCLJmGQAr7mNVu4mrKnnNXUgn4"
+        }
+      ]
+    },
+    {
+      "categoryName": "Аренда миксера с автобетононасосом (PUMI)",
+      "categoryItems": [
+        {
+          "title": "Аренда миксера (PUMI) с бетононасосом",
+          "description": "Аренда миксера PUMI с бетононасосом. Бетономешалка Пумик с длиной стрелы насоса от 28 до 32 м и перевозкой бетона до 10м3",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10118156/2a0000018c17844f7630d503e842498b99ee/{size}",
+          "price": "3000",
+          "volume": "1 ч",
+          "currency": "₽",
+          "matchKey": "v1.Qc7CqoQUxhMmks6dOi9oSJZNZGiQnqs1lWiOMniLwbg"
+        }
+      ]
+    },
+    {
+      "categoryName": "Монтажный раствор М100",
+      "categoryItems": [
+        {
+          "title": "Монтажный раствор М100",
+          "description": "Монтажный раствор М100 применяют для кладки кирпичей, бетонных блоков, стяжки пола, выравнивания плоскостей, штукатурки, облицовочных работ, монтажа плоских кровель.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5234963/2a0000018beec09258f3463a476bef9e26cd/{size}",
+          "price": "4800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.3rL0wyDNa6yjzK6Xs6TGQrBOOrzIiiWinIRo4SOQAPU"
+        }
+      ]
+    },
+    {
+      "categoryName": "Монтажный раствор М150",
+      "categoryItems": [
+        {
+          "title": "Монтажный раствор М150",
+          "description": "Монтажный раствор М150 используется при заливке полов, в отделочных работах (кладке плитки, мозаике, нанесении штукатурки). Прикладке стен из кирпича, ячеистых искусственных камней.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/9896919/2a0000018beec41709589a742649b215c315/{size}",
+          "price": "5150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RM-3JXcfSG3BLGuH9nwQrDHGUxhYRRWdUHtXV6Bu38w"
+        }
+      ]
+    },
+    {
+      "categoryName": "Монтажный раствор М200",
+      "categoryItems": [
+        {
+          "title": "Монтажный раствор М200",
+          "description": "Монтажный раствор М200 применяется как связуещее вещество при кладке стен и перегородок из керамических,бетонных, керамзито-бетонных блоков,газоблоков, кирпича. Для стяжки и выравнивания полов.Черновая штукатурка стен.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10022375/2a0000018de48903fa954e3047f4d4c6a959/{size}",
+          "price": "5450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.5M_g9br2nWO0rovKwQNbuEmSiv-dFIsYhd_ue-Ou-wg"
+        }
+      ]
+    },
+    {
+      "categoryName": "Монтажный раствор М75",
+      "categoryItems": [
+        {
+          "title": "Монтажный раствор М75",
+          "description": "Монтажный раствор М75 используется для укладки стен и решения некоторых строительных задач, для которых не нужно создание конструкций и элементов высокой прочности.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c17844f2101aae86b1888c35233/{size}",
+          "price": "4600",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.xg8JCmn2I0ez_byyW3vomL4KfS2gkF5fysdBSHJZOO4"
+        }
+      ]
+    },
+    {
+      "categoryName": "Бетон с ПМД",
+      "categoryItems": [
+        {
+          "title": "Бетон с ПМД-5 М100 B7,5 F75 W2 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "3750",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.FwOeWLOJOpUcwaUHekGkEpsesqW9b_fuvpSvJZf1bCg"
+        },
+        {
+          "title": "Бетон с ПМД-5 М150 B12,5 F100 W2 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4050",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.3nnm97xdJ6lpL7j3ODztBKFwkkAHg0FGLUF_iyl_bw8"
+        },
+        {
+          "title": "Бетон с ПМД-5 М150 B12,5 F100 W2 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.OWuFqnHz4zgwOl6uJJYpvGjG_S5gw1oKrVP2Rjex960"
+        },
+        {
+          "title": "Бетон с ПМД-5 М200 B15 F100 W4 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.U5C8TJvCdcEvVx0rW9RMjnJizuFpUz1Z50V17U4mbxg"
+        },
+        {
+          "title": "Бетон с ПМД-5 М200 B15 F100 W4 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.zKg2eVBA4uLcMQL407oDNQ9lhJTp2lQNFNRxypN5HAA"
+        },
+        {
+          "title": "Бетон с ПМД-5 М250 B20 F100 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.hmDrs4gFsmFxm80PGDwD4cAyffn2mhw5YQxu8pqrJFY"
+        },
+        {
+          "title": "Бетон с ПМД-5 М250 B20 F100 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4300",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.rfnPW3ZmIhRm55WsnVROHjU5tS0_2AcjYX0s5RMkvsM"
+        },
+        {
+          "title": "Бетон с ПМД-5 М300 B22,5 F150 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.3LYrEqKV4tlCvXQZBad_UXJMqaJmnGamMKeYgmdOWaI"
+        },
+        {
+          "title": "Бетон с ПМД-5 М300 B22,5 F150 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4500",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.7beL4LfjT-gZyCaJam32fkt5cHdLUotdrh-SCAdGj5A"
+        },
+        {
+          "title": "Бетон с ПМД-5 М350 B25 F150 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.XThC42P95SEPN95qPdwI3D0tL_O7LGzlYcaKYMTHfAo"
+        },
+        {
+          "title": "Бетон с ПМД-5 М350 B25 F150 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.3dQcv5DW-2WUDbhT0Xk43SpH6n-OOLf9Bx5Xu_ifQoY"
+        },
+        {
+          "title": "Бетон с ПМД-5 М400 B30 F150 W10 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.aGmWICcx-rtYXSFLOCXzwh_4T-M6KdtcvU1vsnKN-Ek"
+        },
+        {
+          "title": "Бетон с ПМД-5 М450 B35 F150 W12 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5050",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.eLde4hncYU91UR3RGyjLdkK2lqqObnMgNaAry2WMz1k"
+        },
+        {
+          "title": "Бетон с ПМД-5 М500 B40 F150 W12 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ee1-apMEJSi4YEonnqCE9Mtn0GpGlXIPnjhhYi3MRxg"
+        },
+        {
+          "title": "Бетон сПМД-10 М100 B7,5 F75 W2 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "3800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.wJflsDjGI7LKyvsswAS9Dw0VbUJ6cNce-PAU_X1oRmA"
+        },
+        {
+          "title": "Бетон сПМД-10 М100 B7,5 F75 W2 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "3850",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.7UJETomJ_hZmtLI9wSvZjKYlMvvuc26SHcutEDgS-rA"
+        },
+        {
+          "title": "Бетон с ПМД-10 М150 B12,5 F100 W2 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.PO6Nv3sQ_tacZg3qDNuJoS72TIJcxwQLOtveYhU9JXo"
+        },
+        {
+          "title": "Бетон с ПМД-10 М150 B12,5 F100 W2 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4150",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.4bWwNktVUpB7bZzsmaF1R8Aw6SJfruM8g30hspz5cpk"
+        },
+        {
+          "title": "Бетон с ПМД-10 М200 B15 F100 W4 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.YBMwtvuK7gKVvw44mHqNqPrr4aujNOVPYlr-Wt6Gjak"
+        },
+        {
+          "title": "Бетон с ПМД-10 М200 B15 F100 W4 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.GUiy1CtAHbYUDDWpNMfJSkeHUXq4kzlyINOV8eUSxaQ"
+        },
+        {
+          "title": "Бетон с ПМД-10 М250 B20 F100 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.F6voNtLKDqWjiwM2QiTe2An969WG_-E28THeXU13TRs"
+        },
+        {
+          "title": "Бетон с ПМД-10 М250 B20 F100 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4750",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.cnLTtWRcI0N9XJr8TVK6IT77mgcEFmBk7RCFM5BcOG4"
+        },
+        {
+          "title": "Бетон с ПМД -10 М300 B22,5 F150 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5000",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.6RNW5JTDmfgIit-On4akkx8-kI6o9cRpM8d87NA0RCc"
+        },
+        {
+          "title": "Бетон с ПМД-10 М300 B22,5 F150 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5050",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.l8pY78KJlPzX7K1LKX1xquLMJbU1xCVkymyWaoNMRCc"
+        },
+        {
+          "title": "Бетон с ПМД-10 М350 B25 F150 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5300",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.FaKmg9yZvQg-J5DB6CIfq0MS2s4aiC7pvQWKYja-mws"
+        },
+        {
+          "title": "Бетон с ПМД-10 М400 B30 F150 W10 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.lSqT1IWB7wFZd1Me4N1ceSVFO6lzIW3v0jzZ0slSIyM"
+        },
+        {
+          "title": "Бетон с ПМД-10 М450 B35 F150 W10 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5900",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.EfMCtfXBzgEyamoFNExSzFtGX65bCyRZ-aby0_72Czw"
+        },
+        {
+          "title": "Бетон с ПМД-10 М500 40 F150 W12 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "6000",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.WHjkBjvdx6GPlB4_oAygfvBYPPszoqJABRlDVlivVek"
+        },
+        {
+          "title": "Бетон с ПМД-15 М100 B7,5 F75 W2 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "3950",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.4l1mGRlwMMTP2SUXxGXHQVPtmqN336mQ1bgUj8pKzcI"
+        },
+        {
+          "title": "Бетон с ПМД -15 М100 B7,5 F75 W2 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4000",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.uAoXeQEPBZVLTUaZf93tK4eYl9qveHR8nMfdmtpImow"
+        },
+        {
+          "title": "Бетон с ПМД-15 М150 B12,5 F100 W2 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1._UG1E9pZIv45Fpv2p1GZxU9N0VDYUOYKGWUGPzcbvWw"
+        },
+        {
+          "title": "Бетон с ПМД-15 М150 B12,5 F100 W2 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4450",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.bXASsRur3734Rb6oJ4Qjzd2JdJxUyWdpZPgrQ4jOb5M"
+        },
+        {
+          "title": "Бетон с ПМД-15 М200 B15 F100 W4 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4850",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ctwz3IyE309YtzXAjEYAYa834PoH2dbvay4_GMqAcR8"
+        },
+        {
+          "title": "Бетон с ПМД-15 М200 B15 F100 W4 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "4900",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.32J32Vkfxz4EqGiRiSohm4bmXYoegYFyaW60PUm2C2U"
+        },
+        {
+          "title": "Бетон с ПМД-15 М250 B20 F100 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5300",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.NZb7wmZ_sXhFTRGIQMHpINIzsBP4K5ovUYFZHHLRIyI"
+        },
+        {
+          "title": "Бетон с ПМД-15 М250 B20 F100 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5350",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.fr_M91rODtPpETic2s6V7IQxIvAL6qF1-R8MCnkzmaA"
+        },
+        {
+          "title": "Бетон с ПМД-15 М300 B22,5 F150 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5750",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.uYEXuTnQbEoO_j_V-qudASah6Pa79QzPlpf08nzC2-Y"
+        },
+        {
+          "title": "Бетон с ПМД-15 М300 B22,5 F150 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "5800",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.O4Xx1fxOgPCeEGHYu6u5n9UD5-OrJ9xVI7L5B4IaYsg"
+        },
+        {
+          "title": "Бетон с ПМД-15 М350 B25 F150 W6 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "6200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RmArIVsCSkiozaom1uZkJZEALoapz2JsKf5bDzvrz9o"
+        },
+        {
+          "title": "Бетон с ПМД-15 М350 B25 F150 W6 П4",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "6250",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.ltQShKA0IfmF4DTHYBwoPe9MwA74dMB4vrorAzs59kk"
+        },
+        {
+          "title": "Бетон с ПМД-15 М400 B30 F150 W10 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "6650",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.sShCHOCecMuilmVsOzEsWXhxv_PS5oWbkyiHFpT2G28"
+        },
+        {
+          "title": "Бетон с ПМД-15 М450 B35 F150 W12 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "6700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.RW47eJ5hDmtYy7vCNbTLvBmS--lrDo1L9n6gmgxDfsk"
+        },
+        {
+          "title": "Бетон с ПМД-5 М500 B40 F150 W12 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "7100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.5wk-sUFcnLsz8IHCZ9sps3ZI7MrRdoTzZ0HigYkp_AU"
+        }
+      ]
+    },
+    {
+      "categoryName": "Бетон с ПМД+A64:G68",
+      "categoryItems": [
+        {
+          "title": "Бетон с ПМД-5 М100 B7,5 F75 W2 П3",
+          "description": "Присадка в бетон позволяет использовать материалы для строительства в зимний период. Пониженная теипература создает сложности выполнения строительных работ, вносит коррективы в осуществление мероприятий, направленных на выполнение кладки и бетонир...",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/10324913/2a0000018c11875ae281a2bbcba87fbe4757/{size}",
+          "price": "3700",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.yb81KrE-hr6_T6Cj9DCoDLETW7uRJjfsz1jNyEHBUoE"
+        }
+      ]
+    },
+    {
+      "categoryName": "Доп. техника Труба 4-6м",
+      "categoryItems": [
+        {
+          "title": "Труба 4-6м",
+          "description": "Используется для подачи бетона на небольшое расстояние без сильного подьема. Длина подачи: до 7м. Высота подачи: до 1,4м.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5235338/2a0000018d30f5ac5e32d31b7f23d76bfc6e/{size}",
+          "price": "3500",
+          "volume": "1 шт.",
+          "currency": "₽",
+          "matchKey": "v1.qYQ1Qhbg4T-dQfOCLrJsh4lnF7V_NY7lr-Vlx4uTpNg"
+        }
+      ]
+    },
+    {
+      "categoryName": "ЦПС(цементно-песчанная смесь",
+      "categoryItems": [
+        {
+          "title": "ЦПС 1:1 М400",
+          "description": "Из этой марки можно получить крепкий и надежныйраствор. Это самая дорогая смесь из вышеперечисленных. Применяется при повышенных требованиях к влагостойкости, морозостойкости и прочности.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "6200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.lqHia8Zu-mLgCJ8K2IMquYlUGx4VU7g7waflqNd_Fsk"
+        },
+        {
+          "title": "ЦПС 1:2 М300",
+          "description": "Выдерживает большие нагрузки и подходит для заливки стяжек, стен, фундаментов идругих несущих кнструкций.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "5400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.0a7zhZBrxIQawUIHo8TfjQo21xBOIwmhG_5GTWFxUtM"
+        },
+        {
+          "title": "ЦПС 1:3 М300",
+          "description": "Выдерживает большие нагрузки и подходит для заливки стяжек, стен, фундаментов идругих несущих кнструкций.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "4900",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Urk69i7o1Y6nphWaGNU7t7os-tzPNDoQPV87cjhy6_c"
+        },
+        {
+          "title": "ЦПС 1:4 М200",
+          "description": "Для кладки, штукатурных и отделочных работ, используют для заливки пола и лестниц.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "4100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.e7VuxMiYy1riHoNZ-TfP9iCRXpZxzwhIY7NWrVDanLM"
+        },
+        {
+          "title": "ЦПС 1:5 М150",
+          "description": "Подходит почти для любых ремонтно-отделочных работ и популярна благодаря своей универсальности идостаточно низкой стоимости.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "3900",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.srLdk8fw6M38viy0znlNJQp7PpStTbQAQ1F3pHhQXvw"
+        },
+        {
+          "title": "ЦПС 1:6 М100",
+          "description": "Марка с самой низкой прочностью. Применяется для штукатурных работ.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "3600",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.Oeury3GLfezXbGIpPqZ5jy7z3ouJraKCxy1o79LPv1s"
+        },
+        {
+          "title": "ЦПС 1:8 М75",
+          "description": "Применяется при заделке выбоин, кладки стен, выравнивания поверхностей.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "3400",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.PCA-ZXrtg8RH1BIjYBzQ295eLB_7HgJRTzEZpbQpSu4"
+        },
+        {
+          "title": "ЦПС 1:10 М50",
+          "description": "Применяется при заделке выбоин, кладки стен, выравнивания поверхностей.",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "3200",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.TI4QYaZk5-e4CbnnicFhn_usf3OoYd_V8OsIeXcwAVc"
+        },
+        {
+          "title": "ЦПС 1:15 М25",
+          "description": "При устройстве основания под брусчатку,тротуарную плитку",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "3100",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.vmJmHnyPc4G1jMTDREsSXuT08zs1qB1VSN5Lkhs2Cj0"
+        },
+        {
+          "title": "ЦПС 1:20 М25",
+          "description": "При устройстве основания под брусчатку,тротуарную плитку",
+          "photoLink": "https://avatars.mds.yandex.net/get-sprav-products/5392818/2a0000018c11f3477d181d4bfb3bf5498fda/{size}",
+          "price": "2900",
+          "volume": "1 м³",
+          "currency": "₽",
+          "matchKey": "v1.C8m_ieIKdUu7RyZXm1xyLd_oStPiJWeZ-rwiYIVOmQo"
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "businessComment": {
+        "text": "Багодарим за ваш отзыв!",
+        "updatedTime": "2026-07-22T20:34:55.534Z"
+      },
+      "reviewId": "X3N4-8LAzs-DJt2MTS9K-Oal0LEPaC",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Дмитрий Андреев",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/26057/0c-6/{size}",
+        "professionLevel": "Знаток города 4 уровня",
+        "rtb": "Знаток города 4 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "d41e69frffuzyvyzfbt3vx8ru8",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Обратился за раствором для заливки ленты под забор. Согласовали объем, стоимость и время доставки. Очень ответственно подошли к доставке. Оценили возможность подъезда к месту выгрузки. Доставили все вовремя. Водитель очень качественно организовал разгрузку, Максимально минимизировав долю ручного труда. Рекомендую данную компанию.",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Çitin altına bant dökmek için bir çözüm aradım. Teslimatın hacmi, maliyeti ve zamanı üzerinde anlaştılar. Teslimata çok sorumlu bir şekilde yaklaştık. Boşaltma yerine yaklaşma olasılığını değerlendirdik. Her şeyi zamanında teslim ettiler. Sürücü, el emeğinin payını mümkün olduğunca en aza indirerek boşaltmayı çok verimli bir şekilde organize etti. Bu şirketi tavsiye ederim."
+      },
+      "rating": 5,
+      "updatedTime": "2026-06-29T11:15:49.429Z",
+      "reactions": {
+        "likes": 10,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Благодарим за ваш отзыв!",
+        "updatedTime": "2025-11-14T07:27:56.469Z"
+      },
+      "reviewId": "xYHgX4eCaWh3YmQefX-JtZ4VEuuXptZzr",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Дарья .",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/68143/0p-3/{size}",
+        "professionLevel": "Знаток города 2 уровня",
+        "rtb": "Знаток города 2 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "vv08xyc8pktj6jb6tkz4gdf994",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Нужен был бетон с особыми свойствами для бассейна. В этой компании пошли навстречу и приготовили именно ту смесь, которая требовалась. Привезли в назначенное время, качество на уровне. Бассейн получился герметичным и прочным. Очень доволен результатом. Спасибо за индивидуальный подход и высокое качество работы.",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Havuz için özel özelliklere sahip betona ihtiyacımız vardı. Bu şirkette buluşmaya gittik ve tam olarak ihtiyaç duyulan karışımı hazırladık. Belirlenen zamanda getirdiler, kalite eşit. Havuzun hava geçirmez ve dayanıklı olduğu ortaya çıktı. Sonuçtan çok memnunum. Kişisel yaklaşımınız ve yüksek iş kaliteniz için teşekkür ederiz."
+      },
+      "rating": 5,
+      "updatedTime": "2025-11-12T11:08:34.149Z",
+      "reactions": {
+        "likes": 9,
+        "dislikes": 3,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "GyABYQERtYBx4gyGfxdTSgn3EyeFhCMU",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Оксана",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/45131/0f-5/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "68tebvrmxbbb9wwnq64krm9vn0",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Заливали монолитную плиту под гараж. Приехали вовремя, выгрузили аккуратно. Бетон однородный, без комков. Лаборатория проверила прочность, все соответствует заявленному классу!",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Garajın altına monolitik bir levha döktüler. Zamanında geldik, dikkatlice boşalttık. Beton homojendir, topaksızdır. Laboratuvar gücü test etti, her şey beyan edilen sınıfa karşılık geliyor!"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-07T13:50:44.157Z",
+      "reactions": {
+        "likes": 4,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "kpUteSooWhcytb-kx7TTsehycXdtrktox",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Кристина Беляева",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/26057/0k-9/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "1e8qz866xqpzad4q8qwq1t2qgm",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Заказывали для заливки плиты под коммерческий объект. Работали с лабораторией компании, они проверили каждую партию. Это внушает доверие. Бетон прочный, надежный. Сроки не были сорваны, объект сдан вовремя)",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Plakayı ticari bir tesisin altına dökmek için sipariş ettiler. Şirketin laboratuvarıyla çalışıyorlardı, her partiyi kontrol ettiler. Bu güven uyandırıyor. Beton dayanıklı, güvenilirdir. Son tarihler engellenmedi, nesne zamanında teslim edildi)"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-10T15:29:06.369Z",
+      "reactions": {
+        "likes": 1,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "V1EZedCVr0ruqB_p6ab7S6qatWGux1Ec",
+      "businessId": "1363947198",
+      "author": {
+        "name": "neecanic",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/41409/yJyKUnjlekYsrTbpaY97czbeSQ-1/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "13pgtt2ygxj3x2e4qp90kbg7dg",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Цементно-песчаные смеси у них отличные. Использовали для стяжки полов в новостройке. Схватывается равномерно, трещин нет. Спасибо за работу!",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Çimento-kum karışımları mükemmeldirler. Yeni bir binada zeminleri şap için kullandılar. Eşit şekilde sertleşir, çatlak yoktur. Çalışman için teşekkürler!"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-18T18:26:38.365Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "WbTGZ_qiZ_5w5rIeGz2Ic_RTjSRL4HS",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Дима Б.",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/50595/0h-3/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "7en4ytq1yffypbmmq6u8m4dgac",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Нужно было залить фундамент под дом. Прозрачность расчетов. Никаких скрытых доплат за доставку или простой. Кубатура сошлась, марка соответствует. Бетон лег плотно, без пустот. Строители оценили качество) 😌",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Evin altına temeli dökmek gerekiyordu. Hesaplamaların şeffaflığı. Gizli teslimat ek ücreti veya basit ücret yok. Kübik kapasite bir araya geldi, marka uyuyor. Beton boşluklar olmadan sıkıca uzanıyordu. İnşaatçılar kaliteyi takdir ettiler) 😌"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-14T15:59:05.206Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "SbB1mPlY88HDof43NutfT3CljH25-P0o",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Анастасия Анисимова",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/61207/0m-1/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "wtr2rzjxquppyfn0wry6wywmag",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Думали, что маленький заказ будет в конце очереди, но привезли в первую половину дня. Бетон хороший, без комков. Уложили быстро, поверхность ровная.",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Küçük siparişin hattın sonunda olacağını düşündüler ama günün ilk yarısında getirdiler. Beton iyi, topaksız. Hızlı bir şekilde döşendiler, yüzey düz."
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-08T15:59:05.228Z",
+      "reactions": {
+        "likes": 1,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Ахмед, благодарим вас за отзыв! Будем рады дальнейшему сотрудничеству.",
+        "updatedTime": "2024-09-09T11:44:51.976Z"
+      },
+      "reviewId": "bEKkaGSqAZEP_Iwl2qnsSIPen_OMVIjgL",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Ахмед Артуров",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/58107/0c-7/{size}",
+        "professionLevel": "Знаток города 4 уровня",
+        "rtb": "Знаток города 4 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "aat6vbq6ywzgebq47dzg6bzrcm",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Очень нравится сотрудничать с данной компанией! Доставки всегда в срок. По качеству всегда всё отлично. Огромное спасибо за профессиональную работу!",
+      "textLanguage": "ru",
+      "textTranslations": {},
+      "rating": 5,
+      "updatedTime": "2024-08-26T16:35:24.312Z",
+      "reactions": {
+        "likes": 6,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Благодарим вас за отзыв! Надеемся на дальнейшее сотрудничество.",
+        "updatedTime": "2024-09-30T15:01:34.341Z"
+      },
+      "reviewId": "_vzfp4XI8Nu2dyPxQVJf9jU_k7xBkXuK",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Каверина Татьяна",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/69015/0o-9/{size}",
+        "professionLevel": "Знаток города 4 уровня",
+        "rtb": "Знаток города 4 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "twxn2xjjt6y6xf4xkdjxmgx08g",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Заказывали бетон для заливки фундамента. Миксеры приехали вовремя. Спасибо за проделанную работу!",
+      "textLanguage": "ru",
+      "textTranslations": {},
+      "rating": 5,
+      "updatedTime": "2024-09-20T14:55:26.269Z",
+      "reactions": {
+        "likes": 2,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Даниил, благодарим вас за отзыв! Будем рады дальнейшему сотрудничеству.",
+        "updatedTime": "2024-09-09T11:44:12.510Z"
+      },
+      "reviewId": "kB1vuSwCK0Je4n2KujotwKnX-xIfu0D",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Даниил Халин",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/26057/0k-9/{size}",
+        "professionLevel": "Знаток города 4 уровня",
+        "rtb": "Знаток города 4 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "x1jaavkrwpj25mf3tnzrr720xg",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Отличный завод, работу выполнили хорошо. Вопросов по качеству нет. Спасибо!",
+      "textLanguage": "ru",
+      "textTranslations": {},
+      "rating": 5,
+      "updatedTime": "2024-08-16T09:33:14.666Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Благодарим за ваш отзыв!",
+        "updatedTime": "2025-12-12T10:19:05.151Z"
+      },
+      "reviewId": "a7Rl45LqW835ufN7fP2CguTViBaZDJ6P",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Степан Ведерников",
+        "avatarUrl": "",
+        "professionLevel": "Знаток города 14 уровня",
+        "rtb": "Знаток города 14 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "dunguyz88vee5404ne86jfmq34",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Все устроило, заказал привезли! Водитель все подсказал, как быстрей и как лучше, получилось все оперативно!!!",
+      "textLanguage": "unknown",
+      "textTranslations": {},
+      "rating": 5,
+      "updatedTime": "2019-10-02T03:37:05.820Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "j_BqfkGNQREeWhxBv17yyXIimxUDL08",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Анастасия Никитина",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/63032/0d-9/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "eb15yppzmcmxz1m7ebwhmwnp30",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Профессиональный подход к клиентам! Менеджеры быстро рассчитали объем, помогли выбрать класс прочности под наши задачи. Доставка своим транспортом!",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Müşterilere profesyonel yaklaşım! Yöneticiler hacmi hızla hesapladılar, görevlerimiz için bir güç sınıfı seçmeye yardımcı oldular. Ulaşımınızla teslimat!"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-19T17:09:57.763Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "nFAFkT9QQN__4_fkc5KIKg9iN89mVoNk",
+      "businessId": "1363947198",
+      "author": {
+        "name": "даша пискунова",
+        "avatarUrl": "",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "90zz9dd6xn4ypknm2mqbu9pdjg",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Профессиональный подход к клиентам! Менеджеры быстро рассчитали объем, помогли выбрать класс прочности под наши задачи. Доставка своим транспортом!",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "Müşterilere profesyonel yaklaşım! Yöneticiler hacmi hızla hesapladılar, görevlerimiz için bir güç sınıfı seçmeye yardımcı oldular. Ulaşımınızla teslimat!"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-19T16:14:40.700Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "reviewId": "zgUZbCYiYSCmD-vKRA5Oa08lztv4MIOD",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Яна М.",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/17694366/twgXlBj12nus7GxWVvTI2ZGhI-1/{size}",
+        "professionLevel": "Знаток города 3 уровня",
+        "rtb": "Знаток города 3 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Хорошая компания. Бетон соответствует заявленным характеристикам. Ни разу не было нареканий по качеству. Работаем только с ними. 👌🏻",
+      "textLanguage": "ru",
+      "textTranslations": {
+        "tr": "İyi bir şirket. Beton belirtilen özelliklere uygundur. Kaliteden hiç şikayet edilmemişti. Sadece onlarla çalışıyoruz. 👌🏻"
+      },
+      "rating": 5,
+      "updatedTime": "2026-10-20T14:19:10.191Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Спасибо за приятный отклик!",
+        "updatedTime": "2025-12-12T10:18:48.923Z"
+      },
+      "reviewId": "HeidWbeUUqVivtCr44aZ9iv_r8wdVfS",
+      "businessId": "1363947198",
+      "text": "Дорогой бетон но хороший",
+      "textLanguage": "unknown",
+      "textTranslations": {},
+      "rating": 5,
+      "updatedTime": "2020-03-03T15:13:33.263Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    },
+    {
+      "businessComment": {
+        "text": "Спасибо, что оценили!",
+        "updatedTime": "2025-12-12T10:18:56.665Z"
+      },
+      "reviewId": "XlGFLpOtvvNbNtaVjErPKEBu9htQ4B",
+      "businessId": "1363947198",
+      "author": {
+        "name": "Алексей Кетов",
+        "avatarUrl": "https://avatars.mds.yandex.net/get-yapic/60687/FbPHP7r5Eu0b2XRH6Y5mnAKX9nU-1/{size}",
+        "professionLevel": "Знаток города 8 уровня",
+        "rtb": "Знаток города 8 уровня",
+        "rtbType": "PROFESSION",
+        "publicId": "94h019vhh0xeyg2k0xdfwgahz8",
+        "achievements": [],
+        "professions": [],
+        "isSubscribed": false
+      },
+      "text": "Мне нравится.",
+      "textLanguage": "unknown",
+      "textTranslations": {},
+      "rating": 5,
+      "updatedTime": "2020-09-12T13:35:04.993Z",
+      "reactions": {
+        "likes": 0,
+        "dislikes": 0,
+        "userReaction": "NONE"
+      },
+      "photos": [],
+      "videos": [],
+      "pinned": false
+    }
+  ],
+  "reviewsSummary": {
+    "ratingCount": 17,
+    "ratingValue": 4.699999809265137,
+    "reviewCount": 16
+  }
+}
