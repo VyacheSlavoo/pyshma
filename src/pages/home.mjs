@@ -67,6 +67,7 @@ export function home(ctx) {
 <div>
 <a class="pill" href="${site.plant.yandex_url}" rel="noopener" target="_blank">${icon(ctx, 'pin')}<span>${site.plant.region}, ${site.plant.locality}</span></a>
 <h1>${h1.replace(/ в /g, ' в\u00A0')}<span class="sr">: </span> <span class="hero__sub">доставка от ${minV}${NBSP}м³, 24/7</span></h1>
+<p class="hero__from"><b>от ${fmtNum(ctx.fromPrice)}${NBSP}₽/м³</b> товарный бетон</p>
 <p class="hero__lead">${nb(T(ctx, 'home.lead', `Бетон ${marksRange(ctx)}, растворы, ЦПС, арматура и аренда автобетононасосов. Завод на улице Обогатителей: забирайте сами или закажите миксер и насос на объект.`))}</p>
 <ul class="facts3">${join(facts.map(([b, s], i) => h`<li${i === 0 ? raw(' class="hero__price"') : ''}><b>${b}</b><span>${s}</span></li>`))}</ul>
 <div class="hero__cta">

@@ -335,7 +335,7 @@ if (args.includes('--layout')) {
     const seen = await pg.evaluate(() => {
       const inView = (el) => { if (!el) return false; const b = el.getBoundingClientRect(); return b.width > 0 && b.top >= 0 && b.top < innerHeight; };
       const txt = (re) => [...document.querySelectorAll('.hero *, .hdr *, .mbar *')].some((e) => e.children.length === 0 && re.test(e.textContent) && inView(e));
-      return { h1: inView(document.querySelector('h1')), tel: [...document.querySelectorAll('a[href^="tel:"]')].some(inView), c247: txt(/24\/7/), price: inView(document.querySelector('.hero__price')), who: txt(/Верхн/), form: inView(document.querySelector('.hero [data-order], .mbar')) };
+      return { h1: inView(document.querySelector('h1')), tel: [...document.querySelectorAll('a[href^="tel:"]')].some(inView), c247: txt(/24\/7/), price: inView(document.querySelector('.hero__price')) || inView(document.querySelector('.hero__from')), who: txt(/Верхн/), form: inView(document.querySelector('.hero [data-order], .mbar')) };
     });
     const miss = Object.entries({ 'заголовок': seen.h1, 'телефон': seen.tel, '24/7': seen.c247, 'цена «от»': seen.price, 'откуда (завод)': seen.who }).filter(([, v]) => !v).map(([k]) => k);
     if (miss.length) err(5, `холодный взгляд ${w}px`, `в первом экране не видно: ${miss.join(', ')}`);
