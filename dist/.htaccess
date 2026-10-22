@@ -15,10 +15,11 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_URI} !/$
 RewriteRule ^(.*)$ https://verhnyaya-pyshma.ekaterinburgbeton.ru/$1/ [R=301,L]
 
-# 1. http -> https одним шагом (Бегет за nginx: проверяем все признаки https)
+# 1. http -> https одним шагом. Бегет стоит за nginx: редирект только когда запрос явно по http,
+# иначе при неизвестном признаке https получилась бы петля перенаправлений
 RewriteCond %{HTTPS} !=on
 RewriteCond %{ENV:HTTPS} !=on
-RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
 RewriteRule ^ https://verhnyaya-pyshma.ekaterinburgbeton.ru%{REQUEST_URI} [R=301,L]
 
 # 2. www -> основной хост
