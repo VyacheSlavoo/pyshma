@@ -133,7 +133,8 @@ const allText = pages.map((p) => p.text).join('\n');
     // ресурсы
     for (const m of p.html.matchAll(/(?:src|href)="(\/assets\/[^"#]+)/g)) if (!fs.existsSync(path.join(dist, m[1]))) err(P, p.url, `нет файла ресурса ${m[1]}`);
     for (const m of p.html.matchAll(/srcset="([^"]+)"/g)) for (const part of m[1].split(',')) { const u = part.trim().split(' ')[0]; if (u && !fs.existsSync(path.join(dist, u))) err(P, p.url, `нет файла srcset ${u}`); }
-    for (const m of p.html.matchAll(/<img\b[^>]*>/g)) { if (!/ alt="[^"]+"/.test(m[0])) err(P, p.url, 'img без alt'); if (!/ width="\d+" height="\d+"/.test(m[0])) err(P, p.url, 'img без width/height (скачок вёрстки)'); }
+    // у фото в карточках пустой alt допустим: рядом заголовок-ссылка с тем же смыслом
+    for (const m of p.html.matchAll(/(<figure class="(?:pcard|acard)__ph">)?<img\b[^>]*>/g)) { if (!/ alt="/.test(m[0]) || (!m[1] && !/ alt="[^"]+"/.test(m[0]))) err(P, p.url, 'img без alt'); if (!/ width="\d+" height="\d+"/.test(m[0])) err(P, p.url, 'img без width/height (скачок вёрстки)'); }
     // OG
     const ogUrl = (p.head.match(/property="og:url" content="([^"]*)"/) || [])[1];
     if (ogUrl !== ctx.origin + p.url) err(P, p.url, `og:url ${ogUrl} ≠ canonical`);
@@ -208,7 +209,7 @@ const allText = pages.map((p) => p.text).join('\n');
     if (!p.noindex && !/24\/7/.test(p.desc) && ['/', '/contacts/', '/dostavka/'].includes(p.url)) err(P, p.url, 'в Description нет 24/7');
   }
   // 24/7 в ключевых местах
-  if (!/class="t247"/.test(home.html)) err(P, '/', 'нет бейджа 24/7 в шапке');
+  if (!/class="hdr__hrs">Работаем 24\/7</.test(home.html)) err(P, '/', 'нет «Работаем 24/7» в шапке');
   for (const [url, where] of [['/', 'hero'], ['/contacts/', 'контакты']]) if (!/24\/7/.test(byUrl(url).mainText)) err(P, url, `нет 24/7 (${where})`);
   if (!/24\/7/.test(home.html.slice(home.html.indexOf('<footer')))) err(P, '/', 'нет 24/7 в футере');
   if (!home.ld.some((j) => JSON.stringify(j).includes('"openingHours":"Mo-Su 00:00-23:59"'))) err(P, '/', 'нет openingHours 24/7 в schema');
@@ -217,7 +218,7 @@ const allText = pages.map((p) => p.text).join('\n');
   for (const p of pages) for (const m of p.mainText.matchAll(/(?:минимальный заказ(?: [^.]{0,12})?\s*[—-]|заказ от|доставка от|миксером)\s*(?:от\s*)?(\d+(?:,\d+)?)\s*м³/gi)) if (m[1] !== mv) err(P, p.url, `минимальный объём «${m[0]}» ≠ ${mv}`);
   // цена «от»
   const main = ctx.mainConcrete;
-  const heroPrice = Number((home.main.match(/<div class="price-plate"><span>[^<]*<\/span><b>([^<]*)<\/b>/) || [])[1]?.replace(/[^\d]/g, ''));
+  const heroPrice = Number((home.main.match(/<p class="hero__price">[^<]*<b>([^<]*)<\/b>/) || [])[1]?.replace(/[^\d]/g, ''));
   if (heroPrice !== ctx.fromPrice) err(P, '/', `цена «от» в hero ${heroPrice} ≠ минимум товарного бетона ${ctx.fromPrice}`);
   const catPage = byUrl(`/catalog/${main.slug}/`);
   const fact = Number((catPage.mainText.match(/Цена от ([\d ]+)\s*₽\/м³/) || [])[1]?.replace(/\s/g, ''));
@@ -225,6 +226,40 @@ const allText = pages.map((p) => p.text).join('\n');
   // все видимые цены есть в данных
   const known = new Set([...ctx.categories.flatMap((c) => c.rows.map((r) => r.price)), ...(ctx.rental ? [...ctx.rental.units, ...ctx.rental.extras].map((u) => u.price) : []), ...ctx.cities.map((c) => c.delivery_cost).filter((v) => v != null)]);
   for (const p of pages) for (const m of p.main.matchAll(/<td class="pr"[^>]*><span class="num">([^<]*)<\/span>/g)) { const v = Number(decode(m[1]).replace(/[^\d]/g, '')); if (!known.has(v)) err(P, p.url, `цена ${v} не из прайса`); }
+  // конфигуратор: каждая цена в нём есть в таблице той же страницы, а форма содержит капчу
+  for (const p of pages.filter((x) => x.main.includes('data-cfg-data'))) {
+    const data = (() => { try { return JSON.parse(decode(p.main.match(/<script type="application\/json" data-cfg-data>([\s\S]*?)<\/script>/)[1]).replace(/\\u003c/g, '<')); } catch { return null; } })();
+    if (!data) { err(P, p.url, 'данные конфигуратора не парсятся'); continue; }
+    const tablePrices = new Set([...p.main.matchAll(/<td class="pr"[^>]*><span class="num">([^<]*)<\/span>/g)].map((m) => Number(decode(m[1]).replace(/[^\d]/g, ''))));
+    for (const r of data.rows) if (!tablePrices.has(r.p)) err(P, p.url, `в конфигураторе цена ${r.p} (${r.l}) отсутствует в таблице страницы`);
+    for (const r of data.rows) if (!known.has(r.p)) err(P, p.url, `в конфигураторе цена ${r.p} не из прайса`);
+    const keys = new Set(data.rows.map((r) => r.k));
+    if (keys.size !== data.rows.length) err(P, p.url, 'в конфигураторе повторяются ключи позиций');
+    if (!keys.has(data.def)) err(P, p.url, 'позиция по умолчанию не найдена среди строк');
+    const cheapest = Math.min(...data.rows.map((r) => r.p));
+    if (data.rows.find((r) => r.k === data.def).p !== cheapest) err(P, p.url, 'по умолчанию выбрана не самая дешёвая позиция');
+    for (const tr of p.main.matchAll(/<tr data-k="([^"]+)"/g)) if (!keys.has(decode(tr[1]))) err(P, p.url, `строка таблицы с ключом ${tr[1]} не найдена в конфигураторе`);
+  }
+  for (const p of pages.filter((x) => /data-lead/.test(x.html))) {
+    for (const f of p.html.matchAll(/<form [^>]*data-lead[\s\S]*?<\/form>/g)) if (!/name="cap"/.test(f[0]) || !/name="ct"/.test(f[0])) err(P, p.url, 'в форме заявки нет арифметической капчи');
+  }
+  // статьи: разметка Article, цены из прайса, ссылка на карточку Яндекса
+  for (const p of pages.filter((x) => /^\/stati\/.+/.test(x.url))) {
+    const a = p.ld.find((j) => j?.['@type'] === 'Article');
+    if (!a) err(P, p.url, 'нет разметки Article');
+    else {
+      if (!a.headline || !a.datePublished || !a.author || !a.publisher || !a.image) err(P, p.url, 'в Article не хватает полей');
+      if (new Date(a.datePublished) > new Date()) err(P, p.url, 'дата публикации статьи в будущем');
+      if (a.dateModified < a.datePublished) err(P, p.url, 'dateModified раньше datePublished');
+    }
+    for (const m of p.main.matchAll(/<td>([\d\u00a0 ]+)\u00a0₽/g)) { const v = Number(m[1].replace(/\D/g, '')); if (!known.has(v)) err(P, p.url, `цена ${v} в таблице статьи не из прайса`); }
+    if (!p.main.includes(`href="${site.plant.yandex_url}"`)) err(P, p.url, 'в статье нет ссылки на карточку Яндекса');
+    if (!/Цены в статье на/.test(p.mainText)) err(P, p.url, 'в статье не указана дата цен');
+  }
+  for (const u of ['/', '/contacts/', '/about/']) if (!byUrl(u).main.includes(`href="${site.plant.yandex_url}"`)) err(P, u, 'нет ссылки на карточку Яндекса');
+  // цвета: прежний жёлтый акцент не должен остаться
+  const css = fs.readdirSync(path.join(dist, 'assets')).filter((f) => f.endsWith('.css')).map((f) => fs.readFileSync(path.join(dist, 'assets', f), 'utf8')).join('');
+  if (/#ffc20e|#fb0|#f5a623|#edb000|signal/i.test(css)) err(P, 'CSS', 'в стилях остался жёлтый акцент');
   // марка ↔ класс
   const cls = new Map(ctx.classByMark);
   for (const p of pages) for (const tr of p.main.matchAll(/<tr>([\s\S]*?)<\/tr>/g)) {
@@ -261,11 +296,16 @@ const allText = pages.map((p) => p.text).join('\n');
     if (!p.noindex && !/data-lead/.test(p.html) && !/\/(privacy|soglasie)\//.test(p.url)) warn(P, p.url, 'нет формы заявки');
     if (!/class="mbar/.test(p.html)) err(P, p.url, 'нет нижней панели CTA для телефона');
   }
-  const order = ['class="hero"', 'id="price"', 'Что можно заказать', 'id="faq"'];
+  const order = ['class="herob"', 'id="price"', 'Заказ, оплата и документы', 'id="faq"'];
   let last = -1; for (const k of order) { const i = home.html.indexOf(k); if (i < 0) err(P, '/', `на главной нет блока ${k}`); else { if (i < last) err(P, '/', `блок ${k} стоит не по порядку`); last = i; } }
   if ((home.html.match(/id="price"/g) || []).length !== 1) err(P, '/', 'блок цен на главной не один');
-  if ((home.html.match(/<details/g) || []).length < 3) err(P, '/', 'нет сворачиваемого прайса на главной');
-  if (!/<details open>/.test(home.html)) warn(P, '/', 'на главной не раскрыт ни один раздел прайса');
+  const want = ctx.categories.length + (ctx.rental ? 1 : 0);
+  if ((home.html.match(/<article class="pcard">/g) || []).length !== want) err(P, '/', `на главной карточек продукции ${(home.html.match(/<article class="pcard">/g) || []).length}, нужно ${want}`);
+  if (!byUrl('/price/') || (byUrl('/price/').html.match(/<article class="pcard">/g) || []).length !== want) err(P, '/price/', 'в разделе цен карточки продукции не по числу категорий');
+  for (const m of home.html.matchAll(/<article class="pcard">[\s\S]*?<\/article>/g)) {
+    if (!/<a href="\/catalog\/[a-z0-9\/-]+\/">/.test(m[0])) err(P, '/', 'карточка продукции без ссылки на страницу');
+    if (!/<figure class="pcard__ph"><img/.test(m[0])) err(P, '/', 'у карточки продукции нет картинки');
+  }
   if (/<a [^>]*href="\/price\/"[^>]*>[^<]*Прайс[^<]*<\/a>/i.test(home.main) && /Цены на бетон/.test(home.main)) { /* ссылка на полный прайс допустима */ }
   const tables = new Map(); for (const p of pages.filter((x) => x.url === '/')) for (const t of p.main.matchAll(/<table class="pt">([\s\S]*?)<\/table>/g)) { if (tables.has(t[1])) err(P, p.url, 'на странице два одинаковых прайса'); tables.set(t[1], 1); }
 }
@@ -291,7 +331,7 @@ if (args.includes('--layout')) {
     const seen = await pg.evaluate(() => {
       const inView = (el) => { if (!el) return false; const b = el.getBoundingClientRect(); return b.width > 0 && b.top >= 0 && b.top < innerHeight; };
       const txt = (re) => [...document.querySelectorAll('.hero *, .hdr *, .mbar *')].some((e) => e.children.length === 0 && re.test(e.textContent) && inView(e));
-      return { h1: inView(document.querySelector('h1')), tel: [...document.querySelectorAll('a[href^="tel:"]')].some(inView), c247: txt(/24\/7/), price: inView(document.querySelector('.price-plate')), who: txt(/Верхн/), form: inView(document.querySelector('.hero [data-open-lead], .mbar')) };
+      return { h1: inView(document.querySelector('h1')), tel: [...document.querySelectorAll('a[href^="tel:"]')].some(inView), c247: txt(/24\/7/), price: inView(document.querySelector('.hero__price')), who: txt(/Верхн/), form: inView(document.querySelector('.hero [data-open-lead], .mbar')) };
     });
     const miss = Object.entries({ 'заголовок': seen.h1, 'телефон': seen.tel, '24/7': seen.c247, 'цена «от»': seen.price, 'откуда (завод)': seen.who }).filter(([, v]) => !v).map(([k]) => k);
     if (miss.length) err(5, `холодный взгляд ${w}px`, `в первом экране не видно: ${miss.join(', ')}`);

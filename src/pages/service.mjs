@@ -2,6 +2,7 @@
 import { h, raw, join, fmtNum, NBSP, truncate } from '../lib/util.mjs';
 import { icon, img, telHref, HOURS_TEXT, HOURS_FULL, minVolText, priceNote, concreteTable, faq, fromPriceOf } from '../lib/layout.mjs';
 import { markNum } from '../lib/marks.mjs';
+import { rentalSpec, renderConfigurator, slugify } from '../lib/configurator.mjs';
 import { baseGraph, faqLd, lbId } from '../lib/seo.mjs';
 import { T, pagehead, ctaBand, cityCards, deliveryLine, deliveryFaq, pickupLine, paymentLine, gallery, reachSpan, pagePhoto } from './common.mjs';
 
@@ -23,12 +24,15 @@ export function rentalPage(ctx) {
     ['Можно ли заказать насос ночью?', `Да. ${HOURS_FULL}.`],
     ['Нужно ли согласовывать насос и миксеры вместе?', 'Лучше да: насос и миксеры заказывают на одно окно времени, тогда подача идёт без пауз.']
   ]);
-  const unitRow = (u) => h`<tr>
+  const unitRow = (u) => h`<tr data-k="${slugify(u.name)}">
 <td class="mk nm" data-l="Техника">${u.name}</td>
 <td class="pr" data-l="Цена"><span class="num">${fmtNum(u.price)}${NBSP}₽</span> <small>/${u.unit}</small></td>
 <td class="ac"><a class="rowlink" href="${telHref(ctx)}">Заказать</a></td></tr>`;
-  const main = h`${pagehead(ctx, { h1, lead, facts: [['Цена от', `${fmtNum(minUnit.price)}${NBSP}₽/${minUnit.unit}`], ['Вылет стрелы', reachSpan(ctx)], ['Режим работы', '24/7']], photo: pagePhoto(ctx, 'arenda-abn') })}
+  const main = h`${pagehead(ctx, { h1, lead, facts: [['Цена от', `${fmtNum(minUnit.price)}${NBSP}₽/${minUnit.unit}`], ['Вылет стрелы', reachSpan(ctx)]], photo: pagePhoto(ctx, 'arenda-abn') })}
 <section class="section section--tight"><div class="container">
+${renderConfigurator(ctx, rentalSpec(ctx), { deliveryNote: 'Время работы зависит от объёма заливки, подъезда и условий площадки: уточним при заказе. Бетон и доставка миксерами считаются отдельно.', tel: telHref(ctx), lead: `Выберите насос по вылету стрелы и время работы. Цены из прайса на ${ctx.priceDateRu}.` })}
+</div></section>
+<section class="section section--sand"><div class="container">
 ${priceNote(ctx, { min: false })}
 <h2 class="tbl-title">Автобетононасосы</h2>
 <div class="table-wrap"><table class="pt"><thead><tr><th>Техника</th><th class="pr">Цена</th><th class="ac"><span class="sr">Заказ</span></th></tr></thead>
@@ -37,7 +41,7 @@ ${extras.length ? h`<h2 class="tbl-title">Дополнительная техн�
 <div class="table-wrap"><table class="pt"><thead><tr><th>Позиция</th><th>Условия</th><th class="pr">Цена</th><th class="ac"><span class="sr">Заказ</span></th></tr></thead>
 <tbody>${join(extras.map((u) => h`<tr><td class="mk nm" data-l="Позиция">${u.name}</td><td data-l="Условия">${u.note ?? '—'}</td><td class="pr" data-l="Цена"><span class="num">${fmtNum(u.price)}${NBSP}₽</span> <small>/${u.unit}</small></td><td class="ac"><a class="rowlink" href="${telHref(ctx)}">Заказать</a></td></tr>`))}</tbody></table></div>` : ''}
 </div></section>
-<section class="section section--sand"><div class="container"><div class="split">
+<section class="section"><div class="container"><div class="split">
 <div><h2>Требования к площадке</h2>
 <ul class="checks"><li>Ровная площадка под выносные опоры.</li><li>Подъезд для насоса и миксеров.</li><li>Свободное пространство над стрелой: без проводов и ветвей.</li></ul>
 <p>Перед выездом мы уточняем адрес и размеры площадки.</p></div>
@@ -70,7 +74,7 @@ export function deliveryPage(ctx) {
   const pick = pickupLine(ctx);
   const pay = paymentLine(ctx);
   const faqItems = T(ctx, 'faq.delivery', [
-    ['Откуда вы доставляете бетон?', `Бетон производится на нашем заводе ${site.plant.locality_in} (${site.plant.address}) и доставляется автобетоносмесителями на объект.`],
+    ['Откуда вы доставляете бетон?', `Бетон производится на нашем заводе ${site.plant.locality_in} и доставляется автобетоносмесителями на объект. Адрес завода: ${site.plant.address}.`],
     ['Как быстро приедет миксер?', d.dispatch_note ?? 'Время подачи зависит от расстояния до объекта, дорожной обстановки и загрузки завода. Ориентировочное время называем при согласовании заказа.'],
     ['Можно ли заказать доставку ночью?', `Да. ${HOURS_FULL}.`],
     ['Какой минимальный объём доставки?', `Минимальный заказ — ${minVolText(ctx)}.`],
@@ -80,8 +84,8 @@ export function deliveryPage(ctx) {
     ...(d.waiting_note ? [['Как оплачивается простой миксера?', d.waiting_note]] : [])
   ]);
   const main = h`${pagehead(ctx, {
-    h1, lead: `Завод находится ${site.plant.locality_in}, ${site.plant.address}. ${deliveryLine(ctx)} ${pick ?? ''}`,
-    facts: [['Минимальный заказ', minVolText(ctx)], ['Режим работы', '24/7'], ['Отгрузка', `завод ${site.plant.locality_in}`]], photo: pagePhoto(ctx, 'dostavka')
+    h1, lead: `Завод: ${site.plant.address}. ${deliveryLine(ctx)} ${pickupLine(ctx, { short: true }) ?? ''}`,
+    facts: [['Минимальный заказ', minVolText(ctx)], ['Отгрузка', `завод ${site.plant.locality_in}`]], photo: pagePhoto(ctx, 'dostavka')
   })}
 ${ctx.cities.length ? h`<section class="section section--tight"><div class="container">
 <div class="section__head"><h2>Направления доставки</h2><p>Для каждого направления есть своя страница с условиями.</p></div>
@@ -92,7 +96,7 @@ ${withCost.length ? h`<div style="margin-top:26px">${priceNote(ctx, { min: false
 <div><h2>Из чего складывается стоимость</h2>
 <p>${d.tariff_note ?? 'Стоимость доставки зависит от расстояния до объекта и объёма заказа. Точную сумму называем после уточнения адреса.'}</p>
 <ul class="checks"><li>Расстояние от завода ${site.plant.locality_from} до объекта.</li><li>Объём заказа и число рейсов${d.mixer_capacity_m3 ? ` (миксер вмещает до ${fmtNum(d.mixer_capacity_m3)}${NBSP}м³)` : ''}.</li><li>Условия подъезда и разгрузки на объекте.</li></ul></div>
-<div class="card"><h3>Как заказать доставку</h3><ol><li>Позвоните ${site.phone.display} или оставьте заявку.</li><li>Назовите марку, объём и адрес объекта.</li><li>Получите расчёт и согласуйте время подачи.</li></ol><p>${HOURS_TEXT}.</p></div>
+<div class="card"><h3>Как заказать доставку</h3><ol><li>Позвоните ${site.phone.display} или оставьте заявку.</li><li>Назовите марку, объём и адрес объекта.</li><li>Получите расчёт и согласуйте время подачи.</li></ol></div>
 </div></div></section>
 ${gallery(ctx, ['fleet'], { title: 'Миксеры и насосы на объектах', max: 6, more: true })}
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: 'delivery' })}`;
@@ -113,33 +117,33 @@ export function cityPage(ctx, c) {
   const pick = ctx.markPages.length ? ctx.markPages : marksOrdered.slice(0, 5);
   const rows = pick.map((m) => cat.rows.filter((r) => r.mark === m).sort((a, b) => a.price - b.price)[0]).filter(Boolean);
   const unit = c.delivery_cost_unit ? ` ${c.delivery_cost_unit}` : '';
-  const costLine = c.delivery_cost != null ? `Доставка ${c.in}: ${fmtNum(c.delivery_cost)}${NBSP}₽${unit}.` : `Стоимость доставки ${c.in} зависит от адреса объекта и объёма заказа. Точную сумму называем при расчёте.`;
+  const to = c.to ?? c.in;
+  const costLine = c.delivery_cost != null ? `Доставка ${to}: ${fmtNum(c.delivery_cost)}${NBSP}₽${unit}.` : `Стоимость доставки ${to} зависит от адреса объекта и объёма заказа. Точную сумму называем при расчёте.`;
   const timeLine = c.travel_time ? `Время в пути от завода: ${c.travel_time}.` : site.delivery.dispatch_note ?? 'Время подачи зависит от расстояния и загрузки завода.';
   const abn = ctx.rental ? h`<p>Для подачи бетона на высоту и в труднодоступные места можно заказать <a href="/catalog/arenda-abn/">автобетононасос</a>.</p>` : '';
   const pickup = pickupLine(ctx);
   const faqItems = T(ctx, `faq.city.${c.slug}`, [
     ...(c.faq || []).map((f) => (Array.isArray(f) ? f : [f.q, f.a])),
-    [`Откуда привозите бетон ${c.in}?`, `Производство находится ${site.plant.locality_in}, ${site.plant.address}. ${c.name} — направление доставки: бетон привозят автобетоносмесители.`],
-    [`Сколько стоит доставка бетона ${c.in}?`, costLine],
-    [`Как быстро привезёте бетон ${c.in}?`, `${timeLine} ${site.delivery.dispatch_note ?? ''}`.trim()],
+    [`Откуда привозите бетон ${to}?`, `Производство находится по адресу: ${site.plant.address}. ${c.name} — направление доставки: бетон привозят автобетоносмесители.`],
+    [`Сколько стоит доставка бетона ${to}?`, costLine],
+    [`Как быстро привезёте бетон ${to}?`, `${timeLine} ${site.delivery.dispatch_note ?? ''}`.trim()],
     ['Работаете ли вы ночью и в выходные?', `Да. ${HOURS_FULL}.`],
-    [`Какой минимальный объём заказа ${c.in}?`, c.min_volume ? `Минимальный заказ ${c.in} — ${fmtNum(c.min_volume)}${NBSP}м³.` : `Минимальный заказ — ${minVolText(ctx)}.`]
+    [`Какой минимальный объём заказа ${to}?`, c.min_volume ? `Минимальный заказ ${to} — ${fmtNum(c.min_volume)}${NBSP}м³.` : `Минимальный заказ — ${minVolText(ctx)}.`]
   ]);
   const facts = [['Откуда', `завод ${site.plant.locality_in}`]];
   if (c.distance_km != null) facts.push(['Расстояние', `${fmtNum(c.distance_km)}${NBSP}км`]);
   if (c.travel_time) facts.push(['В пути', c.travel_time]);
-  facts.push(['Режим работы', '24/7']);
   const main = h`${pagehead(ctx, {
-    h1, lead: `Бетон производится на нашем заводе ${site.plant.locality_in} и доставляется ${c.in} автобетоносмесителями. ${costLine}`, facts, photo: pagePhoto(ctx, c.slug)
+    h1, lead: `Бетон производится на нашем заводе ${site.plant.locality_in} и доставляется ${to} автобетоносмесителями. ${costLine}`, facts, photo: pagePhoto(ctx, c.slug)
   })}
 <section class="section section--tight"><div class="container">
-<div class="section__head"><h2>Цены на бетон с доставкой ${c.in}</h2><p>Цена бетона указана за 1${NBSP}м³. ${costLine}</p></div>
+<div class="section__head"><h2>Цены на бетон с доставкой ${to}</h2><p>Цена бетона указана за 1${NBSP}м³. ${costLine}</p></div>
 ${priceNote(ctx)}
 ${concreteTable(ctx, cat, rows)}
 <p style="margin-top:14px"><a href="/price/">Полный прайс-лист</a></p>
 </div></section>
 <section class="section section--sand"><div class="container"><div class="split">
-<div><h2>Условия доставки ${c.in}</h2>
+<div><h2>Условия доставки ${to}</h2>
 <dl class="kv">
 <dt>Откуда</dt><dd>завод ${site.plant.locality_in}</dd>
 ${c.distance_km != null ? h`<dt>Расстояние</dt><dd>${fmtNum(c.distance_km)}${NBSP}км</dd>` : ''}
@@ -149,7 +153,7 @@ ${c.travel_time ? h`<dt>В пути</dt><dd>${c.travel_time}</dd>` : ''}
 <dt>Режим</dt><dd>${HOURS_TEXT}</dd>
 </dl>
 ${(c.notes || []).map((n) => h`<p>${n}</p>`)}${abn}</div>
-<div class="card"><h3>Другие направления</h3>${ctx.cities.filter((x) => x.slug !== c.slug).length ? h`<ul>${join(ctx.cities.filter((x) => x.slug !== c.slug).map((x) => h`<li><a href="${x.url}">Бетон ${x.in}</a></li>`))}</ul>` : h`<p>Все условия — на странице доставки.</p>`}<p><a href="/dostavka/">Доставка бетона по ${site.plant.district_dat}</a></p>${pickup ? h`<p>${pickup}</p>` : ''}</div>
+<div class="card"><h3>Другие направления</h3>${ctx.cities.filter((x) => x.slug !== c.slug).length ? h`<ul>${join(ctx.cities.filter((x) => x.slug !== c.slug).map((x) => h`<li><a href="${x.url}">Бетон ${x.in}</a></li>`))}</ul>` : h`<p>Условия по всем направлениям собраны на странице доставки.</p>`}<p><a href="/dostavka/">Доставка бетона по ${site.plant.district_dat}</a></p>${pickup ? h`<p>${pickup}</p>` : ''}</div>
 </div></div></section>
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: `city-${c.slug}`, title: `Закажите бетон ${c.in}` })}`;
   const service = {

@@ -3,7 +3,7 @@ import { h, raw, join, fmtNum, NBSP } from '../lib/util.mjs';
 import { icon, telHref, messengers, HOURS_TEXT, HOURS_FULL, leadForm, minVolText, faq } from '../lib/layout.mjs';
 import { CONCRETE_KINDS } from '../lib/categories.mjs';
 import { baseGraph, faqLd } from '../lib/seo.mjs';
-import { T, pagehead, ctaBand, gallery, marksRange, pickupLine, paymentLine, deliveryLine, reachSpan, pagePhoto } from './common.mjs';
+import { T, pagehead, ctaBand, gallery, marksRange, pickupLine, paymentLine, deliveryLine, reachSpan, pagePhoto, yandexBlock } from './common.mjs';
 
 const operator = (ctx) => ctx.site.signature && !ctx.fixture ? ctx.site.signature : ctx.site.brand;
 
@@ -13,7 +13,7 @@ export function contactsPage(ctx) {
   const m = messengers(ctx);
   const mapBlock = p.yandex_org_id
     ? h`<iframe title="Завод на карте" src="https://yandex.ru/map-widget/v1/?ol=biz&oid=${p.yandex_org_id}" width="100%" height="380" style="border:0;border-radius:14px;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
-    : h`<div class="mapbox"><div>${icon(ctx, 'pin')}<p><b>${p.address}</b></p><p><a class="btn btn--blue" href="${p.yandex_url}" rel="noopener" target="_blank">Открыть на Яндекс Картах</a></p></div></div>`;
+    : h`<div class="mapbox"><div>${icon(ctx, 'pin')}<p><b>${p.address}</b></p><p><a class="btn btn--primary" href="${p.yandex_url}" rel="noopener" target="_blank">Открыть на Яндекс Картах</a></p></div></div>`;
   const h1 = T(ctx, 'contacts.h1', `Контакты завода ${p.locality_in}`);
   const main = h`${pagehead(ctx, { h1, lead: `${HOURS_FULL}.`, actions: false, photo: pagePhoto(ctx, 'contacts') })}
 <section class="section section--tight"><div class="container"><div class="split">
@@ -29,7 +29,8 @@ ${site.card?.pickup ? h`<dt>Самовывоз</dt><dd>с завода, по а�
 ${paymentLine(ctx) ? h`<dt>Оплата</dt><dd>${paymentLine(ctx).replace('Способы оплаты: ', '').replace(/\.$/, '')}</dd>` : ''}
 </dl>
 ${p.directions ? h`<h2>Как проехать</h2><p>${p.directions}</p>` : ''}
-<p><a href="${p.yandex_url}" rel="noopener" target="_blank">Карточка завода на Яндекс Картах</a>${p.card_name ? ` («${p.card_name}»)` : ''}: отзывы и фото.</p>
+${yandexBlock(ctx)}
+${p.card_name ? h`<p class="muted" style="font-size:.9rem">В Яндекс Картах завод значится как «${p.card_name}».</p>` : ''}
 ${site.main_site ? h`<p>Общий сайт сети в Екатеринбурге: <a href="${site.main_site.url}">${site.main_site.name}</a>.</p>` : ''}
 ${mapBlock}
 </div>
@@ -47,7 +48,8 @@ ${leadForm(ctx, { title: 'Написать или заказать расчёт'
 export function aboutPage(ctx) {
   const { site } = ctx;
   const p = site.plant;
-  const cats = ctx.categories.map((c) => c.menu.toLowerCase());
+  const WHAT = { 'tovarnyy-beton': 'товарный бетон', 'beton-s-pmd': 'бетон с противоморозными добавками', 'fibrobeton': 'фибробетон', 'gidrotehnicheskiy-beton': 'гидротехнический бетон', 'beton-na-melkom-share': 'бетон на мелком щебне', 'keramzitobeton': 'керамзитобетон', 'suhoy-beton': 'сухой бетон', 'rastvory': 'кладочные и монтажные растворы', 'tsps': 'цементно-песчаные смеси (ЦПС)', 'armatura': 'арматуру' };
+  const made = ctx.categories.map((c) => WHAT[c.slug] ?? c.menu.toLowerCase());
   const h1 = T(ctx, 'about.h1', `О заводе ${p.locality_in}`);
   const pick = pickupLine(ctx);
   const faqItems = T(ctx, 'faq.about', [
@@ -55,16 +57,17 @@ export function aboutPage(ctx) {
     ['Что вы производите и продаёте?', `Бетон ${marksRange(ctx)} разных видов, растворы и ЦПС, арматуру, а также сдаём в аренду автобетононасосы. Полный список позиций и цены — в прайс-листе.`],
     ...(site.lab?.has_control ? [['Как подтверждается качество бетона?', 'Перед отгрузкой контролируем состав и подвижность смеси. Образцы испытываются в установленном возрасте. Партия отправляется с документами о качестве.']] : [])
   ]);
-  const main = h`${pagehead(ctx, { h1, lead: `Производим и доставляем бетон ${marksRange(ctx)}, растворы и ЦПС. Сдаём в аренду автобетононасосы. ${HOURS_FULL}.`, facts: [['Завод', p.locality], ['Режим работы', '24/7'], ['Документы', site.documents.join(', ')]], photo: pagePhoto(ctx, 'about') })}
+  const main = h`${pagehead(ctx, { h1, lead: `Производим и доставляем бетон ${marksRange(ctx)}, растворы и ЦПС. Сдаём в аренду автобетононасосы. ${HOURS_FULL}.`, facts: [['Завод', p.locality], ['Документы', site.documents.join(', ')]], photo: pagePhoto(ctx, 'about') })}
 <section class="section section--tight"><div class="container"><div class="split">
 <div class="prose">
 <h2>Что производим и поставляем</h2>
-<p>Завод ${p.locality_in} выпускает ${cats.slice(0, 8).join(', ')}${ctx.categories.some((c) => c.kind === 'mortar') ? ', растворы и ЦПС' : ''}. Актуальные позиции и цены — в <a href="/price/">прайс-листе</a>.</p>
+<p>Завод ${p.locality_in} отгружает ${made.join(', ')}. Актуальные позиции и цены — в <a href="/price/">прайс-листе</a>.</p>
 <h2>Где находится</h2>
-<p>${p.address}. Бетон отгружается с этой площадки и доставляется автобетоносмесителями на объекты по ${p.district_dat}. ${pick ?? ''} Условия — на странице <a href="/dostavka/">доставки</a>.</p>
+<p>${p.address}. Бетон отгружается с этой площадки и доставляется автобетоносмесителями на объекты по ${p.district_dat}. ${pickupLine(ctx, { short: true }) ?? ''} Условия — на странице <a href="/dostavka/">доставки</a>.</p>
 ${ctx.rental ? h`<h2>Техника</h2><p>Для подачи бетона на высоту и в труднодоступные места сдаём в аренду <a href="/catalog/arenda-abn/">автобетононасосы</a> с вылетом стрелы ${reachSpan(ctx)}.</p>` : ''}
 ${site.lab?.has_control ? h`<h2>Как подтверждаем качество</h2>
 <ul class="checks"><li>Перед отгрузкой контролируем состав и подвижность смеси.</li><li>Образцы испытываются в установленном возрасте.</li><li>Партия идёт с документами о качестве: ${site.documents.join(', ')}.</li></ul>` : ''}
+${yandexBlock(ctx)}
 </div>
 <div class="card"><h3>Коротко</h3><dl class="kv"><dt>Адрес</dt><dd>${p.address}</dd><dt>Режим</dt><dd>${HOURS_TEXT}</dd><dt>Заказ от</dt><dd>${minVolText(ctx)}</dd><dt>Позиций в прайсе</dt><dd>${ctx.positions}</dd></dl><p><a href="/contacts/">Все контакты</a></p></div>
 </div></div></section>

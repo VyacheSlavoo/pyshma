@@ -15,7 +15,7 @@ export function baseGraph(ctx) {
     '@graph': [
       {
         '@type': 'Organization', '@id': orgId(ctx), name: site.brand, url: `${origin}/`,
-        logo: `${origin}${ctx.assets.logo}`, telephone: site.phone.e164,
+        logo: `${origin}${ctx.assets.logo}`, telephone: site.phone.e164, sameAs: [site.plant.yandex_url],
         ...(site.email_public ? { email: site.email_public } : {}),
         ...(site.founded_year ? { foundingDate: String(site.founded_year) } : {})
       },
@@ -29,7 +29,7 @@ export function baseGraph(ctx) {
           addressRegion: site.plant.region, ...(site.plant.postal_code ? { postalCode: site.plant.postal_code } : {}), addressCountry: 'RU'
         },
         geo: { '@type': 'GeoCoordinates', latitude: site.plant.geo.lat, longitude: site.plant.geo.lon },
-        hasMap: site.plant.yandex_url,
+        hasMap: site.plant.yandex_url, sameAs: [site.plant.yandex_url],
         openingHours: OPENING_HOURS,
         openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: DAYS, opens: '00:00', closes: '23:59' }],
         areaServed: [site.plant.locality, ...cityNames].filter((v, i, a) => a.indexOf(v) === i).map((name) => ({ '@type': 'City', name })),

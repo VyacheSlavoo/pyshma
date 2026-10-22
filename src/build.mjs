@@ -15,15 +15,38 @@ import { home } from './pages/home.mjs';
 import { pricePage, categoryPage, markPage } from './pages/catalog.mjs';
 import { rentalPage, deliveryPage, cityPage, galleryPage } from './pages/service.mjs';
 import { contactsPage, aboutPage, privacyPage, consentPage, thanksPage, notFoundPage } from './pages/static.mjs';
+import { articlesIndex, articlePage } from './pages/articles.mjs';
+import { loadArticles } from './lib/articles.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const fixture = args.includes('--fixture');
 const preview = args.includes('--preview');
+const demo = args.includes('--demo'); // сборка для просмотра с диска: относительные ссылки, форма работает вхолостую
 const dateArg = args.find((a) => a.startsWith('--date='));
 const now = dateArg ? new Date(`${dateArg.slice(7)}T00:00:00Z`) : new Date();
 const contentDir = path.join(root, fixture ? 'tests/fixture/content' : 'content');
-const outDir = path.join(root, fixture ? 'dist-fixture' : preview ? 'dist-preview' : 'dist');
+const outDir = path.join(root, fixture ? 'dist-fixture' : preview ? 'dist-preview' : demo ? 'dist-demo' : 'dist');
+// Демо-сборка открывается с диска или с любого адреса: корневые ссылки (/price/, /assets/...) становятся относительными.
+function relativize(html, url) {
+  const depth = url.split('/').filter((x) => x && !x.endsWith('.html')).length;
+  const up = depth === 0 ? './' : '../'.repeat(depth);
+  const fix = (p) => {
+    const [pathPart, hashPart] = [p.split('#')[0], p.includes('#') ? `#${p.split('#').slice(1).join('#')}` : ''];
+    const rel = pathPart.replace(/^\//, '');
+    if (rel === '' || rel.endsWith('/')) return `${up}${rel}index.html${hashPart}`;
+    return `${up}${rel}${hashPart}`;
+  };
+  const sprite = fs.readFileSync(path.join(root, 'src/assets/icons.svg'), 'utf8').replace(/<\?xml[^>]*>/, '').replace('<svg ', '<svg aria-hidden="true" ');
+  return html
+    .replace(/<link rel="preload"[^>]*>\n?/g, '')
+    .replace(/(<use href=")\/[^"#]*(#)/g, '$1$2')
+    .replace(/data-icons="[^"]*"/g, 'data-icons=""')
+    .replace('<body>', `<body>\n${sprite}`)
+    .replace(/\b(href|src|action)="(\/(?!\/)[^"]*)"/g, (m, a, p) => `${a}="${fix(p)}"`)
+    .replace(/srcset="([^"]+)"/g, (m, v) => `srcset="${v.split(', ').map((x) => x.replace(/^\/(?!\/)(\S+)/, (mm, pp) => `${up}${pp}`)).join(', ')}"`)
+;
+}
 const hash = (buf) => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 8);
 
 if (fixture && !fs.existsSync(path.join(contentDir, 'photos', 'hero.jpg'))) {
@@ -31,6 +54,7 @@ if (fixture && !fs.existsSync(path.join(contentDir, 'photos', 'hero.jpg'))) {
 }
 
 const ctx = loadData({ contentDir, now, fixture, preview });
+ctx.demo = demo;
 for (const w of ctx.warnings) console.warn(`⚠ ${w}`);
 if (ctx.errors.length) {
   console.error(`\nСборка остановлена: данные точки заполнены не полностью (${ctx.errors.length}).\n`);
@@ -43,7 +67,9 @@ fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(path.join(outDir, 'assets', 'fonts'), { recursive: true });
 
 // ассеты с хешем
-const css = await transform(fs.readFileSync(path.join(root, 'src/assets/css/site.css'), 'utf8'), { loader: 'css', minify: true });
+const cssSrc = fs.readFileSync(path.join(root, 'src/assets/css/site.css'), 'utf8');
+const fontUri = (f) => `url(data:font/woff2;base64,${fs.readFileSync(path.join(root, 'src/assets/fonts', f)).toString('base64')})`;
+const css = await transform(demo ? cssSrc.replace(/url\(\/assets\/fonts\/([^)]+)\)/g, (m, f) => fontUri(f)) : cssSrc, { loader: 'css', minify: true });
 const js = await transform(fs.readFileSync(path.join(root, 'src/assets/js/site.js'), 'utf8'), { loader: 'js', minify: true, target: 'es2018' });
 const icons = fs.readFileSync(path.join(root, 'src/assets/icons.svg'));
 const cssName = `site.${hash(css.code)}.css`, jsName = `site.${hash(js.code)}.js`, iconsName = `icons.${hash(icons)}.svg`;
@@ -58,6 +84,7 @@ const brand = await brandAssets({ brand: ctx.site.brand, hero: ctx.images.get(he
 ctx.assets = { css: `/assets/${cssName}`, js: `/assets/${jsName}`, icons: `/assets/${iconsName}`, ...brand };
 ctx.priceDateRu = dateRu(ctx.priceDate);
 ctx.gallery = ctx.photos.length > 1;
+ctx.articles = loadArticles(ctx, path.join(contentDir, 'articles'));
 
 // страницы
 const pages = [home(ctx), pricePage(ctx)];
@@ -67,6 +94,7 @@ if (ctx.rental) pages.push(rentalPage(ctx));
 pages.push(deliveryPage(ctx));
 if (ctx.gallery) pages.push(galleryPage(ctx));
 for (const c of ctx.cities) pages.push(cityPage(ctx, c));
+if (ctx.articles.length) { pages.push(articlesIndex(ctx)); for (const a of ctx.articles) pages.push(articlePage(ctx, a)); }
 pages.push(contactsPage(ctx), aboutPage(ctx), privacyPage(ctx), consentPage(ctx), thanksPage(ctx), notFoundPage(ctx));
 
 // порядок sitemap: как в навигации
@@ -77,7 +105,7 @@ for (const p of pages) {
   seen.add(p.url);
   const file = p.url.endsWith('/') ? path.join(outDir, p.url, 'index.html') : path.join(outDir, p.url);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, pageShell(ctx, p).toString());
+  fs.writeFileSync(file, demo ? relativize(pageShell(ctx, p).toString(), p.url) : pageShell(ctx, p).toString());
 }
 
 fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemapXml(ctx, pages));
@@ -93,4 +121,5 @@ const kb = (n) => `${(n / 1024).toFixed(1)} КБ`;
 console.log(`\nГотово: ${path.relative(root, outDir)}/  страниц: ${pages.length}  (CSS ${kb(css.code.length)}, JS ${kb(js.code.length)})`);
 for (const p of pages) console.log(`  ${p.url}`);
 if (fixture) console.log('\nСборка на ТЕСТОВЫХ данных: noindex, в прод не выкладывать.');
+if (demo) console.log('\nДЕМО-СБОРКА: открывайте dist-demo/index.html, заявки никуда не уходят, в прод не выкладывать.');
 if (preview) console.log(`\nПРЕДПРОСМОТР: не для публикации. Подставлено временно: ${ctx.assumed.join(', ') || 'ничего'}.`);

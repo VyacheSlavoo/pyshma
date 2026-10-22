@@ -5,11 +5,11 @@ import { markNum } from '../lib/marks.mjs';
 const uniq = (a) => [...new Set(a.filter((v) => v !== null && v !== undefined && v !== ''))];
 const marksOf = (rows) => uniq(rows.map((r) => r.mark)).sort((a, b) => markNum(a) - markNum(b));
 export const markSpan = (rows) => { const m = marksOf(rows); return m.length > 1 ? `${m[0]}–${m.at(-1)}` : m[0]; };
-const span = (vals, prefix) => {
+export const span = (vals, prefix) => {
   const n = uniq(vals).map((v) => parseInt(String(v).replace(/\D/g, ''), 10)).sort((a, b) => a - b);
   return n.length > 1 ? `${prefix}${n[0]}–${prefix}${n.at(-1)}` : n.length ? `${prefix}${n[0]}` : null;
 };
-const mobSpan = (rows) => { const n = uniq(rows.map((r) => r.mobility)).map((v) => v.replace('П', '')).sort(); return n.length > 1 ? `П${n[0]}–П${n.at(-1)}` : n.length ? `П${n[0]}` : null; };
+export const mobSpan = (rows) => { const n = uniq(rows.map((r) => r.mobility)).map((v) => v.replace('П', '')).sort(); return n.length > 1 ? `П${n[0]}–П${n.at(-1)}` : n.length ? `П${n[0]}` : null; };
 
 export const CATEGORY_COPY = {
   'tovarnyy-beton': {

@@ -6,3 +6,4 @@ send.config.php
 .DS_Store
 tests/fixture/content/photos/
 dist-preview/
+dist-demo/

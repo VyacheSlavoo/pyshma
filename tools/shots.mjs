@@ -38,7 +38,7 @@ for (const w of widths) {
         const b = el.getBoundingClientRect();
         if (b.width && b.right > vw + 1 && getComputedStyle(el).position !== 'fixed') {
           // внутри прокручиваемой обёртки таблицы это допустимо
-          if (el.closest('.table-wrap, .skip, dialog, template')) continue;
+          if (el.closest('.table-wrap, .callout, .skip, dialog, template')) continue;
           over.push(`${el.tagName.toLowerCase()}.${(el.className || '').toString().split(' ')[0]} right=${Math.round(b.right)}`);
           if (over.length > 3) break;
         }

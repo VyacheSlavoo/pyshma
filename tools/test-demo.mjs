@@ -1,0 +1,41 @@
+// Демо-сборка открывается с диска (file://): ссылки, картинки, иконки, конфигуратор и форма вхолостую.
+// node src/build.mjs --demo && node tools/test-demo.mjs
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { chromium } from 'playwright-core';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const url = (p) => pathToFileURL(path.join(root, 'dist-demo', p)).href;
+let failed = 0;
+const ok = (c, n, e = '') => { console.log(`${c ? '✓' : '✗'} ${n}${c ? '' : `  (${e})`}`); if (!c) failed++; };
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium', headless: true, args: ['--no-sandbox'] });
+const p = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage();
+const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('requestfailed', (r) => errs.push(`нет ${r.url().slice(-60)}`));
+await p.goto(url('index.html'), { waitUntil: 'load' });
+const bad = await p.evaluate(async () => { document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }); await new Promise((r) => setTimeout(r, 1500)); return [...document.images].filter((i) => !i.closest('template, dialog') && !(i.complete && i.naturalWidth > 0)).map((i) => i.getAttribute('src')); });
+ok(bad.length === 0, 'картинки главной загрузились', bad.slice(0, 3).join(', '));
+ok(await p.evaluate(() => { const u = document.querySelector('.hero__cta .btn svg'); return !!u && u.getBoundingClientRect().width > 0 && !!document.querySelector('symbol#i-phone'); }), 'иконки видны (спрайт встроен)');
+ok(await p.evaluate(() => document.fonts.check('600 20px Plex')), 'шрифт из CSS подключён');
+await p.locator('.pcard__t a').first().click();
+ok(/catalog\/tovarnyy-beton\/index\.html$/.test(p.url()), 'карточка ведёт на страницу продукции', p.url());
+await p.locator('[data-attr="mark"] input[value="М300"]').evaluate((e) => e.click());
+ok((await p.locator('[data-o="price"]').innerText()).includes('4 400'), 'конфигуратор работает с диска');
+await p.locator('a.nav__link', { hasText: 'Статьи' }).first().click();
+ok(/stati\/index\.html$/.test(p.url()), 'меню ведёт в раздел статей', p.url());
+await p.locator('.acard__t a').first().click();
+ok(/stati\/[a-z-]+\/index\.html$/.test(p.url()) && (await p.locator('h1').count()) === 1, 'статья открывается', p.url());
+await p.goto(url('contacts/index.html'), { waitUntil: 'load' });
+await p.locator('form[data-lead]').first().scrollIntoViewIfNeeded();
+await p.waitForFunction(() => /^\d+ \+ \d+$/.test(document.querySelector('form[data-lead] [data-cap-q]').textContent));
+const q = await p.locator('form[data-lead] [data-cap-q]').first().innerText();
+const [a, b] = q.split(' + ').map(Number);
+await p.locator('form[data-lead] input[name=phone]').first().fill('+79001234567');
+await p.locator('form[data-lead] input[name=cap]').first().fill(String(a + b));
+await p.locator('form[data-lead] input[name=consent]').first().check();
+await p.locator('form[data-lead] button[type=submit]').first().click();
+await p.waitForFunction(() => /Демо: заявка принята/.test(document.querySelector('form[data-lead] .form__msg').textContent));
+ok(true, 'форма в демо принимает верный ответ и никуда не отправляет');
+ok(errs.length === 0, 'нет ошибок и недоступных файлов', errs.slice(0, 3).join('; '));
+await browser.close();
+console.log(failed ? `\nПровалено: ${failed}` : '\nДемо-сборка: всё работает с диска');
+process.exit(failed ? 1 : 0);

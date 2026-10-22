@@ -21,16 +21,14 @@ function respond(bool $ok, string $error, int $status, bool $json): void
             header('Location: /spasibo/', true, 303);
         } else {
             header('Content-Type: text/html; charset=utf-8', true, $status);
+            $why = strpos($error, 'captcha') === 0
+                ? 'Проверочный пример решается на странице с включённым JavaScript. Включите его и отправьте форму снова либо позвоните нам.'
+                : 'Не удалось отправить заявку. Позвоните нам.';
             echo '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Заявка не отправлена</title>'
-               . '<p>Не удалось отправить заявку. Позвоните нам или <a href="/">вернитесь на сайт</a>.</p>';
+               . '<p>' . $why . ' <a href="/">Вернуться на сайт</a></p>';
         }
     }
     exit;
-}
-
-if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
-    header('Allow: POST');
-    respond(false, 'method', 405, $wantsJson);
 }
 
 // ---- конфиг ----
@@ -40,10 +38,78 @@ foreach ([__DIR__ . '/../send.config.php', __DIR__ . '/send.config.php'] as $pat
 }
 if (!is_array($cfg) || empty($cfg['to'])) {
     error_log('send.php: нет send.config.php или не задан to');
-    respond(false, 'config', 500, $wantsJson);
+    respond(false, 'config', 500, $wantsJson || isset($_GET['captcha']));
 }
 $cfg += ['smtp_host' => '', 'smtp_port' => 465, 'smtp_secure' => 'ssl', 'smtp_user' => '', 'smtp_pass' => '', 'from' => '', 'from_name' => 'Сайт',
-         'site_host' => '', 'brand' => 'Сайт', 'log_dir' => null, 'debug' => false, 'smtp_verify_peer' => true];
+         'site_host' => '', 'brand' => 'Сайт', 'log_dir' => null, 'debug' => false, 'smtp_verify_peer' => true,
+         'captcha_secret' => '', 'captcha_ttl' => 3600];
+
+// ---- арифметическая капча ----
+// Токен: «срок.метка.подпись». Пример восстанавливается из метки и секрета, ответа в токене нет.
+// Подпись не даёт подделать метку, метка живёт один раз (повторная отправка с тем же токеном отклоняется).
+function cap_secret(array $cfg): string
+{
+    return $cfg['captcha_secret'] !== '' ? (string)$cfg['captcha_secret']
+        : hash('sha256', 'cap|' . $cfg['smtp_pass'] . '|' . $cfg['site_host'] . '|' . $cfg['from']);
+}
+
+function cap_example(string $nonce, string $secret): array
+{
+    $b = hash_hmac('sha256', 'q|' . $nonce, $secret, true);
+    $op = ord($b[0]) % 3;
+    if ($op === 0) {            // сложение: 3..19 + 2..9
+        $x = 3 + ord($b[1]) % 17; $y = 2 + ord($b[2]) % 8;
+        return [$x . ' + ' . $y, $x + $y];
+    }
+    if ($op === 1) {            // вычитание: результат от 2 до 17
+        $x = 8 + ord($b[1]) % 13; $y = 2 + ord($b[2]) % ($x - 3);
+        return [$x . ' − ' . $y, $x - $y];
+    }
+    $x = 2 + ord($b[1]) % 8; $y = 2 + ord($b[2]) % 8;
+    return [$x . ' × ' . $y, $x * $y];
+}
+
+function cap_issue(array $cfg): array
+{
+    $nonce = bin2hex(random_bytes(8));
+    $exp = time() + (int)$cfg['captcha_ttl'];
+    $secret = cap_secret($cfg);
+    [$q] = cap_example($nonce, $secret);
+    $sig = hash_hmac('sha256', 't|' . $exp . '|' . $nonce, $secret);
+    return ['q' => $q, 't' => $exp . '.' . $nonce . '.' . $sig];
+}
+
+// Возвращает '' при успехе или код ошибки: captcha_missing, captcha_expired, captcha_bad.
+function cap_check(array $cfg, string $logDir, string $token, string $answer): string
+{
+    $parts = explode('.', $token);
+    if (count($parts) !== 3 || trim($answer) === '') return 'captcha_missing';
+    [$exp, $nonce, $sig] = $parts;
+    if (!ctype_digit($exp) || !preg_match('/^[0-9a-f]{16}$/', $nonce)) return 'captcha_bad';
+    $secret = cap_secret($cfg);
+    if (!hash_equals(hash_hmac('sha256', 't|' . $exp . '|' . $nonce, $secret), $sig)) return 'captcha_bad';
+    if ((int)$exp < time()) return 'captcha_expired';
+
+    // метка расходуется при первой же попытке, чтобы перебором ответов её не угадать
+    $file = $logDir . '/cap-used.json';
+    $fp = @fopen($file, 'c+');
+    if (!$fp) return 'captcha_bad';
+    flock($fp, LOCK_EX);
+    $raw = stream_get_contents($fp);
+    $used = $raw !== '' && $raw !== false ? (json_decode($raw, true) ?: []) : [];
+    $now = time();
+    foreach ($used as $n => $e) if ((int)$e < $now) unset($used[$n]);
+    $seen = isset($used[$nonce]);
+    $used[$nonce] = (int)$exp;
+    ftruncate($fp, 0); rewind($fp); fwrite($fp, json_encode($used));
+    flock($fp, LOCK_UN); fclose($fp);
+    if ($seen) return 'captcha_bad';
+
+    $ans = trim(str_replace(['−', '–'], '-', $answer));
+    if (!preg_match('/^-?\d{1,3}$/', $ans)) return 'captcha_bad';
+    [, $want] = cap_example($nonce, $secret);
+    return (int)$ans === $want ? '' : 'captcha_bad';
+}
 
 $logDir = $cfg['log_dir'] ?: (dirname(__DIR__) . '/leads');
 if (!is_dir($logDir) && !@mkdir($logDir, 0750, true) && !is_dir($logDir)) {
@@ -51,6 +117,19 @@ if (!is_dir($logDir) && !@mkdir($logDir, 0750, true) && !is_dir($logDir)) {
     @mkdir($logDir, 0750, true);
     @file_put_contents($logDir . '/.htaccess', "Require all denied\nDeny from all\n");
 }
+
+$method = $_SERVER['REQUEST_METHOD'] ?? '';
+if ($method === 'GET' && isset($_GET['captcha'])) {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+    echo json_encode(cap_issue($cfg), JSON_UNESCAPED_UNICODE);
+    exit;
+}
+if ($method !== 'POST') {
+    header('Allow: GET, POST');
+    respond(false, 'method', 405, $wantsJson);
+}
+
 
 // ---- защита от ботов ----
 $host = $cfg['site_host'];
@@ -68,6 +147,10 @@ if (trim((string)($_POST['website'] ?? '')) !== '') {
 $ts = (int)($_POST['ts'] ?? 0);
 if ($ts > 0 && (time() - intdiv($ts, 1000)) < 2) {
     respond(false, 'too_fast', 429, $wantsJson);
+}
+$capError = cap_check($cfg, $logDir, (string)($_POST['ct'] ?? ''), (string)($_POST['cap'] ?? ''));
+if ($capError !== '') {
+    respond(false, $capError, 422, $wantsJson);
 }
 
 $ip = $_SERVER['HTTP_X_REAL_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
@@ -88,8 +171,8 @@ $clean = function (string $key, int $max): string {
     return mb_substr(trim($v), 0, $max);
 };
 $phone   = $clean('phone', 20);
-$volume  = $clean('volume', 12);
-$item    = $clean('item', 60);
+$volume  = $clean('volume', 24);
+$item    = $clean('item', 120);
 $address = $clean('address', 200);
 $source  = $clean('source', 60);
 $consent = ($_POST['consent'] ?? '') === '1';
@@ -109,8 +192,8 @@ $lines = [
     "Новая заявка с сайта {$brand}",
     '',
     "Телефон: {$phone}",
-    'Объём: ' . ($volume !== '' ? "{$volume} м³" : 'не указан'),
-    'Марка: ' . ($item !== '' ? $item : 'не указана'),
+    'Объём: ' . ($volume !== '' ? (preg_match('/^[\d.,\s]+$/u', $volume) ? "{$volume} м³" : $volume) : 'не указан'),
+    'Что заказать: ' . ($item !== '' ? $item : 'не указано'),
     'Адрес доставки: ' . ($address !== '' ? $address : 'не указан'),
     '',
     "Форма: {$source}",

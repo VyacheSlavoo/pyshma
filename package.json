@@ -12,7 +12,11 @@
     "check": "node tools/check.mjs",
     "check:fixture": "node tools/check.mjs --fixture",
     "shots": "node tools/shots.mjs",
-    "serve": "node tools/serve.mjs"
+    "serve": "node tools/serve.mjs",
+    "test:form": "node tools/test-form.mjs",
+    "test:config": "node tools/test-config.mjs",
+    "build:demo": "node src/build.mjs --demo",
+    "test:demo": "node tools/test-demo.mjs"
   },
   "engines": {
     "node": ">=20"

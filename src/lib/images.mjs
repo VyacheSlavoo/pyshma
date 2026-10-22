@@ -32,14 +32,15 @@ export async function processPhotos(photos, outDir) {
 }
 
 export async function brandAssets({ brand, hero, outDir }) {
-  const initial = [...brand.trim()][0].toUpperCase();
+  // монограмма из первых букв слов названия: «Бетон Микс» → БМ
+  const initials = brand.trim().split(/\s+/).slice(0, 2).map((w) => [...w][0].toUpperCase()).join('');
   const dir = path.join(outDir, 'assets');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#102640"/><text x="32" y="45" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="38" fill="#f5a623">${initial}</text></svg>`;
+  const mono = (size) => `<svg xmlns="http://www.w3.org/2000/svg"${size ? ` width="${size}" height="${size}"` : ''} viewBox="0 0 64 64"><rect width="64" height="64" fill="#1F4E9E"/><text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="700" font-size="${initials.length > 1 ? 28 : 38}" fill="#fff">${initials}</text></svg>`;
+  const svg = mono();
   const favicon = `favicon.${hash(Buffer.from(svg))}.svg`;
   fs.writeFileSync(path.join(dir, favicon), svg);
-  // логотип для schema.org: PNG 512×512 с буквой бренда
-  const logoSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#102640"/><text x="32" y="45" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="700" font-size="38" fill="#f5a623">${initial}</text></svg>`;
-  const logoBuf = await sharp(Buffer.from(logoSvg)).png().toBuffer();
+  // логотип для schema.org: PNG 512×512
+  const logoBuf = await sharp(Buffer.from(mono(512))).png().toBuffer();
   const logo = `logo.${hash(logoBuf)}.png`;
   fs.writeFileSync(path.join(dir, logo), logoBuf);
   // OG 1200×630 из hero-фото
