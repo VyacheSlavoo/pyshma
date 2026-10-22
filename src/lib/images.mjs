@@ -36,7 +36,7 @@ export async function brandAssets({ brand, hero, outDir }) {
   // монограмма из первых букв слов названия: «Бетон Микс» → БМ
   const initials = brand.trim().split(/\s+/).slice(0, 2).map((w) => [...w][0].toUpperCase()).join('');
   const dir = path.join(outDir, 'assets');
-  const mono = (size) => `<svg xmlns="http://www.w3.org/2000/svg"${size ? ` width="${size}" height="${size}"` : ''} viewBox="0 0 64 64"><rect width="64" height="64" fill="#1F4E9E"/><text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="700" font-size="${initials.length > 1 ? 28 : 38}" fill="#fff">${initials}</text></svg>`;
+  const mono = (size) => `<svg xmlns="http://www.w3.org/2000/svg"${size ? ` width="${size}" height="${size}"` : ''} viewBox="0 0 64 64"><rect width="64" height="64" fill="#3F6485"/><text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="700" font-size="${initials.length > 1 ? 28 : 38}" fill="#fff">${initials}</text></svg>`;
   const svg = mono();
   const favicon = `favicon.${hash(Buffer.from(svg))}.svg`;
   fs.writeFileSync(path.join(dir, favicon), svg);

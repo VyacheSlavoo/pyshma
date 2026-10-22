@@ -95,7 +95,12 @@ ${it.sub ? h`<div class="sub sub--mega">${join(it.sub.map((g) => h`<div class="s
 </li>`));
 }
 
-export const brandHtml = (ctx, sub) => h`<span class="brand__mark" aria-hidden="true">${icon(ctx, 'mark')}</span><span class="brand__t"><b>${ctx.site.brand}</b>${sub}</span>`;
+// Логотип набран шрифтом: первое слово названия тёмным, остальные на плашке акцентного цвета.
+export const brandHtml = (ctx, sub) => {
+  const [first, ...rest] = ctx.site.brand.trim().split(/\s+/);
+  const wm = rest.length ? h`<span class="wm__a">${first}</span> <span class="wm__b">${rest.join(' ')}</span>` : h`<span class="wm__a">${first}</span>`;
+  return h`<span class="brand__t"><b class="wm">${wm}</b>${sub}</span>`;
+};
 
 export function header(ctx, page) {
   const { site } = ctx;
