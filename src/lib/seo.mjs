@@ -32,8 +32,7 @@ export function baseGraph(ctx) {
         hasMap: site.plant.yandex_url, sameAs: [site.plant.yandex_url],
         openingHours: OPENING_HOURS,
         openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: DAYS, opens: '00:00', closes: '23:59' }],
-        areaServed: [site.plant.locality, ...cityNames].filter((v, i, a) => a.indexOf(v) === i).map((name) => ({ '@type': 'City', name })),
-        parentOrganization: { '@id': orgId(ctx) }
+        areaServed: [site.plant.locality, ...cityNames].filter((v, i, a) => a.indexOf(v) === i).map((name) => ({ '@type': 'City', name }))
       }
     ]
   };
@@ -65,14 +64,16 @@ export function offerLd(ctx, { name, price, url, unitCode = 'MTQ', unitText }) {
 }
 
 export function sitemapXml(ctx, pages) {
-  const last = isoDate(ctx.now);
-  const urls = pages.filter((p) => p.inSitemap !== false && !p.noindex).map((p) => `  <url><loc>${ctx.origin}${p.url}</loc><lastmod>${last}</lastmod></url>`);
+  // lastmod: у статей дата публикации или обновления цен, у остальных дата прайса (сайт меняется вместе с ним)
+  const last = isoDate(ctx.priceDate);
+  const urls = pages.filter((p) => p.inSitemap !== false && !p.noindex).map((p) => `  <url><loc>${ctx.origin}${p.url}</loc><lastmod>${p.lastmod ?? last}</lastmod></url>`);
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
 }
 
 export function robotsTxt(ctx) {
   if (ctx.fixture || ctx.preview) return 'User-agent: *\nDisallow: /\n';
-  return `User-agent: *\nAllow: /\nDisallow: /send.php\nDisallow: /spasibo/\n\nSitemap: ${ctx.origin}/sitemap.xml\n`;
+  // /spasibo/ не закрываем: боту нужно увидеть на странице noindex. Clean-param склеивает адреса с метками рекламы.
+  return `User-agent: *\nAllow: /\nDisallow: /send.php\nClean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid&fbclid&openstat /\n\nSitemap: ${ctx.origin}/sitemap.xml\n`;
 }
 
 export function htaccess(ctx) {
@@ -89,6 +90,11 @@ AddType image/svg+xml .svg
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
+
+# 0. каталог без слэша: слэш и https за один шаг (http://host/price -> https://host/price/)
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ https://${host}/$1/ [R=301,L]
 
 # 1. http -> https одним шагом (Бегет за nginx: проверяем все признаки https)
 RewriteCond %{HTTPS} !=on
@@ -107,10 +113,6 @@ RewriteRule ^ https://${host}/%1 [R=301,L,NE]
 # 4. отдельной страницы /catalog/ нет, полный прайс лежит в /price/
 RewriteRule ^catalog/?$ https://${host}/price/ [R=301,L]
 
-# 5. каталог без слэша на конце -> со слэшем, сразу на https основного хоста
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_URI} !/$
-RewriteRule ^(.*)$ https://${host}/$1/ [R=301,L]
 </IfModule>
 
 <IfModule mod_authz_core.c>
@@ -132,7 +134,7 @@ Header always set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 
 <IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json application/ld+json image/svg+xml application/xml text/plain
+AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json application/ld+json image/svg+xml application/xml text/plain
 </IfModule>
 
 <IfModule mod_expires.c>

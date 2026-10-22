@@ -14,7 +14,7 @@
 // Статья с датой позже даты сборки не попадает на сайт: так раздел остаётся «живым» без ручной публикации.
 import fs from 'node:fs';
 import path from 'node:path';
-import { esc, fmtNum, NBSP, dateRu, isoDate, normMark } from './util.mjs';
+import { esc, fmtNum, NBSP, dateRu, isoDate, normMark, nb } from './util.mjs';
 import { slugify } from './configurator.mjs';
 import { markNum } from './marks.mjs';
 import { span, mobSpan } from '../pages/copy.mjs';
@@ -91,7 +91,7 @@ function tokens(ctx, s, where) {
 }
 
 function inline(ctx, s, where) {
-  s = esc(tokens(ctx, s, where));
+  s = esc(nb(tokens(ctx, s, where)));
   s = s.replace(/\[([^\]]+)\]\(((?:\/|https:\/\/)[^)\s]*)\)/g, (m, t, u) => `<a href="${u}">${t}</a>`);
   s = s.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
   s = s.replace(/(^|[\s(])_([^_]+)_(?=[\s).,;:!?]|$)/g, '$1<i>$2</i>');

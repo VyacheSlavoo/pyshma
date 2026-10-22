@@ -23,16 +23,13 @@ export function articlePage(ctx, a) {
   const { site } = ctx;
   const others = ctx.articles.filter((x) => x.slug !== a.slug).slice(0, 2);
   const img = ctx.assets.og;
-  const main = h`<section class="pagehead pagehead--plain"><div class="container pagehead__in"><div class="pagehead__txt">
-<h1>${a.title}</h1>
-<p class="pagehead__lead">${a.lead}</p>
-<p class="art__meta" style="margin:0"><span>Опубликовано <time datetime="${a.date}">${a.dateRu}</time></span><span>Читать ${a.minutes} мин</span><span>Цены в статье на <time datetime="${ctx.priceDateIso}">${ctx.priceDateRu}</time></span></p>
-</div></div></section>
+  const meta = h`<p class="art__meta" style="margin:0 0 4px"><span>Автор: завод «${site.brand}»</span><span>Опубликовано <time datetime="${a.date}">${a.dateRu}</time></span><span>Читать ${a.minutes} мин</span><span>Цены в статье на <time datetime="${ctx.priceDateIso}">${ctx.priceDateRu}</time></span></p>`;
+  const main = h`${pagehead(ctx, { h1: a.title, lead: a.lead, actions: false, photo: a.photo, extra: meta })}
 <section class="section section--tight"><div class="container art">
 ${a.toc.length > 2 ? h`<nav class="toc" aria-label="Содержание статьи"><b>Содержание</b><ol>${join(a.toc.map((t) => h`<li><a href="#${t.id}">${t.text}</a></li>`))}</ol></nav>` : ''}
 <div class="art__body">
 ${raw(a.html)}
-<p class="art__src">Статью написали на заводе ${site.plant.locality_in}, ${site.plant.address}. Цены и характеристики взяты из <a href="/price/">прайс-листа</a> на ${ctx.priceDateRu}. Адрес, отзывы и маршрут: <a href="${site.plant.yandex_url}" rel="noopener" target="_blank">карточка завода на Яндекс Картах</a>. Вопросы по заказу: <a href="${telHref(ctx)}">${site.phone.display}</a>.</p>
+<p class="art__src">Цены и характеристики взяты из <a href="/price/">прайс-листа</a> на ${ctx.priceDateRu}. Адрес, отзывы и маршрут: <a href="${site.plant.yandex_url}" rel="noopener" target="_blank">карточка завода на Яндекс Картах</a>. Вопросы по заказу: <a href="${telHref(ctx)}">${site.phone.display}</a>.</p>
 </div>
 </div></section>
 ${others.length ? h`<section class="section section--sand"><div class="container">
@@ -50,7 +47,7 @@ ${ctaBand(ctx, { source: `article-${a.slug}` })}`;
   };
   return {
     url: a.url, crumbs: [{ name: 'Статьи', url: '/stati/' }, { name: a.title, url: a.url }],
-    title: `${a.title} | ${site.brand}`, description: a.description, h1: a.title,
+    title: `${a.title} | ${site.brand}`, description: a.description, h1: a.title, ogType: 'article', lastmod: a.modified,
     main, jsonld: [baseGraph(ctx), ld]
   };
 }

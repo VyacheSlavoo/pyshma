@@ -12,7 +12,7 @@ export function contactsPage(ctx) {
   const p = site.plant;
   const m = messengers(ctx);
   const mapBlock = p.yandex_org_id
-    ? h`<iframe title="Завод на карте" src="https://yandex.ru/map-widget/v1/?ol=biz&oid=${p.yandex_org_id}" width="100%" height="380" style="border:0;border-radius:14px;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+    ? h`<div class="mapbox" data-oid="${p.yandex_org_id}">${icon(ctx, 'pin')}<p><b>${p.address}</b></p><p><button type="button" class="btn btn--primary" data-map>Показать карту</button> <a class="btn btn--ghost" href="${p.yandex_url}" rel="noopener" target="_blank">Открыть на Яндекс Картах</a></p></div>`
     : h`<div class="mapbox"><div>${icon(ctx, 'pin')}<p><b>${p.address}</b></p><p><a class="btn btn--primary" href="${p.yandex_url}" rel="noopener" target="_blank">Открыть на Яндекс Картах</a></p></div></div>`;
   const h1 = T(ctx, 'contacts.h1', `Контакты завода ${p.locality_in}`);
   const main = h`${pagehead(ctx, { h1, lead: `${HOURS_FULL}.`, actions: false, photo: pagePhoto(ctx, 'contacts') })}
@@ -30,7 +30,6 @@ ${paymentLine(ctx) ? h`<dt>Оплата</dt><dd>${paymentLine(ctx).replace('Сп
 </dl>
 ${p.directions ? h`<h2>Как проехать</h2><p>${p.directions}</p>` : ''}
 ${yandexBlock(ctx)}
-${p.card_name ? h`<p class="muted" style="font-size:.9rem">В Яндекс Картах завод значится как «${p.card_name}».</p>` : ''}
 ${site.main_site ? h`<p>Общий сайт сети в Екатеринбурге: <a href="${site.main_site.url}">${site.main_site.name}</a>.</p>` : ''}
 ${mapBlock}
 </div>

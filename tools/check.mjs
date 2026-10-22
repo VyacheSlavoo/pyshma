@@ -179,7 +179,8 @@ const allText = pages.map((p) => p.text).join('\n');
     }
     for (const j of p.ld) {
       if (j?.['@type'] === 'Product') {
-        const offers = j.offers ?? [];
+        const o = j.offers;
+        const offers = Array.isArray(o) ? o : o?.['@type'] === 'AggregateOffer' ? o.offers : o ? [o] : [];
         const vis = new Set([...p.main.matchAll(/<td class="pr"[^>]*><span class="num">([^<]*)<\/span>/g)].map((m) => Number(decode(m[1]).replace(/[^\d]/g, ''))));
         for (const o of offers) if (!vis.has(Number(o.price))) err(P, p.url, `Offer.price ${o.price} нет среди видимых цен`);
         for (const v of vis) if (!offers.some((o) => Number(o.price) === v)) err(P, p.url, `видимая цена ${v} нет в Offer`);
@@ -277,7 +278,7 @@ const allText = pages.map((p) => p.text).join('\n');
   // даты цен и обороты
   for (const p of pages.filter((x) => /class="pt"/.test(x.main))) if (!p.mainText.includes(`Актуально на ${ctx.priceDateRu}`)) err(P, p.url, 'у таблиц нет «Актуально на {дата}»');
   // отзывы
-  for (const r of site.reviews?.items ?? []) if (!home.html.includes(r.author)) warn(P, '/', `отзыв ${r.author} не выведен`);
+  for (const r of site.reviews?.items ?? []) if (!home.html.includes(r.author.replace(/[.\s]+$/, '').split(/\s+/)[0])) warn(P, '/', `отзыв ${r.author} не выведен`);
   const y = new Date().getUTCFullYear();
   if (!home.text.includes(`© ${y}`)) warn(P, '/', 'год в футере не текущий');
   if (!site.founded_year && /с \d{4} года/.test(allText)) err(P, '/', 'год основания не подтверждён, но указан');

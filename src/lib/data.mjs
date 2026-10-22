@@ -162,12 +162,17 @@ export function loadData({ contentDir, now, fixture = false, preview = false }) 
   }
 
   const positions = categories.reduce((n, c) => n + c.rows.length, 0) + (rental ? rental.units.length + rental.extras.length : 0);
-  const priceDate = monthStart(now);
+  // Дата прайса: месяц последнего импорта цен из карточки, а не месяц сборки. Иначе пересборка ради новой статьи
+  // выдала бы старые цены за свежие. Если импорт старше 35 дней, сборка предупреждает.
+  const fetched = site.card?.fetched_at ? new Date(site.card.fetched_at) : now;
+  const priceDate = monthStart(fetched);
+  const nextMonth = new Date(Date.UTC(priceDate.getUTCFullYear(), priceDate.getUTCMonth() + 1, 1));
+  if ((now - fetched) / 86400000 > 35) warnings.push(`цены загружены ${isoDate(fetched)}, прайс старше месяца: выполните npm run import`);
   return {
     site, texts, categories, rental, cities, photos, fixture, preview, assumed, errors, warnings,
     origin: site.domain,
     host: site.domain ? new URL(site.domain).host : null,
-    now, priceDate, priceValidUntil: monthEnd(now), priceDateIso: isoDate(priceDate),
+    now, priceDate, priceValidUntil: monthEnd(nextMonth), priceDateIso: isoDate(priceDate),
     mainConcrete, fromPrice, markPages, positions, classByMark
   };
 }

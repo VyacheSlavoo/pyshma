@@ -13,15 +13,13 @@ export function rentalPage(ctx) {
   const minUnit = units.reduce((a, b) => (b.price < a.price ? b : a));
   const priceHint = `от ${fmtNum(minUnit.price)}${NBSP}₽ в ${minUnit.unit === 'час' ? 'час' : minUnit.unit}`;
   const h1 = T(ctx, 'rental.h1', `Аренда автобетононасоса ${site.plant.locality_in}`);
-  const maxReach = Math.max(...units.map((u) => u.reach_m).filter(Boolean));
-  const minReach = Math.min(...units.map((u) => u.reach_m).filter(Boolean));
   const lead = T(ctx, 'rental.lead', `Автобетононасос подаёт смесь из миксера по стреле и бетоноводу в место заливки: на перекрытия, колонны, в труднодоступные места. В парке насосы с вылетом стрелы ${reachSpan(ctx)}. Стоимость считается за час работы.`);
   const withMin = extras.filter((e) => e.min_hours);
   const faqItems = T(ctx, 'faq.rental', [
     ['Как рассчитывается стоимость аренды?', `Цена указана за ${units[0].unit} работы машины.${withMin.length ? ` ${withMin.map((e) => `${e.name}: минимальная смена ${e.min_hours}${NBSP}ч`).join('; ')}.` : ''} Точное время работы зависит от объёма заливки, подъезд и условий площадки: рассчитаем при заказе.`],
-    ['Как выбрать вылет стрелы?', `Вылет определяет, как далеко и высоко насос подаёт бетон. Назовите высоту и расстояние до самой дальней точки заливки, подберём насос из ряда ${minReach}–${maxReach}${NBSP}м.`],
+    ['Как выбрать вылет стрелы?', `Вылет определяет, как далеко и высоко насос подаёт бетон. Назовите высоту и расстояние до самой дальней точки заливки, подберём насос из ряда ${reachSpan(ctx)}.`],
     ['Что нужно подготовить на площадке?', 'Ровную площадку под выносные опоры, подъезд для насоса и миксеров, свободное место над стрелой без проводов и ветвей. Размеры опор зависят от модели, мы сообщим их при заказе.'],
-    ['Можно ли заказать насос ночью?', `Да. ${HOURS_FULL}.`],
+    ['Можно ли заказать насос ночью?', `Да. ${HOURS_TEXT}: заявки на технику принимаем круглосуточно.`],
     ['Нужно ли согласовывать насос и миксеры вместе?', 'Лучше да: насос и миксеры заказывают на одно окно времени, тогда подача идёт без пауз.']
   ]);
   const unitRow = (u) => h`<tr data-k="${slugify(u.name)}">
@@ -59,8 +57,8 @@ ${faq(ctx, faqItems)}${ctaBand(ctx, { source: 'rental', title: 'Закажите
   };
   return {
     url: '/catalog/arenda-abn/', crumbs: [{ name: 'Аренда АБН', url: '/catalog/arenda-abn/' }],
-    title: `Аренда автобетононасоса ${site.plant.locality_in} — ${priceHint} | ${site.brand}`,
-    description: truncate(`Аренда автобетононасоса ${site.plant.locality_in}: ${priceHint}, вылет стрелы до ${maxReach}${NBSP}м. Транспортерная лента, бетоноводы, миксер с насосом. Работаем 24/7.`, 190),
+    title: `Аренда автобетононасоса ${site.plant.locality_in} ${priceHint} | ${site.brand}`,
+    description: `Аренда автобетононасоса ${site.plant.locality_in}: ${priceHint}, вылет стрелы ${reachSpan(ctx)}. Лента, бетоноводы, миксер с насосом. Работаем 24/7.`,
     h1, main, jsonld: [baseGraph(ctx), service, faqLd(faqItems)]
   };
 }
@@ -69,7 +67,7 @@ ${faq(ctx, faqItems)}${ctaBand(ctx, { source: 'rental', title: 'Закажите
 export function deliveryPage(ctx) {
   const { site } = ctx;
   const d = site.delivery;
-  const h1 = T(ctx, 'delivery.h1', `Доставка бетона по ${site.plant.district_dat} — цены и зоны`);
+  const h1 = T(ctx, 'delivery.h1', `Доставка бетона по ${site.plant.district_dat}`);
   const withCost = ctx.cities.filter((c) => c.delivery_cost != null);
   const pick = pickupLine(ctx);
   const pay = paymentLine(ctx);
@@ -102,7 +100,7 @@ ${gallery(ctx, ['fleet'], { title: 'Миксеры и насосы на объе
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: 'delivery' })}`;
   return {
     url: '/dostavka/', crumbs: [{ name: 'Доставка', url: '/dostavka/' }],
-    title: `Доставка бетона по ${site.plant.district_dat} — цены и зоны | ${site.brand}`,
+    title: `Доставка бетона по ${site.plant.district_dat} | ${site.brand}`,
     description: truncate(`Доставка бетона миксерами с завода ${site.plant.locality_in} по ${site.plant.district_dat}: заказ от ${fmtNum(site.min_volume_m3)}${NBSP}м³, расчёт по адресу, работаем 24/7.`, 190),
     h1, main, jsonld: [baseGraph(ctx), faqLd(faqItems)]
   };
@@ -161,8 +159,11 @@ ${faq(ctx, faqItems)}${ctaBand(ctx, { source: `city-${c.slug}`, title: `Зака
     serviceType: 'Доставка бетона', name: h1, provider: { '@id': lbId(ctx) }, areaServed: { '@type': 'City', name: c.name }
   };
   const crumbs = [{ name: 'Доставка', url: '/dostavka/' }, { name: c.tier === 'settlement' ? c.name : `Бетон ${c.in}`, url: c.url }];
+  // Без расстояния, времени и цены доставки страница ничем не отличается от основного сайта сети: закрываем от индекса,
+  // пока владелец не заполнит данные в content/cities.json. Тогда страница откроется сама.
+  const unique = c.distance_km != null || c.travel_time != null || c.delivery_cost != null;
   return {
-    url: c.url, crumbs,
+    url: c.url, crumbs, ...(unique ? {} : { noindex: true, inSitemap: false }),
     title: `Купить бетон ${c.in} с доставкой — цена за м³ | ${site.brand}`,
     description: truncate(`Бетон ${c.in} с доставкой с завода ${site.plant.locality_in}: от ${fmtNum(fromPriceOf(cat.rows))}${NBSP}₽/м³. ${costLine} Работаем 24/7.`, 190),
     h1, main, jsonld: [baseGraph(ctx), service, faqLd(faqItems)]

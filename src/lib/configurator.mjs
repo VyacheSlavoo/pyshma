@@ -52,6 +52,12 @@ const hintFrost = (v) => (v ? `${v}: образец выдерживает ${num
 const hintWater = (v) => (v ? `${v}: образец остаётся сухим при давлении воды ${String(num(v) / 10).replace('.', ',')}${NBSP}МПа (ГОСТ 12730.5).` : '');
 const hintPmd = (v) => (v === '' ? 'Смесь без противоморозной добавки: для заливки в тёплое время.' : `ПМД до ${minus(Number(v))}${NBSP}°C: нижняя температура воздуха, для которой подобрана смесь. Режим выдерживания на морозе определяет технолог объекта.`);
 
+// Подпись позиции: та же в конфигураторе, в кнопках таблиц и в заявке.
+export function concreteLabel(cat, r) {
+  const parts = [r.pmd != null ? `ПМД до ${minus(r.pmd)}${NBSP}°C` : null, r.mobility, r.frost, r.water, r.filler ? FILLER[r.filler] ?? r.filler : null].filter(Boolean);
+  return `${cat.menu} ${r.mark} (${r.cls})${parts.length ? `, ${parts.join(', ')}` : ''}`;
+}
+
 // ---------- сборка описания конфигуратора из прайса ----------
 // entries: [{ cat, r }]. withCat: ключи с кодом категории (страница марки, где смешаны разные виды бетона).
 export function concreteSpec(ctx, entries, { withCat = false, qtyDef = 5 } = {}) {
@@ -59,8 +65,7 @@ export function concreteSpec(ctx, entries, { withCat = false, qtyDef = 5 } = {})
   const rows = entries.map((e) => {
     const { cat, r } = e;
     const a = { cat: cat.slug, mark: r.mark, pmd: r.pmd == null ? '' : String(r.pmd), mob: r.mobility ?? '', frost: r.frost ?? '', water: r.water ?? '', fill: r.filler ?? '' };
-    const parts = [r.pmd != null ? `ПМД до ${minus(r.pmd)}${NBSP}°C` : null, r.mobility, r.frost, r.water, r.filler ? FILLER[r.filler] ?? r.filler : null].filter(Boolean);
-    return { k: concreteKey(cat, r, withCat), a, p: r.price, u: 'м³', l: `${cat.menu} ${r.mark} (${r.cls})${parts.length ? `, ${parts.join(', ')}` : ''}`, cls: r.cls };
+    return { k: concreteKey(cat, r, withCat), a, p: r.price, u: 'м³', l: concreteLabel(cat, r), cls: r.cls };
   });
 
   const choice = (id, label, values, textOf, subOf, hintOf, wide = false) => {
@@ -149,10 +154,12 @@ export function renderConfigurator(ctx, spec, { deliveryNote, tel, lead }) {
 <div class="section__head"><h2 id="${id}-h">${spec.title}</h2>${lead ? h`<p>${lead}</p>` : ''}</div>
 <section class="cfg" data-cfg aria-labelledby="${id}-h">
 <script type="application/json" data-cfg-data>${raw(json)}</script>
-<div class="cfg__mini" aria-hidden="true"><span data-o="mini-des">${def.l}</span><b data-o="mini-price">${price(def.p)}</b></div>
+<div class="cfg__mini" aria-hidden="true"><span data-o="mini-des">${def.l}</span><b data-o="mini-price">${price(def.p * spec.qty.def)}</b></div>
 <div class="cfg__grid">
 <div class="cfg__ctl">
+<p class="cfg__chg cfg__chg--top" data-o="chg2" aria-hidden="true"></p>
 ${join(spec.attrs.map(group))}
+${spec.attrs.length > 1 ? h`<p class="cfg__legend">Пунктиром отмечены значения, которых нет вместе с остальным выбором. Если нажать на такое значение, подберём ближайший вариант из прайса.</p>` : ''}
 </div>
 <div class="cfg__res"><div class="cfg__res-in">
 <p class="cfg__des" data-o="des">${def.l}<small data-o="sub">${def.s ?? ''}</small></p>

@@ -38,7 +38,6 @@ export function pricePage(ctx) {
 </details></div>` : '';
   const faqItems = T(ctx, 'faq.price', [
     ['Как часто обновляется прайс-лист?', `Цены на этой странице действуют с ${ctx.priceDateRu}. Стоимость на день заказа подтверждаем по телефону ${site.phone.display}.`],
-    deliveryFaq(ctx),
     ['Можно ли заказать бетон ночью?', `Да. ${HOURS_TEXT}: принимаем заявки, производим и отгружаем круглосуточно.`]
   ]);
   const h1 = `Прайс-лист на бетон и растворы ${site.plant.locality_in}`;
@@ -70,10 +69,10 @@ function markGuide(ctx, cat) {
   const rowsOf = (m) => cat.rows.filter((r) => r.mark === m);
   return h`<section class="section"><div class="container">
 <div class="section__head"><h2>Как выбрать марку</h2><p>Марку и класс бетона задаёт проект конструкции. Если проекта нет, ориентируйтесь на таблицу и уточните у проектировщика.</p></div>
-<div class="table-wrap"><table class="pt"><thead><tr><th>Марка</th><th>Класс</th><th>Для чего подходит</th><th class="pr">Цена от</th></tr></thead><tbody>${join(marks.map((m) => {
+<div class="table-wrap"><table class="pt"><thead><tr><th>Марка</th><th>Класс</th><th>Для чего подходит</th></tr></thead><tbody>${join(marks.map((m) => {
     const k = MARKS[m]; const rows = rowsOf(m);
     const link = ctx.markPages.includes(m);
-    return h`<tr><td class="mk" data-l="Марка">${link ? h`<a href="/catalog/${cat.slug}/${rows[0].markSlug}/">${m}</a>` : m}</td><td class="cl" data-l="Класс">${rows[0].cls}</td><td data-l="Применение">${k ? k.lead : '—'}</td><td class="pr" data-l="Цена от"><span class="num">${fmtNum(fromPriceOf(rows))}${NBSP}₽</span></td></tr>`;
+    return h`<tr><td class="mk" data-l="Марка">${link ? h`<a href="/catalog/${cat.slug}/${rows[0].markSlug}/">${m}</a>` : m}</td><td class="cl" data-l="Класс">${rows[0].cls}</td><td data-l="Применение">${k ? k.lead : '—'}</td></tr>`;
   }))}</tbody></table></div>
 </div></section>`;
 }
@@ -91,11 +90,17 @@ ${ticks.map((t) => `<line class="slump__ax" x1="${x0 + t * k}" y1="82" x2="${x0 
 </svg>`);
 }
 
-function glossary(ctx, cat) {
+function glossary(ctx, cat, full) {
   const has = (k) => cat.rows.some((r) => r[k]);
   const pmd = cat.kind === 'pmd';
   if (!has('mobility') && !has('frost') && !has('water') && !pmd) return '';
-  return h`<section class="section section--sand"><div class="container"><div class="split">
+  if (!full) {
+    return pmd ? h`<section class="section section--sand"><div class="container prose">
+<h2>Что значит ПМД</h2>
+<p><b>ПМД: противоморозная добавка.</b> Число в графе «ПМД до» показывает нижнюю температуру воздуха, для которой подобрана смесь. Режим выдерживания бетона на морозе определяет технолог объекта по СП 70.13330. Значения П, F и W описаны в разделе <a href="/catalog/${ctx.mainConcrete.slug}/#pfw">товарного бетона</a>.</p>
+</div></section>` : '';
+  }
+  return h`<section class="section section--sand" id="pfw"><div class="container"><div class="split">
 <div>
 <div class="section__head"><h2>Что означают П, F и W в прайсе</h2></div>
 <p><b>П: подвижность смеси</b> (ГОСТ 7473-2010). Её меряют осадкой конуса: чем выше число, тем жиже смесь.</p>
@@ -120,13 +125,23 @@ ${ctx.cities.length ? cityCards(ctx) : ''}
 
 function categoryFaq(ctx, cat) {
   const own = CATEGORY_COPY[cat.slug]?.faq(ctx, cat) ?? [];
-  return T(ctx, `faq.category.${cat.slug}`, [...own, deliveryFaq(ctx)]);
+  return T(ctx, `faq.category.${cat.slug}`, own);
 }
 
 function configFor(ctx, cat) {
   if (CONCRETE_KINDS.has(cat.kind)) return concreteSpec(ctx, cat.rows.map((r) => ({ cat, r })));
   if (cat.kind === 'mortar') return mortarSpec(ctx, cat);
   return rebarSpec(ctx, cat);
+}
+
+// Описание для выдачи: одно законченное предложение с ценой, а не обрезанный лид страницы.
+function categoryDescription(ctx, cat, from, unit) {
+  const { site } = ctx;
+  const where = `${cat.menu} ${site.plant.locality_in}`;
+  const tail = `Заказ от ${fmtNum(site.min_volume_m3)}${NBSP}м³, работаем 24/7.`;
+  if (CONCRETE_KINDS.has(cat.kind)) return `${where}: марки ${markSpan(cat.rows)}, от ${fmtNum(from)}${NBSP}₽/${unit}. ${tail}`;
+  if (cat.kind === 'rebar') { const d = cat.rows.map((r) => r.diameter); return `${where}: диаметр ${Math.min(...d)}–${Math.max(...d)}${NBSP}мм, от ${fmtNum(from)}${NBSP}₽/${unit}. Работаем 24/7.`; }
+  return `${where}: ${cat.rows.length} ${cat.rows.length > 4 ? 'составов' : 'состава'} в прайсе, от ${fmtNum(from)}${NBSP}₽/${unit}. ${tail}`;
 }
 
 export function categoryPage(ctx, cat) {
@@ -142,7 +157,12 @@ export function categoryPage(ctx, cat) {
   const markLinks = concrete && isMain && ctx.markPages.length
     ? h`<div class="marklinks"><span>Страницы с подбором по марке:</span>${join(ctx.markPages.map((m) => h`<a class="chip" href="/catalog/${cat.slug}/${cat.rows.find((r) => r.mark === m).markSlug}/">Бетон ${m}</a>`))}</div>` : '';
   const note = concrete && !isMain
-    ? h`<p style="margin-top:18px">Для чего подходит каждая марка, описано в разделе <a href="/catalog/${ctx.mainConcrete.slug}/">${ctx.mainConcrete.menu}</a>.</p>` : '';
+    ? h`<p style="margin-top:18px">Для чего подходит каждая марка, описано в разделе <a href="/catalog/${ctx.mainConcrete.slug}/">${ctx.mainConcrete.menu}</a>. Что значат П, F и W: <a href="/catalog/${ctx.mainConcrete.slug}/#pfw">в том же разделе</a>.</p>` : '';
+  const approx = concrete && isMain ? h`<p class="muted" style="font-size:.9rem;margin-top:14px">Соответствие марки и класса приблизительное (ГОСТ 26633-2015); в проектах указывают класс.</p>` : '';
+  const use = copy.use ? h`<section class="section"><div class="container prose">
+<h2>Для чего подходит</h2>
+<ul class="checks">${join(copy.use.map((u) => h`<li>${u}</li>`))}</ul>${copy.note ? h`<p>${copy.note}</p>` : ''}
+</div></section>` : '';
   const main = h`${pagehead(ctx, {
     h1, lead,
     facts: [['Цена от', `${fmtNum(from)}${NBSP}₽/${unit}`], ...(cat.kind === 'rebar' ? [] : [['Заказ от', minVolText(ctx)]]), ['Цены на', ctx.priceDateRu]], photo: pagePhoto(ctx, cat.slug)
@@ -153,16 +173,16 @@ ${markLinks}
 </div></section>
 <section class="section section--sand"><div class="container">
 <div class="section__head"><h2>Все позиции и цены</h2></div>
-${priceNote(ctx, { min: false })}${categoryTable(ctx, cat, { keys: 'plain', linkMarks: isMain })}${note}
+${priceNote(ctx, { min: false })}${categoryTable(ctx, cat, { keys: 'plain', linkMarks: isMain })}${note}${approx}
 </div></section>
 ${concrete && isMain ? markGuide(ctx, cat) : ''}
-${concrete ? glossary(ctx, cat) : ''}
+${concrete ? glossary(ctx, cat, isMain) : ''}${use}
 ${deliveryTeaser(ctx)}
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: `cat-${cat.slug}` })}`;
   return {
     url: `/catalog/${cat.slug}/`, crumbs: [{ name: cat.menu, url: `/catalog/${cat.slug}/` }],
-    title: `${shortName(cat)} ${site.plant.locality_in} — цены от ${fmtNum(from)}${NBSP}₽/${unit} | ${site.brand}`,
-    description: truncate(`${lead} Работаем 24/7.`, 190),
+    title: `${shortName(cat)} ${site.plant.locality_in} от ${fmtNum(from)}${NBSP}₽/${unit} | ${site.brand}`,
+    description: categoryDescription(ctx, cat, from, unit),
     h1, main, jsonld: [baseGraph(ctx), faqLd(faqItems)]
   };
 }
@@ -186,12 +206,13 @@ export function markPage(ctx, mark) {
   const variants = ctx.categories.filter((c) => CONCRETE_KINDS.has(c.kind)).map((c) => ({ cat: c, rows: c.rows.filter((r) => r.mark === mark) })).filter((v) => v.rows.length);
   const allRows = variants.flatMap((v) => v.rows);
   const uniqVals = (key) => [...new Set(allRows.map((r) => r[key]).filter(Boolean))];
-  const mobs = uniqVals('mobility'), frosts = uniqVals('frost'), waters = uniqVals('water');
+  const sortNum = (a) => a.sort((x, y) => parseInt(x.replace(/\D/g, ''), 10) - parseInt(y.replace(/\D/g, ''), 10));
+  const mobs = sortNum(uniqVals('mobility')), frosts = sortNum(uniqVals('frost')), waters = sortNum(uniqVals('water'));
   const link = (m) => ctx.markPages.includes(m) ? h`<a href="/catalog/${cat.slug}/${cat.rows.find((r) => r.mark === m).markSlug}/">${m}</a>` : m;
 
   const faqItems = T(ctx, `faq.mark.${slug}`, [
     ...(k ? k.faq : []),
-    [`Сколько стоит бетон ${mark} с доставкой?`, `Бетон ${mark} стоит от ${fmtNum(from)}${NBSP}₽/м³. ${deliveryLine(ctx)}`],
+    [`Сколько стоит бетон ${mark} с доставкой?`, `Бетон ${mark} стоит от ${fmtNum(from)}${NBSP}₽/м³ на ${ctx.priceDateRu}. ${deliveryLine(ctx)}`],
     [`Можно ли заказать ${mark} ночью?`, `Да. ${HOURS_TEXT}: отгрузка и доставка идут круглосуточно.`]
   ]);
 
@@ -235,23 +256,28 @@ ${next ? h`<li>${link(next)} (${cat.rows.find((r) => r.mark === next).cls}): ${d
 </div>
 <div class="card">
 <h3>Доставка ${mark} с завода ${site.plant.locality_in}</h3>
-<p>${deliveryLine(ctx)} Заказ от ${minVolText(ctx)}.</p>
+<p>Заказ от ${minVolText(ctx)}. Условия по направлениям, самовывоз и оплата собраны на странице доставки.</p>
 ${ctx.cities.length ? h`<p>${join(ctx.cities.map((c) => h`<a href="${c.url}">Бетон ${c.in}</a>`), ', ')}</p>` : ''}
 <p><a href="/dostavka/">Условия доставки</a></p>
 </div></div></div></section>
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: `mark-${slug}`, title: `Закажите бетон ${mark}` })}`;
 
+  const offerList = variants.flatMap((v) => v.rows.map((r) => offerLd(ctx, {
+    name: [v.cat.menu, mark, r.pmd != null ? `ПМД ${r.pmd}°C` : null, r.mobility, r.frost, r.water].filter(Boolean).join(' '), price: r.price, url
+  })));
+  const priceList = offerList.map((o) => Number(o.price));
+  // Разные исполнения марки (с ПМД, фибробетон и т. д.) собраны в AggregateOffer: «от» совпадает с видимой ценой.
+  const aggregate = { '@type': 'AggregateOffer', priceCurrency: 'RUB', lowPrice: String(Math.min(...priceList)), highPrice: String(Math.max(...priceList)), offerCount: offerList.length, offers: offerList };
   const product = {
     '@context': 'https://schema.org', '@type': 'Product', '@id': `${ctx.origin}${url}#product`,
     name: `Бетон ${mark} (${cls})`, description: k ? k.lead : `Бетон ${mark}, класс ${cls}`, category: 'Бетон товарный',
-    brand: { '@type': 'Brand', name: site.brand }, image: ctx.origin + ctx.assets.og,
-    offers: variants.flatMap((v) => v.rows.map((r) => offerLd(ctx, {
-      name: [v.cat.menu, mark, r.pmd != null ? `ПМД ${r.pmd}°C` : null, r.mobility, r.frost, r.water].filter(Boolean).join(' '), price: r.price, url
-    })))
+    brand: { '@type': 'Brand', name: site.brand },
+    image: pagePhoto(ctx, slug) && ctx.images.has(pagePhoto(ctx, slug)) ? ctx.origin + ctx.images.get(pagePhoto(ctx, slug)).full : ctx.origin + ctx.assets.og,
+    offers: aggregate
   };
   return {
     url, crumbs: [{ name: cat.menu, url: `/catalog/${cat.slug}/` }, { name: `Бетон ${mark}`, url }],
-    title: `Бетон ${mark} (${cls}) ${site.plant.locality_in} — цена от ${fmtNum(from)}${NBSP}₽/м³ | ${site.brand}`,
+    title: `Бетон ${mark} (${cls}) ${site.plant.locality_in} от ${fmtNum(from)}${NBSP}₽/м³ | ${site.brand}`,
     description: truncate(`Бетон ${mark} (${cls}) с завода ${site.plant.locality_in}: от ${fmtNum(from)}${NBSP}₽/м³. ${k ? k.lead : ''} Заказ от ${fmtNum(site.min_volume_m3)}${NBSP}м³, работаем 24/7.`, 190),
     h1, main, jsonld: [baseGraph(ctx), product, faqLd(faqItems)]
   };

@@ -1,5 +1,5 @@
 // Блоки, которые повторяются на разных страницах.
-import { h, raw, join, fmtNum, NBSP, plural } from '../lib/util.mjs';
+import { h, raw, join, fmtNum, NBSP, plural, nb } from '../lib/util.mjs';
 import { icon, img, telHref, messengers, HOURS_TEXT, leadForm, minVolText } from '../lib/layout.mjs';
 import { MARK_ORDER, markNum } from '../lib/marks.mjs';
 import { GROUP_ORDER, CONCRETE_KINDS } from '../lib/categories.mjs';
@@ -19,12 +19,13 @@ const PAGE_PHOTO = {
 export const pagePhoto = (ctx, key) => { const f = PAGE_PHOTO[key]; return f && ctx.photos.some((p) => p.file === f) ? f : null; };
 
 // facts: [[подпись, значение], ...]: ячейки спецификации под заголовком
-export function pagehead(ctx, { h1, lead, facts = [], actions = true, photo = null }) {
+export function pagehead(ctx, { h1, lead, facts = [], actions = true, photo = null, extra = null }) {
   const ph = photo && ctx.images.has(photo) ? photo : null;
   return h`<section class="pagehead${ph ? '' : ' pagehead--plain'}"><div class="container pagehead__in">
 <div class="pagehead__txt">
-<h1>${h1}</h1>
-${lead ? h`<p class="pagehead__lead">${lead}</p>` : ''}
+<h1>${nb(h1)}</h1>
+${lead ? h`<p class="pagehead__lead">${nb(lead)}</p>` : ''}
+${extra ?? ''}
 ${facts.length ? h`<dl class="specs">${join(facts.map(([k, v]) => h`<div><dt>${k}</dt><dd>${v}</dd></div>`))}</dl>` : ''}
 ${actions ? h`<div class="pagehead__cta"><a class="btn btn--primary" href="${telHref(ctx)}">${icon(ctx, 'phone')}${ctx.site.phone.display}</a>${messengers(ctx).slice(0, 1).map((m) => h`<a class="btn btn--ghost" href="${m.url}" rel="noopener" target="_blank">${icon(ctx, m.icon)}${m.label}</a>`)}</div>` : ''}
 </div>
@@ -141,6 +142,7 @@ ${photo ? h`<figure class="pcard__ph">${img(ctx, photo, { sizes: '(max-width:700
 ${title}
 <p class="pcard__m">${item.meta}</p>
 <p class="pcard__p">от <b>${fmtNum(item.from)}${NBSP}₽</b> <small>за ${item.unit}</small></p>
+<p class="pcard__go">Подобрать и посчитать</p>
 </div>
 </article></li>`;
 }
@@ -160,10 +162,14 @@ export function productGroups(ctx, { level = 3 } = {}) {
     }
     return list;
   };
-  return join(GROUP_ORDER.map((g) => ({ g, list: items(g) })).filter((x) => x.list.length).map(({ g, list }, i) => h`<div class="pgroup pgroup--${i}">
+  // Первая группа (бетон) занимает всю ширину, в её последней ячейке стоит призыв позвонить.
+  // Остальные группы по две карточки идут рядом, иначе половина строки пустует.
+  const groups = GROUP_ORDER.map((g) => ({ g, list: items(g) })).filter((x) => x.list.length);
+  const block = ({ g, list }, i) => h`<div class="pgroup pgroup--${i}">
 <h3>${g}</h3>
-<ul class="pgrid">${join(list.map((it) => productCard(ctx, it, { level: 4 })))}</ul>
-</div>`));
+<ul class="pgrid">${join(list.map((it) => productCard(ctx, it, { level: 4 })))}${i === 0 ? h`<li><div class="pcard pcard--cta"><p class="pcard__t">Нужна другая марка или смесь?</p><p>Назовите объём и адрес, подберём и назовём цену.</p><a class="btn btn--primary btn--sm" href="${telHref(ctx)}">${icon(ctx, 'phone')}${ctx.site.phone.display}</a></div></li>` : ''}</ul>
+</div>`;
+  return h`${groups.slice(0, 1).map((g) => block(g, 0))}${groups.length > 1 ? h`<div class="pgroup-rest">${join(groups.slice(1).map((g, i) => block(g, i + 1)))}</div>` : ''}`;
 }
 
 // ---------- карточка организации на Яндекс Картах ----------

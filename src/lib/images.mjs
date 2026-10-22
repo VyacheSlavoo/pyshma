@@ -40,6 +40,11 @@ export async function brandAssets({ brand, hero, outDir }) {
   const favicon = `favicon.${hash(Buffer.from(svg))}.svg`;
   fs.writeFileSync(path.join(dir, favicon), svg);
   // логотип для schema.org: PNG 512×512
+  // favicon.ico в корне нужен Яндексу; PNG внутри .ico принимают все современные браузеры
+  fs.writeFileSync(path.join(outDir, 'favicon.ico'), await sharp(Buffer.from(mono(48))).png().toBuffer());
+  const touchBuf = await sharp(Buffer.from(mono(180))).png().toBuffer();
+  const touch = `apple-touch-icon.${hash(touchBuf)}.png`;
+  fs.writeFileSync(path.join(dir, touch), touchBuf);
   const logoBuf = await sharp(Buffer.from(mono(512))).png().toBuffer();
   const logo = `logo.${hash(logoBuf)}.png`;
   fs.writeFileSync(path.join(dir, logo), logoBuf);
@@ -47,5 +52,5 @@ export async function brandAssets({ brand, hero, outDir }) {
   const ogBuf = await sharp(hero.src).rotate().resize(1200, 630, { fit: 'cover', position: 'attention' }).jpeg({ quality: 82, mozjpeg: true }).toBuffer();
   const og = `og.${hash(ogBuf)}.jpg`;
   fs.writeFileSync(path.join(dir, og), ogBuf);
-  return { favicon: `/assets/${favicon}`, logo: `/assets/${logo}`, og: `/assets/${og}` };
+  return { favicon: `/assets/${favicon}`, touch: `/assets/${touch}`, logo: `/assets/${logo}`, og: `/assets/${og}` };
 }

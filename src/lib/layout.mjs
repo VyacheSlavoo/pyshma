@@ -1,7 +1,7 @@
 // Общие блоки страницы: head, шапка, футер, формы, таблицы цен, FAQ, картинки.
 import { h, raw, join, esc, NBSP, fmtNum, markSlug } from './util.mjs';
 import { CONCRETE_KINDS } from './categories.mjs';
-import { rowKeyFor } from './configurator.mjs';
+import { rowKeyFor, concreteLabel } from './configurator.mjs';
 
 export const HOURS_TEXT = 'Работаем 24/7';
 export const HOURS_FULL = 'Приём заявок, производство, отгрузка и доставка — круглосуточно, 24/7';
@@ -42,7 +42,7 @@ export function head(ctx, page) {
 <link rel="canonical" href="${canonical}">
 ${noindex ? raw('<meta name="robots" content="noindex, nofollow">') : raw('<meta name="robots" content="index, follow, max-image-preview:large">')}
 <meta name="theme-color" content="#FFFFFF">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${page.ogType || 'website'}">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="${site.brand}">
 <meta property="og:title" content="${page.ogTitle || page.title}">
@@ -56,7 +56,10 @@ ${noindex ? raw('<meta name="robots" content="noindex, nofollow">') : raw('<meta
 <meta name="twitter:description" content="${page.description}">
 <meta name="twitter:image" content="${ogImg}">
 <link rel="icon" href="${ctx.assets.favicon}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="${ctx.assets.touch}">
+${site.yandex_verification ? raw(`<meta name="yandex-verification" content="${esc(site.yandex_verification)}">`) : ''}
 <link rel="preload" href="/assets/fonts/plex-cyrillic-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-latin-wdth.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${ctx.assets.css}">
 <script>document.documentElement.className='js'${ctx.demo ? raw(';window.__DEMO__=1') : ''}</script>
 ${join(ld.map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)), '\n')}
@@ -86,7 +89,7 @@ export function navItems(ctx) {
 function navHtml(ctx, page) {
   const cur = (u) => (page.url === u || (u.startsWith('/catalog/') && page.url.startsWith(u)) || (u === '/stati/' && page.url.startsWith(u)) ? 'page' : null);
   return join(navItems(ctx).map((it) => h`<li${it.sub ? raw(' class="has-sub"') : ''}>
-<a class="nav__link" href="${it.url}"${cur(it.url) && !it.sub ? raw(' aria-current="page"') : ''}>${it.name}${it.sub ? icon(ctx, 'chev') : ''}</a>
+<a class="nav__link" href="${it.url}"${cur(it.url) && !it.sub ? raw(' aria-current="page"') : it.sub && page.url.startsWith('/catalog/') ? raw(' aria-current="true"') : ''}>${it.name}${it.sub ? icon(ctx, 'chev') : ''}</a>${it.sub ? h`<button type="button" class="sub-toggle" aria-expanded="false" aria-label="Показать разделы продукции">${icon(ctx, 'chev')}</button>` : ''}
 ${it.sub ? h`<div class="sub sub--mega">${join(it.sub.map((g) => h`<div class="sub__col"><span class="sub__h">${g.title}</span><ul>${join(g.links.map((l) => h`<li><a href="${l.url}"${cur(l.url) ? raw(' aria-current="page"') : ''}>${l.name}</a></li>`))}</ul></div>`))}</div>` : ''}
 </li>`));
 }
@@ -98,7 +101,7 @@ ${ctx.fixture ? h`<div class="fixture-banner">ТЕСТОВЫЕ ДАННЫЕ: с�
 ${ctx.demo ? h`<div class="fixture-banner fixture-banner--preview">ДЕМО ДЛЯ ТЕСТИРОВАНИЯ: заявки никуда не отправляются, почта не подключена. Не для публикации</div>` : ''}
 ${ctx.preview ? h`<div class="fixture-banner fixture-banner--preview">ПРЕДПРОСМОТР: не для публикации. Не заполнено, подставлено временно: ${ctx.assumed.join(', ') || 'ничего'}</div>` : ''}
 <header class="hdr"><div class="container hdr__in">
-<a class="brand" href="/" aria-label="${site.brand}: на главную"><b>${site.brand}</b><small>Бетонный завод, ${site.plant.locality}</small></a>
+<a class="brand" href="/" aria-label="${site.brand}: на главную"><b>${site.brand}</b><small class="brand__sub">Бетонный завод, ${site.plant.locality}</small><small class="brand__hrs">${HOURS_TEXT}</small></a>
 <nav class="nav" id="nav" aria-label="Основное меню"><ul class="nav__list">${navHtml(ctx, page)}</ul></nav>
 <div class="hdr__r">
 <span class="hdr__hrs">${HOURS_TEXT}</span>
@@ -130,9 +133,9 @@ export function footer(ctx) {
 <p>${site.plant.address}.<br>${HOURS_FULL}.</p>
 <p><a class="ftr__phone" href="${telHref(ctx)}">${site.phone.display}</a></p>
 </div>
-<div><h4>Цены и продукция</h4><ul><li><a href="/price/">Прайс-лист</a></li>${join(cats)}${join(marks)}</ul></div>
-<div><h4>Информация</h4><ul><li><a href="/dostavka/">Доставка</a></li>${join(cities.map((c) => h`<li><a href="${c.url}">Бетон ${c.in}</a></li>`))}${ctx.articles?.length ? h`<li><a href="/stati/">Статьи</a></li>` : ''}<li><a href="/about/">О заводе</a></li>${ctx.gallery ? h`<li><a href="/gallery/">Фото</a></li>` : ''}<li><a href="/contacts/">Контакты</a></li>${site.main_site ? h`<li><a href="${site.main_site.url}">${site.main_site.name}</a></li>` : ''}<li><a href="/privacy/">Политика конфиденциальности</a></li><li><a href="/soglasie/">Согласие на обработку данных</a></li></ul></div>
-<div><h4>Контакты</h4><ul>
+<div><p class="ftr__h">Цены и продукция</p><ul class="cols"><li><a href="/price/">Прайс-лист</a></li>${join(cats)}${join(marks)}</ul></div>
+<div><p class="ftr__h">Информация</p><ul><li><a href="/dostavka/">Доставка</a></li>${join(cities.map((c) => h`<li><a href="${c.url}">Бетон ${c.in}</a></li>`))}${ctx.articles?.length ? h`<li><a href="/stati/">Статьи</a></li>` : ''}<li><a href="/about/">О заводе</a></li>${ctx.gallery ? h`<li><a href="/gallery/">Фото</a></li>` : ''}<li><a href="/contacts/">Контакты</a></li>${site.main_site ? h`<li><a href="${site.main_site.url}">Общий сайт: ${site.main_site.name}</a></li>` : ''}<li><a href="/privacy/">Политика конфиденциальности</a></li><li><a href="/soglasie/">Согласие на обработку данных</a></li></ul></div>
+<div><p class="ftr__h">Контакты</p><ul>
 <li>${site.plant.address}</li>
 <li>${HOURS_TEXT}</li>
 ${site.email_public ? h`<li><a href="mailto:${site.email_public}">${site.email_public}</a></li>` : ''}
@@ -150,8 +153,8 @@ const honey = (source) => h`<div class="hp" aria-hidden="true"><label>Сайт<i
 <input type="hidden" name="ts" value="">
 <input type="hidden" name="source" value="${source}">`;
 // Арифметическая проверка: пример и подписанный токен приходят с сервера (send.php?captcha=1), ответ проверяется на сервере.
-const captchaHtml = () => h`<label class="field cap"><span>Проверка от роботов: сколько будет <b class="cap__q" data-cap-q>…</b>?</span><input type="text" name="cap" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="ответ"></label>
-<input type="hidden" name="ct" value="">`;
+const captchaHtml = () => h`<div class="cap"><label class="field"><span>Проверка от роботов: сколько будет <b class="cap__q" data-cap-q>…</b>?</span><input type="text" name="cap" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="ответ"></label><button type="button" class="cap__re" data-cap-new>Другой пример</button>
+<input type="hidden" name="ct" value=""></div>`;
 const noJsNote = (ctx) => h`<p class="nojs-note">Форма работает с включённым JavaScript. Без него позвоните: <a href="${telHref(ctx)}">${ctx.site.phone.display}</a>.</p>`;
 
 export function leadForm(ctx, { title = 'Получить расчёт', sub = null, source = 'site', item = null, compact = false, tag = 'h2' } = {}) {
@@ -229,6 +232,7 @@ const FILLER = { granite: 'гранит', gravel: 'гравий' };
 
 // Столбцы, в которых у всех строк пусто, не выводим.
 // keys: 'plain' | 'cat' | false: строки получают data-k, по нему конфигуратор подсвечивает выбранную позицию.
+const orderLink = (ctx, label) => h`<a class="rowlink" href="${telHref(ctx)}" data-order data-item="${label}" aria-label="Заказать: ${label}">Заказать</a>`;
 const kAttr = (cat, r, keys) => { const k = rowKeyFor(cat, r, keys); return k ? raw(` data-k="${esc(k)}"`) : ''; };
 
 export function concreteTable(ctx, cat, rows = cat.rows, { order = true, linkMarks = true, keys = false } = {}) {
@@ -246,7 +250,7 @@ ${col.frost ? h`<td data-l="Мороз-ть">${r.frost ?? '—'}</td>` : ''}
 ${col.water ? h`<td data-l="Водонепр.">${r.water ?? '—'}</td>` : ''}
 ${col.filler ? h`<td data-l="Заполнитель">${FILLER[r.filler] ?? r.filler ?? '—'}</td>` : ''}
 <td class="pr" data-l="Цена за м³"><span class="num">${fmtNum(r.price)}${NBSP}₽</span> <small>/м³</small></td>
-${order ? h`<td class="ac"><a class="rowlink" href="${telHref(ctx)}" aria-label="Заказать ${r.mark} по телефону">Заказать</a></td>` : ''}
+${order ? h`<td class="ac">${orderLink(ctx, concreteLabel(cat, r))}</td>` : ''}
 </tr>`))}</tbody></table></div>`;
 }
 
@@ -259,7 +263,7 @@ export function mortarTable(ctx, cat, { keys = false } = {}) {
 ${spec ? h`<td data-l="Для чего">${r.spec ?? '—'}</td>` : ''}
 <td data-l="Ед.">${r.unit}</td>
 <td class="pr" data-l="Цена"><span class="num">${fmtNum(r.price)}${NBSP}₽</span> <small>/${r.unit}</small></td>
-<td class="ac"><a class="rowlink" href="${telHref(ctx)}">Заказать</a></td>
+<td class="ac">${orderLink(ctx, r.name)}</td>
 </tr>`))}</tbody></table></div>`;
 }
 
@@ -274,10 +278,11 @@ export function rebarTables(ctx, cat, { keys = false } = {}) {
 <td data-l="Класс">${r.rebarClass ?? '—'}</td>
 <td data-l="Сталь">${r.steel ?? '—'}</td>
 <td class="pr" data-l="Цена за т"><span class="num">${fmtNum(r.price)}${NBSP}₽</span> <small>/т</small></td>
-<td class="ac"><a class="rowlink" href="${telHref(ctx)}">Заказать</a></td>
+<td class="ac">${orderLink(ctx, r.name)}</td>
 </tr>`))}</tbody></table></div>`));
 }
 
+export { orderLink };
 export const fromPriceOf = (rows) => Math.min(...rows.map((r) => r.price));
 
 export const priceNote = (ctx, { min = true } = {}) => h`<p class="price-note"><span>Актуально на <time datetime="${ctx.priceDateIso}">${ctx.priceDateRu}</time></span>${min ? h`<span>Минимальный заказ — ${minVolText(ctx)}</span>` : ''}</p>`;

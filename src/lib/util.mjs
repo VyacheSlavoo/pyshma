@@ -63,6 +63,13 @@ export function getPath(obj, path) {
   return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
 }
 
+// Неразрывный пробел после коротких предлогов и перед единицами измерения: «в Верхней Пышме», «−15 °C», «5 м³».
+export function nb(s) {
+  return String(s)
+    .replace(/(^|[\s(«])(в|на|и|с|к|у|о|по|от|до|за|из|не|для)\s+(?=\S)/gi, (m, a, w) => `${a}${w}${NBSP}`)
+    .replace(/\s+(°C|м³|м²|₽|см|мм|кг|т|ч)(?=[\s.,;:)!?]|$)/g, `${NBSP}$1`);
+}
+
 export function truncate(s, n) {
   s = String(s).replace(/\s+/g, ' ').trim();
   if (s.length <= n) return s;

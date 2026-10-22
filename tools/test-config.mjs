@@ -97,6 +97,18 @@ const checked = (p, attr) => p.locator(`[data-attr="${attr}"] input:checked`).ev
   await q.context().close();
 }
 
+// ---------- 1б. вид бетона не меняется молча ----------
+{
+  const p = await open('/catalog/tovarnyy-beton/m300/');
+  const before = await txt(p, 'des');
+  await pick(p, 'mob', 'П4');
+  ok((await txt(p, 'des')) === before && (await checked(p, 'cat')) === 'tovarnyy-beton', 'П4 есть у нескольких видов: выбор не меняется', await txt(p, 'des'));
+  ok(/есть у видов/.test(await txt(p, 'chg')) && /сначала выберите вид/.test(await txt(p, 'chg')), 'сообщение объясняет, что выбрать вид нужно вручную', await txt(p, 'chg'));
+  await pick(p, 'pmd', '-15');
+  ok((await checked(p, 'cat')) === 'beton-s-pmd' && /только у вида/.test(await txt(p, 'chg')), 'ПМД есть только у одного вида: он выбирается с пояснением', await txt(p, 'chg'));
+  await p.context().close();
+}
+
 // ---------- 2. клавиатура ----------
 {
   const p = await open('/catalog/beton-s-pmd/');

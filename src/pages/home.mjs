@@ -1,5 +1,5 @@
-import { h, raw, join, fmtNum, NBSP, plural } from '../lib/util.mjs';
-import { icon, img, telHref, HOURS_TEXT, HOURS_FULL, leadStrip, minVolText, priceNote, fromPriceOf, faq } from '../lib/layout.mjs';
+import { h, raw, join, fmtNum, NBSP, plural, nb } from '../lib/util.mjs';
+import { icon, img, telHref, HOURS_TEXT, HOURS_FULL, leadStrip, minVolText, priceNote, fromPriceOf, faq, concreteTable } from '../lib/layout.mjs';
 import { baseGraph, faqLd } from '../lib/seo.mjs';
 import { T, ctaBand, gallery, cityCards, volumeCalc, marksRange, deliveryLine, deliveryFaq, pickupLine, paymentLine, reachSpan, productGroups, yandexBlock, articleList } from './common.mjs';
 
@@ -10,7 +10,6 @@ export function homeFaq(ctx) {
     ['Вы работаете ночью и в выходные?', `Да. ${HOURS_FULL}.`],
     ['Откуда вы возите бетон?', `С нашего завода ${site.plant.locality_in}: ${site.plant.address}. Бетон привозят автобетоносмесители.`],
     ['Как узнать стоимость с доставкой?', `${site.delivery.tariff_note ?? deliveryLine(ctx)} Позвоните ${site.phone.display} или оставьте заявку: назовите марку, объём и адрес.`],
-    deliveryFaq(ctx),
     ['Какие документы выдаёте на бетон?', `К партии прилагаются: ${site.documents.join(', ')}.`]
   ].filter(Boolean);
   const pick = pickupLine(ctx), pay = paymentLine(ctx);
@@ -21,6 +20,12 @@ export function homeFaq(ctx) {
   }
   return T(ctx, 'faq.home', items);
 }
+
+// Имя автора отзыва: без лишних знаков, фамилия сокращается до инициала.
+const reviewer = (a) => {
+  const w = String(a).replace(/[.\s]+$/g, '').trim().split(/\s+/);
+  return w.length > 1 ? `${w[0]} ${[...w[1]][0].toUpperCase()}.` : w[0];
+};
 
 export function home(ctx) {
   const { site } = ctx;
@@ -37,12 +42,12 @@ export function home(ctx) {
 
   const hero = h`<section class="herob"><div class="container hero">
 <div class="hero__txt">
-<h1>${h1}</h1>
-<p class="hero__lead">${T(ctx, 'home.lead', `Завод: ${site.plant.address}. Бетон ${marksRange(ctx)}, растворы, арматура и аренда автобетононасосов. Привозим миксерами${site.card?.pickup ? ', можно забрать самовывозом' : ''}.`)}</p>
+<h1>${nb(h1)}</h1>
+<p class="hero__lead">${nb(T(ctx, 'home.lead', `Завод: ${site.plant.address}. Бетон ${marksRange(ctx)}, растворы, арматура и аренда автобетононасосов. Привозим миксерами${site.card?.pickup ? ', можно забрать самовывозом' : ''}.`))}</p>
 <p class="hero__price">Бетон от <b>${fmtNum(ctx.fromPrice)}${NBSP}₽</b> за м³<small>Цены на ${ctx.priceDateRu}. Доставка считается по адресу.</small></p>
 <div class="hero__cta"><a class="btn btn--primary" href="${telHref(ctx)}">${icon(ctx, 'phone')}${site.phone.display}</a><button type="button" class="btn btn--ghost" data-open-lead hidden>Получить расчёт</button></div>
 </div>
-<figure class="hero__img">${img(ctx, heroPhoto.file, { sizes: '(max-width:1100px) 100vw, 42vw', eager: true })}<figcaption>${heroPhoto.caption ?? 'Завод'}: ${site.plant.address}</figcaption></figure>
+<figure class="hero__img">${img(ctx, heroPhoto.file, { sizes: '(max-width:1100px) 100vw, 42vw', eager: true })}<figcaption>${heroPhoto.caption ?? 'Завод'}</figcaption></figure>
 </div></section>
 ${leadStrip(ctx, { source: 'home-strip' })}`;
 
@@ -51,6 +56,10 @@ ${leadStrip(ctx, { source: 'home-strip' })}`;
 ${priceNote(ctx)}
 ${productGroups(ctx)}
 ${popular.length ? h`<div class="marklinks"><span>Чаще всего заказывают:</span>${join(popular.map((r) => h`<a class="chip" href="/catalog/${ctx.mainConcrete.slug}/${r.markSlug}/">Бетон ${r.mark} от ${fmtNum(fromPriceOf(ctx.mainConcrete.rows.filter((x) => x.mark === r.mark)))}${NBSP}₽</a>`))}</div>` : ''}
+<div class="more" style="margin-top:28px"><details>
+<summary><span>Товарный бетон по маркам: цены в таблице</span>${icon(ctx, 'chev', 'chev')}</summary>
+<div class="more__body">${concreteTable(ctx, ctx.mainConcrete, ctx.mainConcrete.rows, { linkMarks: true })}</div>
+</details></div>
 <p style="margin-top:24px"><a class="btn btn--ghost" href="/price/">Прайс-лист целиком</a></p>
 </div></section>`;
 
@@ -70,12 +79,12 @@ ${termsPhoto ? h`<figure style="margin:0">${img(ctx, termsPhoto.file, { sizes: '
 </div></div></section>`;
 
   const delivery = h`<section class="section"><div class="container">
-<div class="section__head"><h2>Доставка бетона по ${site.plant.district_dat}</h2><p>${deliveryLine(ctx)}</p></div>
+<div class="section__head"><h2>Откуда и как возим</h2><p>Бетон отгружается с нашего завода и приезжает на объект автобетоносмесителем. ${deliveryLine(ctx)}</p></div>
 ${cityCards(ctx, ctx.cities, { origin: true })}
 <p style="margin-top:28px"><a class="btn btn--ghost" href="/dostavka/">Условия и зоны доставки</a></p>
 </div></section>`;
 
-  const calc = h`<section class="section"><div class="container"><div class="split">
+  const calc = h`<section class="section section--blue"><div class="container"><div class="split">
 <div>
 <div class="section__head"><h2>Сколько кубов нужно</h2><p>Введите размеры плиты, ленты или стяжки в метрах. Покажем объём в кубометрах с запасом 5% на потери. Сложную форму лучше считать по проекту.</p></div>
 ${volumeCalc(ctx)}
@@ -94,7 +103,7 @@ ${volumeCalc(ctx)}
   const reviews = site.reviews?.items?.length ? h`<section class="section section--sand"><div class="container">
 <div class="section__head"><h2>Отзывы клиентов</h2></div>
 ${yandexBlock(ctx)}
-<div class="reviews">${join(site.reviews.items.map((r) => h`<blockquote class="review"><p>${r.text}</p><cite><b>${r.author}</b>${r.date ? h`, <time datetime="${r.date}">${r.date.split('-').reverse().join('.')}</time>` : ''}</cite></blockquote>`))}</div>
+<div class="reviews">${join(site.reviews.items.map((r) => h`<blockquote class="review"><p>${r.text}</p><cite><b>${reviewer(r.author)}</b>${r.date ? h`, <time datetime="${r.date}">${r.date.split('-').reverse().join('.')}</time>` : ''}</cite></blockquote>`))}</div>
 </div></section>` : h`<section class="section section--sand"><div class="container">
 <div class="section__head"><h2>Завод на Яндекс Картах</h2></div>
 ${yandexBlock(ctx)}

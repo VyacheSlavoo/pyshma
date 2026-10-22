@@ -12,11 +12,32 @@
       nav.classList.toggle('is-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.querySelector('use').setAttribute('href', burger.dataset.icons + (open ? '#i-close' : '#i-menu'));
+      d.body.classList.toggle('menu-open', open);
     };
     burger.addEventListener('click', function () { setMenu(!nav.classList.contains('is-open')); });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
     nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   }
+
+  /* Подменю «Продукция» в мобильном меню */
+  $$('.sub-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var open = b.closest('.has-sub').classList.toggle('is-open');
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  /* Карта по нажатию: виджет Яндекса тяжёлый, поэтому без клика не грузится */
+  $$('[data-map]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var box = b.closest('.mapbox');
+      var f = d.createElement('iframe');
+      f.src = 'https://yandex.ru/map-widget/v1/?ol=biz&oid=' + box.dataset.oid;
+      f.title = 'Завод на карте'; f.width = '100%'; f.height = '380'; f.style.cssText = 'border:0;display:block';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      box.replaceWith(f);
+    });
+  });
 
   /* Раскрыть аккордеон/FAQ по якорю */
   function openByHash() {
@@ -86,6 +107,8 @@
         phone.value = v.slice(0, 12);
       });
     }
+    var again = $('[data-cap-new]', form);
+    if (again) again.addEventListener('click', function () { loadCaptcha(form).then(function () { if (cap) cap.focus(); }); });
     var show = function (text, cls, field) {
       msg.textContent = text; msg.className = 'form__msg ' + cls;
       if (field) { field.setAttribute('aria-invalid', 'true'); field.setAttribute('aria-describedby', msg.id); field.focus(); }
@@ -145,7 +168,7 @@
 
   /* Модальная форма (кнопки «Расчёт», «Получить расчёт», «Оставить заявку») */
   var tpl = $('#lead-template');
-  var openers = $$('[data-open-lead]');
+  var openers = $$('[data-open-lead], [data-order]');
   if (tpl && openers.length) {
     var dlg = d.createElement('dialog');
     dlg.className = 'modal';
@@ -157,7 +180,8 @@
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
     openers.forEach(function (b) {
       b.removeAttribute('hidden');
-      b.addEventListener('click', function () {
+      b.addEventListener('click', function (e) {
+        if (b.hasAttribute('data-order')) e.preventDefault();
         var form = $('form', dlg);
         var vol = b.getAttribute('data-volume');
         if (vol && form.elements.volume) form.elements.volume.value = vol;
@@ -277,18 +301,38 @@
       var q = qty();
       out('total').textContent = isNaN(q) ? '—' : money(cur.p * q);
       out('mini-des').textContent = cur.l;
-      out('mini-price').textContent = money(cur.p);
-      if (lead) {
-        lead.setAttribute('data-item', cur.l);
-        lead.setAttribute('data-volume', isNaN(q) ? '' : group(q) + NB + data.qty.unit);
-      }
+      out('mini-price').textContent = isNaN(q) ? money(cur.p) : money(cur.p * q);
+      var vol = isNaN(q) ? '' : group(q) + NB + data.qty.unit;
+      [lead].concat($$('.mbar [data-open-lead]')).forEach(function (b) {
+        if (!b) return;
+        b.setAttribute('data-item', cur.l);
+        b.setAttribute('data-volume', vol);
+      });
       $$('tr[data-k]').forEach(function (tr) { tr.classList.toggle('is-sel', tr.getAttribute('data-k') === cur.k); });
     }
 
+    var chg2 = out('chg2');
+    var say = function (t) { chg.textContent = t; if (chg2) chg2.textContent = t; };
+    var uniq = function (a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); };
+
     function choose(id, val) {
-      var prev = cur, best = null, bestScore = -1;
-      rows.forEach(function (r) {
-        if (r.a[id] !== val) return;
+      var prev = cur, best = null, bestScore = -1, note = '';
+      var pool = rows.filter(function (r) { return r.a[id] === val; });
+      /* Вид бетона не меняем молча: если значение есть у другого вида, объясняем, что случилось */
+      if (ids.indexOf('cat') > -1 && id !== 'cat') {
+        var same = pool.filter(function (r) { return r.a.cat === prev.a.cat; });
+        if (same.length) pool = same;
+        else {
+          var cats = uniq(pool.map(function (r) { return r.a.cat; }));
+          if (cats.length === 1) note = 'Значение «' + textOf(id, val) + '» есть только у вида «' + textOf('cat', cats[0]) + '», выбрали его. ';
+          else {
+            say(labelOf(id).charAt(0).toUpperCase() + labelOf(id).slice(1) + ' «' + textOf(id, val) + '» есть у видов: ' + cats.map(function (c) { return textOf('cat', c); }).join(', ') + '. Выбор не менялся: сначала выберите вид бетона.');
+            render();
+            return;
+          }
+        }
+      }
+      pool.forEach(function (r) {
         var s = 0;
         ids.forEach(function (x, i) { if (x !== id && r.a[x] === prev.a[x]) s += Math.pow(2, ids.length - i); });
         if (s > bestScore || (s === bestScore && r.p < best.p)) { best = r; bestScore = s; }
@@ -299,7 +343,7 @@
       ids.forEach(function (x) {
         if (x !== id && prev.a[x] !== cur.a[x]) changes.push(labelOf(x) + ': с ' + textOf(x, prev.a[x]) + ' на ' + textOf(x, cur.a[x]));
       });
-      chg.textContent = changes.length ? 'С выбранным значением нет прежнего сочетания, поэтому изменили: ' + changes.join('; ') + '.' : '';
+      say(note + (changes.length ? 'С выбранным значением нет прежнего сочетания, поэтому изменили: ' + changes.join('; ') + '.' : ''));
       try { history.replaceState(null, '', location.pathname + location.search + '#' + cur.k); } catch (e) {}
       render();
     }
@@ -309,8 +353,8 @@
       if (t.type === 'radio') choose(t.closest('[data-attr]').getAttribute('data-attr'), t.value);
       else if (t === qtyEl) {
         var q = qty();
-        if (!isNaN(q) && q < min) { qtyEl.value = group(min); chg.textContent = 'Минимальный заказ: ' + group(min) + NB + data.qty.unit + '.'; }
-        else if (isNaN(q)) { qtyEl.value = group(data.qty.def); chg.textContent = 'Введите число, например ' + group(data.qty.def) + '.'; }
+        if (!isNaN(q) && q < min) { qtyEl.value = group(min); say('Минимальный заказ: ' + group(min) + NB + data.qty.unit + '.'); }
+        else if (isNaN(q)) { qtyEl.value = group(data.qty.def); say('Введите число, например ' + group(data.qty.def) + '.'); }
         render();
       }
     });
@@ -319,7 +363,7 @@
       b.addEventListener('click', function () {
         var q = qty(); if (isNaN(q)) q = data.qty.def;
         var next = Math.round((q + parseFloat(b.getAttribute('data-step')) * step) * 100) / 100;
-        if (next < min) { next = min; chg.textContent = 'Минимальный заказ: ' + group(min) + NB + data.qty.unit + '.'; } else chg.textContent = '';
+        if (next < min) { next = min; say('Минимальный заказ: ' + group(min) + NB + data.qty.unit + '.'); } else say('');
         qtyEl.value = group(next);
         render();
       });
@@ -329,11 +373,11 @@
     if (copy) {
       copy.hidden = false;
       copy.addEventListener('click', function () {
-        var done = function () { chg.textContent = 'Ссылка на этот выбор скопирована.'; };
+        var done = function () { say('Ссылка на этот выбор скопирована.'); };
         var fallback = function () {
           var ta = d.createElement('textarea'); ta.value = location.href; ta.setAttribute('readonly', '');
           ta.style.position = 'fixed'; ta.style.opacity = '0'; d.body.appendChild(ta); ta.select();
-          try { d.execCommand('copy'); done(); } catch (e) { chg.textContent = 'Скопируйте адрес страницы из строки браузера.'; }
+          try { d.execCommand('copy'); done(); } catch (e) { say('Скопируйте адрес страницы из строки браузера.'); }
           d.body.removeChild(ta);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(location.href).then(done, fallback); else fallback();
