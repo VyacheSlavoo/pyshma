@@ -146,7 +146,7 @@ ${join(messengers(ctx).map((m) => h`<li><a href="${m.url}" rel="noopener" target
 <li><a href="${site.plant.yandex_url}" rel="noopener" target="_blank">Завод на Яндекс Картах: отзывы и маршрут</a></li>
 </ul></div>
 </div>
-<div class="ftr__bar"><span>© ${year} ${site.brand}${site.signature && !ctx.fixture ? `. ${site.signature}` : ''}</span><span>Цены актуальны на ${ctx.priceDateRu}</span></div>
+<div class="ftr__bar"><span>© ${year} ${site.brand}${site.signature && !ctx.fixture ? `. ${site.signature}` : ''}</span><span>Цены актуальны на ${ctx.priceDateRu}. Информация на сайте не является публичной офертой (ст. 437 ГК РФ)</span></div>
 </div></footer>`;
 }
 

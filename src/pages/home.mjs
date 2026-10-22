@@ -3,7 +3,7 @@ import { icon, img, telHref, HOURS_TEXT, HOURS_FULL, minVolText, faq } from '../
 import { CONCRETE_KINDS } from '../lib/categories.mjs';
 import { markNum } from '../lib/marks.mjs';
 import { baseGraph, faqLd } from '../lib/seo.mjs';
-import { T, sh, media, ctaBand, marksRange, deliveryLine, pickupLine, paymentLine, reachSpan, maxReach, productItems, cardMeta, unitOf, pagePhoto, CAT_ICON, photoGrid, ratingPanel, reviewsGrid, articleList, payMethods, cityChip } from './common.mjs';
+import { T, sh, media, ctaBand, marksRange, deliveryLine, pickupLine, paymentLine, reachSpan, maxReach, productItems, cardMeta, unitOf, pagePhoto, CAT_ICON, photoGrid, ratingPanel, reviewsGrid, articleList, payMethods, cityChip, mapSection } from './common.mjs';
 
 export function homeFaq(ctx) {
   const { site } = ctx;
@@ -205,6 +205,6 @@ ${reviewsGrid(ctx)}
 
   const jsonld = [{ ...baseGraph(ctx), '@graph': [...baseGraph(ctx)['@graph'], { '@type': 'WebSite', '@id': `${ctx.origin}/#website`, url: `${ctx.origin}/`, name: site.brand, inLanguage: 'ru-RU', publisher: { '@id': `${ctx.origin}/#organization` } }] }, faqLd(faqItems)];
 
-  const main = h`${hero}${stats}${priceWidget}${offer}${groups}${delivery}${plant}${tips}${process}${photos}${articles}${faq(ctx, faqItems, { id: 'faq' })}${ctaBand(ctx, { source: 'home-bottom' })}`;
+  const main = h`${hero}${stats}${priceWidget}${offer}${groups}${delivery}${plant}${tips}${process}${photos}${articles}${faq(ctx, faqItems, { id: 'faq' })}${mapSection(ctx, { band: true, title: 'Где находится завод' })}${ctaBand(ctx, { source: 'home-bottom' })}`;
   return { url: '/', title, description, h1, main, jsonld };
 }

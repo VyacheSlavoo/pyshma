@@ -14,6 +14,7 @@
     "shots": "node tools/shots.mjs",
     "serve": "node tools/serve.mjs",
     "test:form": "node tools/test-form.mjs",
+    "test:smtp": "node tools/test-smtp-tls.mjs",
     "test:config": "node tools/test-config.mjs",
     "build:demo": "node src/build.mjs --demo",
     "test:demo": "node tools/test-demo.mjs"

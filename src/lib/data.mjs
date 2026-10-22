@@ -182,6 +182,7 @@ export function loadData({ contentDir, now, fixture = false, preview = false }) 
   const fetched = site.card?.fetched_at ? new Date(site.card.fetched_at) : now;
   const priceDate = monthStart(fetched);
   const nextMonth = new Date(Date.UTC(priceDate.getUTCFullYear(), priceDate.getUTCMonth() + 1, 1));
+  if (!site.requisites?.name && !fixture) warnings.push('site.json: requisites не заполнены (name, inn, ogrn, address, email): в политике конфиденциальности оператором указан бренд. Впишите ООО/ИП до публикации');
   if ((now - fetched) / 86400000 > 35) warnings.push(`цены загружены ${isoDate(fetched)}, прайс старше месяца: выполните npm run import`);
   return {
     site, texts, categories, rental, cities, photos, fixture, preview, assumed, errors, warnings,

@@ -226,6 +226,31 @@ export function productGroups(ctx) {
   return h`${groups.slice(0, 1).map((g) => block(g, 0))}${groups.length > 1 ? h`<div class="pgroup-rest">${join(groups.slice(1).map((g, i) => block(g, i + 1)))}</div>` : ''}`;
 }
 
+// ---------- карта: точка организации на Яндекс Картах ----------
+// Виджет «организация» показывает метку завода и карточку с отзывами. iframe грузится при прокрутке (loading=lazy).
+export function mapSection(ctx, { title = 'Как нас найти', band = true, sub = null } = {}) {
+  const p = ctx.site.plant;
+  if (!p.yandex_org_id) return '';
+  const oid = p.yandex_org_id;
+  const route = p.geo ? `https://yandex.ru/maps/?rtext=~${p.geo.lat},${p.geo.lon}&rtt=auto` : p.yandex_url;
+  const r = ctx.site.card?.rating;
+  return h`<section class="section${band ? ' section--band' : ''}" id="map"><div class="container">
+${sh('Адрес', title, sub ?? `Завод ${p.locality_in}: ${p.address}. Метка на карте это карточка организации на Яндекс Картах.`, { row: true })}
+<div class="mapgrid">
+<div class="mapinfo">
+<dl class="kv kv--tight">
+<dt>Адрес</dt><dd>${p.address}</dd>
+<dt>Телефон</dt><dd><a href="${telHref(ctx)}">${ctx.site.phone.display}</a></dd>
+<dt>Режим</dt><dd>${HOURS_TEXT}: заявки, отгрузка и доставка</dd>
+${r ? h`<dt>Оценка</dt><dd>${String(r.value).replace('.', ',')} из 5 на Яндекс Картах, ${r.count} ${plural(r.count, 'оценка', 'оценки', 'оценок')}</dd>` : ''}
+</dl>
+<div class="mapinfo__btns"><a class="btn btn--primary btn--sm" href="${route}" rel="noopener" target="_blank">${icon(ctx, 'pin')}Построить маршрут</a><a class="btn btn--ghost btn--sm" href="https://yandex.ru/maps/org/${oid}/" rel="noopener" target="_blank">Отзывы и фото</a></div>
+</div>
+<div class="mapframe"><iframe src="https://yandex.ru/map-widget/v1/?ol=biz&amp;oid=${oid}${p.geo ? raw(`&amp;ll=${p.geo.lon}%2C${p.geo.lat}&amp;z=16`) : ''}" title="Карта: завод ${p.locality_in} на Яндекс Картах" width="100%" height="440" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+</div>
+</div></section>`;
+}
+
 // ---------- рейтинг и отзывы с Яндекс Карт ----------
 const stars = (ctx, v) => h`<span class="stars" aria-hidden="true">${join([1, 2, 3, 4, 5].map((n) => icon(ctx, 'star-f', n <= Math.round(v) ? '' : 'off')))}</span>`;
 

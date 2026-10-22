@@ -33,14 +33,15 @@ function respond(bool $ok, string $error, int $status, bool $json): void
 
 // ---- конфиг ----
 $cfg = null;
+$cfgPath = '';
 foreach ([__DIR__ . '/../send.config.php', __DIR__ . '/send.config.php'] as $path) {
-    if (is_file($path)) { $cfg = require $path; break; }
+    if (is_file($path)) { $cfg = require $path; $cfgPath = $path; break; }
 }
 if (!is_array($cfg) || empty($cfg['to'])) {
     error_log('send.php: нет send.config.php или не задан to');
     respond(false, 'config', 500, $wantsJson || isset($_GET['captcha']));
 }
-$cfg += ['smtp_host' => '', 'smtp_port' => 465, 'smtp_secure' => 'ssl', 'smtp_user' => '', 'smtp_pass' => '', 'from' => '', 'from_name' => 'Сайт',
+$cfg += ['retention_days' => 365, 'purge_every' => 25, 'smtp_host' => '', 'smtp_port' => 465, 'smtp_secure' => 'ssl', 'smtp_user' => '', 'smtp_pass' => '', 'from' => '', 'from_name' => 'Сайт',
          'site_host' => '', 'brand' => 'Сайт', 'log_dir' => null, 'debug' => false, 'smtp_verify_peer' => true,
          'captcha_secret' => '', 'captcha_ttl' => 3600];
 
@@ -123,6 +124,35 @@ if ($method === 'GET' && isset($_GET['captcha'])) {
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store');
     echo json_encode(cap_issue($cfg), JSON_UNESCAPED_UNICODE);
+    exit;
+}
+// Самопроверка на сервере: https://сайт/send.php?selftest=КЛЮЧ. Ключ задаётся в send.config.php (selftest_key);
+// пока он пуст, адрес отвечает 404. Шлёт тестовое письмо на адрес из конфига и показывает диалог с SMTP без пароля.
+if ($method === 'GET' && isset($_GET['selftest'])) {
+    $key = (string)($cfg['selftest_key'] ?? '');
+    if ($key === '' || !hash_equals($key, (string)$_GET['selftest'])) { http_response_code(404); exit; }
+    header('Content-Type: text/plain; charset=utf-8');
+    header('Cache-Control: no-store');
+    header('X-Robots-Tag: noindex');
+    $out = [];
+    $out[] = 'PHP ' . PHP_VERSION . ', openssl: ' . (extension_loaded('openssl') ? 'да' : 'НЕТ') . ', mbstring: ' . (extension_loaded('mbstring') ? 'да' : 'НЕТ');
+    $out[] = 'Конфиг: ' . $cfgPath;
+    $out[] = 'Хост SMTP: ' . $cfg['smtp_host'] . ':' . $cfg['smtp_port'] . ' (' . $cfg['smtp_secure'] . '), ящик: ' . $cfg['smtp_user'] . ', пароль: ' . ($cfg['smtp_pass'] !== '' ? 'задан' : 'НЕ ЗАДАН');
+    $out[] = 'Журнал заявок: ' . $logDir . ' (' . (is_writable($logDir) ? 'пишется' : 'НЕ ПИШЕТСЯ') . ')';
+    $out[] = 'Получатель: ' . $cfg['to'];
+    $rcpt = array_values(array_filter(array_map('trim', explode(',', (string)$cfg['to'])), fn($a) => filter_var($a, FILTER_VALIDATE_EMAIL)));
+    if (!$rcpt) { $out[] = 'ОШИБКА: в to нет корректного адреса'; echo implode("\n", $out), "\n"; exit; }
+    $t = [];
+    try {
+        smtp_send($cfg, $rcpt, 'Проверка отправки с сайта ' . $cfg['brand'], "Это тестовое письмо с адреса send.php?selftest.\r\nЕсли вы его читаете, заявки с сайта будут доходить.\r\nВремя: " . date('d.m.Y H:i:s') . ' (МСК)', $t);
+        $out[] = 'РЕЗУЛЬТАТ: письмо принято SMTP-сервером. Проверьте ящик ' . $cfg['to'] . ' (и папку «Спам»).';
+    } catch (Throwable $e) {
+        $out[] = 'РЕЗУЛЬТАТ: ОШИБКА SMTP: ' . $e->getMessage();
+    }
+    $out[] = '';
+    $out[] = 'Диалог с SMTP (пароль скрыт):';
+    foreach ($t as $line) $out[] = '  ' . $line;
+    echo implode("\n", $out), "\n";
     exit;
 }
 if ($method !== 'POST') {
@@ -315,6 +345,12 @@ if ($recipients) {
 // ---- журнал ----
 $entry = ['t' => date('c'), 'ip' => $ip, 'phone' => $phone, 'volume' => $volume, 'item' => $item, 'address' => $address, 'source' => $source, 'mail' => $status];
 if ($cfg['debug']) $entry['trace'] = $trace;
+// Срок хранения заявок: файлы журнала старше retention_days (по умолчанию 365) удаляются. Тот же срок указан в политике конфиденциальности.
+if (random_int(1, max(1, (int)$cfg['purge_every'])) === 1) {
+    $limit = time() - max(30, (int)$cfg['retention_days']) * 86400;
+    foreach (glob($logDir . '/leads-*.log') ?: [] as $old) { if (@filemtime($old) < $limit) @unlink($old); }
+    foreach (glob($logDir . '/rate-*.json') ?: [] as $old) { if (@filemtime($old) < time() - 2 * 86400) @unlink($old); }
+}
 @file_put_contents($logDir . '/leads-' . date('Y-m') . '.log', json_encode($entry, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
 
 if ($status === 'failed') {

@@ -5,7 +5,7 @@ import { markNum } from '../lib/marks.mjs';
 import { rentalSpec, renderConfigurator, slugify } from '../lib/configurator.mjs';
 import { baseGraph, faqLd, lbId } from '../lib/seo.mjs';
 import { relatedArticles } from './catalog.mjs';
-import { T, sh, media, pagehead, ctaBand, cityCards, deliveryLine, deliveryFaq, pickupLine, paymentLine, gallery, photoGrid, reachSpan, maxReach, pagePhoto } from './common.mjs';
+import { T, sh, media, mapSection, pagehead, ctaBand, cityCards, deliveryLine, deliveryFaq, pickupLine, paymentLine, gallery, photoGrid, reachSpan, maxReach, pagePhoto } from './common.mjs';
 
 // ---------- Аренда автобетононасоса: отдельный шаблон, без бетонных характеристик ----------
 export function rentalPage(ctx) {
@@ -133,6 +133,7 @@ ${media(ctx, pumpPhoto.file, { ico: 'truck' })}
 ${sh('Фото', 'Миксеры и насосы на объектах')}
 ${photoGrid(ctx, { roles: ['fleet'], skip: [pagePhoto(ctx, 'dostavka'), pumpPhoto.file] })}
 </div></section>
+${mapSection(ctx, { band: false, title: 'Откуда выезжают миксеры' })}
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: 'delivery' })}`;
   return {
     url: '/dostavka/', crumbs: [{ name: 'Доставка', url: '/dostavka/' }],
