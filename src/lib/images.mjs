@@ -7,13 +7,14 @@ import sharp from 'sharp';
 const WIDTHS = [480, 800, 1200, 1600];
 const hash = (buf) => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 8);
 
+const ENC = 'webp-q70-e5';
 export async function processPhotos(photos, outDir) {
   const images = new Map();
   const dir = path.join(outDir, 'assets', 'img');
   fs.mkdirSync(dir, { recursive: true });
   for (const p of photos) {
     const src = fs.readFileSync(p.abs);
-    const id = hash(src);
+    const id = hash(Buffer.concat([src, Buffer.from(ENC)])); // настройки сжатия входят в имя: кэш браузера не отдаст старый файл
     const base = path.basename(p.file, path.extname(p.file)).toLowerCase().replace(/[^a-z0-9-]+/g, '-');
     const meta = await sharp(src).rotate().metadata();
     const natural = meta.autoOrient ? meta.autoOrient.width : meta.width;
@@ -22,7 +23,7 @@ export async function processPhotos(photos, outDir) {
       if (w > natural && variants.length) break;
       const width = Math.min(w, natural);
       const name = `${base}-${width}.${id}.webp`;
-      const info = await sharp(src).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 76, effort: 4 }).toFile(path.join(dir, name));
+      const info = await sharp(src).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 70, effort: 5 }).toFile(path.join(dir, name));
       variants.push({ w: info.width, h: info.height, url: `/assets/img/${name}` });
     }
     const last = variants.at(-1);

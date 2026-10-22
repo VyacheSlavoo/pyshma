@@ -1,6 +1,6 @@
 // Контакты, о заводе, политика, согласие, спасибо, 404.
 import { h, raw, join, fmtNum, NBSP, esc } from '../lib/util.mjs';
-import { icon, telHref, messengers, HOURS_TEXT, HOURS_FULL, leadForm, minVolText, faq } from '../lib/layout.mjs';
+import { icon, img, telHref, messengers, HOURS_TEXT, HOURS_FULL, leadForm, minVolText, faq } from '../lib/layout.mjs';
 import { CONCRETE_KINDS } from '../lib/categories.mjs';
 import { baseGraph, faqLd } from '../lib/seo.mjs';
 import { T, sh, media, pagehead, ctaBand, gallery, photoGrid, marksRange, pickupLine, paymentLine, deliveryLine, reachSpan, pagePhoto, ratingPanel, reviewsGrid, payMethods } from './common.mjs';
@@ -11,7 +11,8 @@ export function contactsPage(ctx) {
   const { site } = ctx;
   const p = site.plant;
   const m = messengers(ctx);
-  const mapBlock = h`<div class="mapbox"${p.yandex_org_id ? raw(` data-oid="${esc(p.yandex_org_id)}"`) : ''}>${icon(ctx, 'pin')}<p><b>${p.address}</b></p><p class="muted">Карта загрузится по кнопке: так страница открывается быстрее.</p><div class="mapbox__btns">${p.yandex_org_id ? h`<button type="button" class="btn btn--primary btn--sm" data-map>Показать карту</button>` : ''}<a class="btn btn--ghost btn--sm" href="${p.yandex_url}" rel="noopener" target="_blank">Маршрут на Яндекс Картах</a></div></div>`;
+  const mapBg = ctx.photos.find((x) => x.file === 'uzel-territoriya.jpg') ?? ctx.photos.find((x) => x.role === 'plant');
+  const mapBlock = h`<div class="mapbox"${p.yandex_org_id ? raw(` data-oid="${esc(p.yandex_org_id)}"`) : ''}>${mapBg ? img(ctx, mapBg.file, { sizes: '(max-width:980px) 100vw, 50vw' }) : ''}${icon(ctx, 'pin')}<p><b>${p.address}</b></p><p class="muted">Карта загрузится по кнопке: так страница открывается быстрее.</p><div class="mapbox__btns">${p.yandex_org_id ? h`<button type="button" class="btn btn--primary btn--sm" data-map>Показать карту</button>` : ''}<a class="btn btn--ghost btn--sm" href="${p.yandex_url}" rel="noopener" target="_blank">Маршрут на Яндекс Картах</a></div></div>`;
   const h1 = T(ctx, 'contacts.h1', `Контакты завода ${p.locality_in}`);
   const main = h`${pagehead(ctx, { h1, eyebrow: 'Контакты', lead: `${HOURS_FULL}.`, actions: false, photo: pagePhoto(ctx, 'contacts'),
     facts: [['телефон', h`<a href="${telHref(ctx)}">${site.phone.display}</a>`], ['режим работы', HOURS_TEXT], ['минимальный заказ', minVolText(ctx)]] })}
@@ -59,16 +60,16 @@ export function aboutPage(ctx) {
     ['Что вы производите и продаёте?', `Бетон ${marksRange(ctx)} разных видов, растворы и ЦПС, арматуру, а также сдаём в аренду автобетононасосы. Полный список позиций и цены — в прайс-листе.`],
     ...(site.lab?.has_control ? [['Как подтверждается качество бетона?', 'Перед отгрузкой контролируем состав и подвижность смеси. Образцы испытываются в установленном возрасте. Партия отправляется с документами о качестве.']] : [])
   ]);
-  const territory = ctx.photos.find((x) => x.file === 'uzel-pomeschenie.jpg') ?? ctx.photos.find((x) => x.role === 'plant');
+  const territory = ctx.photos.find((x) => x.file === 'abn-mikseri.jpg') ?? ctx.photos.find((x) => x.role === 'plant');
   const main = h`${pagehead(ctx, { h1, eyebrow: 'О заводе', lead: `Производим и доставляем бетон ${marksRange(ctx)}, растворы и ЦПС. Сдаём в аренду автобетононасосы. ${HOURS_FULL}.`, facts: [['позиций в прайсе', String(ctx.positions)], ['минимальный заказ', minVolText(ctx)], ['режим работы', HOURS_TEXT]], photo: pagePhoto(ctx, 'about') })}
 <section class="section section--tight"><div class="container split split--wide">
 <div class="prose">
 <p class="eyebrow">Производство</p>
 <h2>Что производим и поставляем</h2>
 <p>Завод ${p.locality_in} отгружает ${made.join(', ')}. Актуальные позиции и цены — в <a href="/price/">прайс-листе</a>.</p>
-<h2>Где находится</h2>
+<h3>Где находится</h3>
 <p>${p.address}. Бетон отгружается с этой площадки и доставляется автобетоносмесителями на объекты по ${p.district_dat}. ${pickupLine(ctx, { short: true }) ?? ''} Условия — на странице <a href="/dostavka/">доставки</a>.</p>
-${ctx.rental ? h`<h2>Техника</h2><p>Для подачи бетона на высоту и в труднодоступные места сдаём в аренду <a href="/catalog/arenda-abn/">автобетононасосы</a> с вылетом стрелы ${reachSpan(ctx)}.</p>` : ''}
+${ctx.rental ? h`<h3>Техника</h3><p>Для подачи бетона на высоту и в труднодоступные места сдаём в аренду <a href="/catalog/arenda-abn/">автобетононасосы</a> с вылетом стрелы ${reachSpan(ctx)}.</p>` : ''}
 ${site.lab?.has_control ? h`<h2>Как подтверждаем качество</h2>
 <ul class="checks"><li>Перед отгрузкой контролируем состав и подвижность смеси.</li><li>Образцы испытываются в установленном возрасте.</li><li>Партия идёт с документами о качестве: ${site.documents.join(', ')}.</li></ul>` : ''}
 </div>
@@ -121,7 +122,7 @@ ${site.metrika_id ? h`<h2>6. Веб-аналитика и cookie</h2><p>Сайт
 <h2>${site.metrika_id ? '9' : '8'}. Изменения политики</h2>
 <p>Актуальная редакция всегда находится на этой странице.</p>
 </div></section>`;
-  return { url: '/privacy/', crumbs: [{ name: 'Политика конфиденциальности', url: '/privacy/' }], title: `Политика конфиденциальности | ${site.brand}`, description: `Как ${site.brand} обрабатывает персональные данные из форм на сайте: какие данные, зачем, сколько хранятся и как их удалить.`, h1: 'Политика конфиденциальности', main, jsonld: [baseGraph(ctx)] };
+  return { url: '/privacy/', inSitemap: false, crumbs: [{ name: 'Политика конфиденциальности', url: '/privacy/' }], title: `Политика конфиденциальности | ${site.brand}`, description: `Как ${site.brand} обрабатывает персональные данные из форм на сайте: какие данные, зачем, сколько хранятся и как их удалить.`, h1: 'Политика конфиденциальности', main, jsonld: [baseGraph(ctx)] };
 }
 
 export function consentPage(ctx) {
@@ -140,7 +141,7 @@ export function consentPage(ctx) {
 <p>Я могу отозвать согласие в любой момент, обратившись к Оператору: ${contact}.</p>
 <p>Подробнее — в <a href="/privacy/">политике конфиденциальности</a>.</p>
 </div></section>`;
-  return { url: '/soglasie/', crumbs: [{ name: 'Согласие на обработку данных', url: '/soglasie/' }], title: `Согласие на обработку персональных данных | ${site.brand}`, description: `Текст согласия на обработку персональных данных, которое даёт посетитель при отправке формы на сайте ${site.brand}.`, h1: 'Согласие на обработку персональных данных', main, jsonld: [baseGraph(ctx)] };
+  return { url: '/soglasie/', inSitemap: false, crumbs: [{ name: 'Согласие на обработку данных', url: '/soglasie/' }], title: `Согласие на обработку персональных данных | ${site.brand}`, description: `Текст согласия на обработку персональных данных, которое даёт посетитель при отправке формы на сайте ${site.brand}.`, h1: 'Согласие на обработку персональных данных', main, jsonld: [baseGraph(ctx)] };
 }
 
 export function thanksPage(ctx) {

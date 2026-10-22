@@ -8,6 +8,7 @@
 //   {{pmdprice марка температура}}   минимальная цена бетона с ПМД, например {{pmdprice М300 -15}}
 //   {{rent Название позиции из аренды}}   цена из rental.json, «6 000 ₽/час»
 //   {{rowprice категория марка П4 F150}}   минимальная цена марки среди строк с указанными П, F, W
+//   {{rowcost категория марка объём П3}}   та же цена × объём
 //   {{item категория Название позиции}}   цена позиции раствора или ЦПС, «4 600 ₽/м³»
 //   {{itemcost категория объём Название позиции}}   цена позиции × объём
 //   {{rebar диаметр}}, {{rebarcost диаметр тонны}}   арматура А500С: цена за тонну и стоимость массы
@@ -80,6 +81,14 @@ function tokens(ctx, s, where) {
       const hit = rows.filter((r) => want.every((v) => [r.mobility, r.frost, r.water].includes(v)));
       if (!hit.length) throw new Error(`${where}: нет строки ${a[0]} ${mark} ${want.join(' ')}`);
       return `${fmtNum(minPrice(hit))}${NBSP}₽/м³`;
+    }
+    if (fn === 'rowcost') {
+      const { rows, mark } = lookup(ctx, a[0], a[1], where);
+      const v = parseFloat(String(a[2]).replace(',', '.'));
+      const want = a.slice(3);
+      const hit = rows.filter((r) => want.every((x) => [r.mobility, r.frost, r.water].includes(x)));
+      if (!hit.length || !(v > 0)) throw new Error(`${where}: {{${expr}}}`);
+      return `${fmtNum(Math.round(minPrice(hit) * v))}${NBSP}₽`;
     }
     if (fn === 'item' || fn === 'itemcost') {
       const cat = ctx.categories.find((c) => c.slug === a[0]);
@@ -204,7 +213,8 @@ export function loadArticles(ctx, dir) {
   if (!fs.existsSync(dir)) return [];
   const list = [];
   const slugs = new Set();
-  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.md')).sort()) {
+  const files = fs.readdirSync(dir).filter((x) => x.endsWith('.md')).sort();
+  for (const f of files) {
     const { meta, body } = parseFront(fs.readFileSync(path.join(dir, f), 'utf8'), f);
     if (slugs.has(meta.slug)) throw new Error(`${f}: повторяющийся slug ${meta.slug}`);
     slugs.add(meta.slug);
@@ -214,7 +224,7 @@ export function loadArticles(ctx, dir) {
     const { html, toc } = renderMarkdown(ctx, body, f);
     const words = body.replace(/\{\{[^}]*\}\}|::.*|[#>*_\[\]()-]/g, ' ').split(/\s+/).filter(Boolean).length;
     list.push({
-      ...meta, url: `/stati/${meta.slug}/`, dateRu: dateRu(date), html, toc, words,
+      ...meta, order: files.indexOf(f), related: (meta.related ?? '').split(',').map((x) => x.trim()).filter(Boolean), url: `/stati/${meta.slug}/`, dateRu: dateRu(date), html, toc, words,
       minutes: Math.max(1, Math.round(words / 180)),
       modified: isoDate(date > ctx.priceDate ? date : ctx.priceDate)
     });
@@ -225,5 +235,7 @@ export function loadArticles(ctx, dir) {
       if (!have.has(m[1])) throw new Error(`${x.slug}: ссылка на статью ${m[1]}, которой нет среди опубликованных (дата позже сборки или опечатка)`);
     }
   }
-  return list.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug.localeCompare(b.slug)));
+  for (const x of list) for (const r of x.related) if (!have.has(r)) throw new Error(`${x.slug}: в related статья ${r}, которой нет среди опубликованных`);
+  // свежие сверху; в один день — в порядке файлов, от первой статьи к последней
+  return list.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.order - b.order));
 }

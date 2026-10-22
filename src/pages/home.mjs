@@ -3,7 +3,7 @@ import { icon, img, telHref, HOURS_TEXT, HOURS_FULL, minVolText, faq } from '../
 import { CONCRETE_KINDS } from '../lib/categories.mjs';
 import { markNum } from '../lib/marks.mjs';
 import { baseGraph, faqLd } from '../lib/seo.mjs';
-import { T, sh, media, ctaBand, marksRange, deliveryLine, pickupLine, paymentLine, reachSpan, maxReach, productItems, cardMeta, unitOf, pagePhoto, CAT_ICON, photoGrid, ratingPanel, reviewsGrid, articleList, payMethods } from './common.mjs';
+import { T, sh, media, ctaBand, marksRange, deliveryLine, pickupLine, paymentLine, reachSpan, maxReach, productItems, cardMeta, unitOf, pagePhoto, CAT_ICON, photoGrid, ratingPanel, reviewsGrid, articleList, payMethods, cityChip } from './common.mjs';
 
 export function homeFaq(ctx) {
   const { site } = ctx;
@@ -66,7 +66,7 @@ export function home(ctx) {
   const hero = h`<section class="hero"><div class="container hero__in">
 <div>
 <a class="pill" href="${site.plant.yandex_url}" rel="noopener" target="_blank">${icon(ctx, 'pin')}<span>${site.plant.region}, ${site.plant.locality}</span></a>
-<h1>${h1.replace(/ в /g, ' в\u00A0')} <span class="hero__sub">доставка от ${minV}${NBSP}м³, 24/7</span></h1>
+<h1>${h1.replace(/ в /g, ' в\u00A0')}<span class="sr">: </span> <span class="hero__sub">доставка от ${minV}${NBSP}м³, 24/7</span></h1>
 <p class="hero__lead">${nb(T(ctx, 'home.lead', `Бетон ${marksRange(ctx)}, растворы, ЦПС, арматура и аренда автобетононасосов. Завод на улице Обогатителей: забирайте сами или закажите миксер и насос на объект.`))}</p>
 <ul class="facts3">${join(facts.map(([b, s], i) => h`<li${i === 0 ? raw(' class="hero__price"') : ''}><b>${b}</b><span>${s}</span></li>`))}</ul>
 <div class="hero__cta">
@@ -106,9 +106,9 @@ ${r ? h`<a class="stat" href="${site.plant.yandex_url}" rel="noopener" target="_
   const big = productItems(ctx, main0.group).find((x) => x.slug === main0.slug);
   const bigPhoto = pagePhoto(ctx, 'price') ?? big.photo;
   const others = [
-    ...productItems(ctx, 'Растворы').slice(0, 1).map((x) => ({ ...x, name: 'Растворы и ЦПС', meta: 'Кладочные и монтажные растворы, цементно-песчаные смеси для стяжки и подливки.' })),
+    ...productItems(ctx, 'Растворы').slice(0, 1).map((x) => ({ ...x, from: Math.min(...productItems(ctx, 'Растворы').map((y) => y.from)), name: 'Растворы и ЦПС', meta: 'Кладочные и монтажные растворы, цементно-песчаные смеси для стяжки и подливки.' })),
     ...productItems(ctx, 'Металл и техника').filter((x) => x.slug === 'arenda-abn').map((x) => ({ ...x, meta: `Насосы с вылетом стрелы ${reachSpan(ctx)}: бетон уходит на этаж или в дальний угол участка. Оплата по часам.` })),
-    ...productItems(ctx, 'Металл и техника').filter((x) => x.slug === 'armatura').map((x) => ({ ...x, meta: `${x.meta}. Каркас для фундамента можно заказать вместе с бетоном.` }))
+    ...productItems(ctx, 'Металл и техника').filter((x) => x.slug === 'armatura').map((x) => ({ ...x, meta: `${x.meta}. Классы А500С и А240, цена за тонну.` }))
   ];
   const offer = h`<section class="section" id="produkciya"><div class="container">
 ${sh('Продукция', 'Что можно заказать')}
@@ -121,14 +121,15 @@ ${sh('Продукция', 'Что можно заказать')}
   // ---------- колонки со ссылками ----------
   const concreteCats = ctx.categories.filter((c) => CONCRETE_KINDS.has(c.kind));
   const marks = ctx.markPages.map((m) => ({ m, rows: main0.rows.filter((x) => x.mark === m) })).filter((x) => x.rows.length);
-  const rest = [...productItems(ctx, 'Растворы'), ...productItems(ctx, 'Металл и техника')];
-  const col = (title, links) => h`<div class="groups__col"><h3>${title}</h3><ul>${join(links.map(([name, url, from, unit]) => h`<li><a href="${url}">${name}<small>от ${fmtNum(from)}${NBSP}₽/${unit}</small></a></li>`))}</ul></div>`;
+  const mortars = productItems(ctx, 'Растворы'), metal = productItems(ctx, 'Металл и техника');
+  const ul = (links) => h`<ul>${join(links.map(([name, url, from, unit]) => h`<li><a href="${url}">${name}<small>от ${fmtNum(from)}${NBSP}₽/${unit}</small></a></li>`))}</ul>`;
+  const col = (title, links, extra = '') => h`<div class="groups__col"><h3>${title}</h3>${ul(links)}${extra}</div>`;
   const groups = h`<section class="section"><div class="container">
 ${sh('Разделы', 'Откройте нужный раздел', 'В каждом разделе есть подбор характеристик: выберите марку и параметры, цена пересчитается на ваш объём.', { row: true })}
 <div class="groups">
 ${col('Бетон по видам', concreteCats.map((c) => [c.menu, `/catalog/${c.slug}/`, priceOf(c.rows), 'м³']))}
-${marks.length ? col('Бетон по маркам', marks.map(({ m, rows }) => [`Бетон ${m} (${rows[0].cls})`, `/catalog/${main0.slug}/${rows[0].markSlug}/`, priceOf(rows), 'м³'])) : ''}
-${col('Растворы, металл, техника', rest.map((x) => [x.name, x.url, x.from, x.unit]))}
+${col(marks.length ? 'Бетон по маркам' : 'Растворы', marks.length ? marks.map(({ m, rows }) => [`Бетон ${m} (${rows[0].cls})`, `/catalog/${main0.slug}/${rows[0].markSlug}/`, priceOf(rows), 'м³']) : mortars.map((x) => [x.name, x.url, x.from, x.unit]), marks.length && mortars.length ? h`<h3 class="groups__sub">Растворы</h3>${ul(mortars.map((x) => [x.name, x.url, x.from, x.unit]))}` : '')}
+${col('Металл и техника', metal.map((x) => [x.name, x.url, x.from, x.unit]), h`<div class="groups__cta"><p>Не нашли состав или марку? Назовите конструкцию и объём, подберём по телефону.</p><a class="telink" href="${telHref(ctx)}">${icon(ctx, 'phone')}${site.phone.display}</a></div>`)}
 </div>
 </div></section>`;
 
@@ -140,7 +141,7 @@ ${media(ctx, delivPhoto.file, { ico: 'truck' })}
 <p class="eyebrow">Доставка и подача</p>
 <h2>Миксер до объекта, насос до места заливки</h2>
 <p class="lead">Бетон отгружается с завода ${site.plant.locality_in} и приезжает автобетоносмесителем. ${deliveryLine(ctx)}</p>
-<div class="chips"><span class="chip">${site.plant.locality}</span>${join(ctx.cities.map((c) => h`<a class="chip" href="${c.url}">${c.name}</a>`))}<span class="chip chip--dashed">Другой адрес: по запросу</span></div>
+<div class="chips"><span class="chip">${site.plant.locality}</span>${join(ctx.cities.map(cityChip))}<span class="chip chip--dashed">Другой адрес: по запросу</span></div>
 <div class="actions actions--flush"><a class="btn btn--primary" href="/dostavka/">Условия доставки</a>${ctx.rental ? h`<a class="link-arrow" href="/catalog/arenda-abn/">Тарифы на насосы${icon(ctx, 'arrow')}</a>` : ''}</div>
 </div>
 </div></section>`;
@@ -199,7 +200,8 @@ ${ratingPanel(ctx)}
 ${reviewsGrid(ctx)}
 </div></section>`;
 
-  const articles = articleList(ctx, { limit: 3, title: 'Что проверить перед заказом бетона', more: true, eyebrow: 'Статьи' });
+  const homeArts = ['kakoj-beton-dlya-fundamenta', 'skolko-kubov-betona', 'beton-zimoj-pmd'].map((x) => ctx.articles?.find((y) => y.slug === x)).filter(Boolean);
+  const articles = articleList(ctx, { limit: 3, list: homeArts.length === 3 ? homeArts : null, title: 'Что проверить перед заказом бетона', more: true, eyebrow: 'Статьи' });
 
   const jsonld = [{ ...baseGraph(ctx), '@graph': [...baseGraph(ctx)['@graph'], { '@type': 'WebSite', '@id': `${ctx.origin}/#website`, url: `${ctx.origin}/`, name: site.brand, inLanguage: 'ru-RU', publisher: { '@id': `${ctx.origin}/#organization` } }] }, faqLd(faqItems)];
 

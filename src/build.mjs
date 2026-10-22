@@ -108,6 +108,23 @@ for (const p of pages) {
   fs.writeFileSync(file, demo ? relativize(pageShell(ctx, p).toString(), p.url) : pageShell(ctx, p).toString());
 }
 
+// lastmod страниц без своей даты: меняется, когда меняется содержимое <main>. Хэши хранятся в content/lastmod.json
+// и коммитятся вместе с сайтом, поэтому повторная сборка без правок дату не сдвигает.
+if (!fixture && !preview && !demo) {
+  const store = path.join(contentDir, 'lastmod.json');
+  const prev = fs.existsSync(store) ? JSON.parse(fs.readFileSync(store, 'utf8')) : {};
+  const next = {};
+  const today = ctx.now.toISOString().slice(0, 10);
+  const priceDay = ctx.priceDate.toISOString().slice(0, 10);
+  for (const p of pages) {
+    if (p.lastmod || p.noindex || p.inSitemap === false) continue;
+    const hash = crypto.createHash('sha1').update(String(p.main)).digest('hex').slice(0, 16);
+    const day = prev[p.url]?.h === hash ? prev[p.url].d : today;
+    next[p.url] = { h: hash, d: day };
+    p.lastmod = day > priceDay ? day : priceDay;
+  }
+  fs.writeFileSync(store, JSON.stringify(next, null, 1) + '\n');
+}
 fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemapXml(ctx, pages));
 fs.writeFileSync(path.join(outDir, 'robots.txt'), robotsTxt(ctx));
 fs.writeFileSync(path.join(outDir, '.htaccess'), htaccess(ctx));

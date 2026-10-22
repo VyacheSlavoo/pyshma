@@ -39,8 +39,8 @@ export function head(ctx, page) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${page.title}</title>
 <meta name="description" content="${page.description}">
-<link rel="canonical" href="${canonical}">
-${noindex ? raw('<meta name="robots" content="noindex, nofollow">') : raw('<meta name="robots" content="index, follow, max-image-preview:large">')}
+${page.url === '/404.html' ? '' : h`<link rel="canonical" href="${canonical}">`}
+${noindex ? raw(`<meta name="robots" content="noindex, ${ctx.fixture || ctx.preview || ctx.demo ? 'nofollow' : 'follow'}">`) : raw('<meta name="robots" content="index, follow, max-image-preview:large">')}
 <meta name="theme-color" content="#F5F3EE">
 <meta property="og:type" content="${page.ogType || 'website'}">
 <meta property="og:locale" content="ru_RU">
@@ -60,6 +60,8 @@ ${noindex ? raw('<meta name="robots" content="noindex, nofollow">') : raw('<meta
 ${site.yandex_verification ? raw(`<meta name="yandex-verification" content="${esc(site.yandex_verification)}">`) : ''}
 <link rel="preload" href="/assets/fonts/plex-cyrillic-wdth.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/oswald-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-latin-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${ctx.assets.css}">
 <script>document.documentElement.className='js'${ctx.demo ? raw(';window.__DEMO__=1') : ''}</script>
 ${join(ld.map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)), '\n')}
@@ -94,7 +96,7 @@ ${it.sub ? h`<div class="sub sub--mega">${join(it.sub.map((g) => h`<div class="s
 </li>`));
 }
 
-export const brandHtml = (ctx, sub) => h`<span class="brand__mark" aria-hidden="true">БМ</span><span class="brand__t"><b>${ctx.site.brand}</b>${sub}</span>`;
+export const brandHtml = (ctx, sub) => h`<span class="brand__mark" aria-hidden="true">${icon(ctx, 'mark')}</span><span class="brand__t"><b>${ctx.site.brand}</b>${sub}</span>`;
 
 export function header(ctx, page) {
   const { site } = ctx;
@@ -155,7 +157,7 @@ const honey = (source) => h`<div class="hp" aria-hidden="true"><label>Сайт<i
 <input type="hidden" name="ts" value="">
 <input type="hidden" name="source" value="${source}">`;
 // Арифметическая проверка: пример и подписанный токен приходят с сервера (send.php?captcha=1), ответ проверяется на сервере.
-const captchaHtml = () => h`<div class="cap"><label class="field"><span>Проверка от роботов: сколько будет <b class="cap__q" data-cap-q>…</b>?</span><input type="text" name="cap" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="ответ"></label><button type="button" class="cap__re" data-cap-new>Другой пример</button>
+const captchaHtml = (ctx) => h`<div class="cap"><label class="field"><span>Проверка от роботов: сколько будет <b class="cap__q" data-cap-q>…</b>?</span><input type="text" name="cap" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="ответ"></label><button type="button" class="cap__re" data-cap-new aria-label="Другой пример" title="Другой пример">${icon(ctx, 'refresh')}</button>
 <input type="hidden" name="ct" value=""></div>`;
 const noJsNote = (ctx) => h`<p class="nojs-note">Форма работает с включённым JavaScript. Без него позвоните: <a href="${telHref(ctx)}">${ctx.site.phone.display}</a>.</p>`;
 
@@ -174,7 +176,7 @@ ${compact ? '' : h`<label class="field"><span>Объём</span><input type="text
 <label class="field"><span>Что заказать</span><input type="text" name="item" value="${item ?? ''}" placeholder="например, бетон М300" maxlength="120"></label>
 <label class="field"><span>Адрес доставки</span><input type="text" name="address" autocomplete="street-address" placeholder="город, улица или СНТ" maxlength="200"></label>`}
 </div>
-${captchaHtml()}
+${captchaHtml(ctx)}
 ${honey(source)}
 ${consentHtml(ctx)}
 <button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
@@ -201,7 +203,7 @@ export function faq(ctx, items, { title = 'Что обычно спрашива�
   if (!items?.length) return '';
   return h`<section class="section${band ? ' section--band' : ''}"${id ? raw(` id="${id}"`) : ''}><div class="container">
 <div class="sh sh--row"><div><p class="eyebrow">Вопросы и ответы</p><h2>${title}</h2></div><p>${note ?? h`Если нужного вопроса нет, позвоните: <a href="${telHref(ctx)}">${ctx.site.phone.display}</a>. ${HOURS_TEXT}.`}</p></div>
-<div class="faq">${join(items.map(([q, a]) => h`<details><summary>${q}${icon(ctx, 'chev', 'chev')}</summary><div class="faq__a"><p>${a}</p></div></details>`))}</div>
+<div class="faq${items.length <= 3 ? ' faq--1' : ''}">${join(items.map(([q, a]) => h`<details><summary>${q}${icon(ctx, 'chev', 'chev')}</summary><div class="faq__a"><p>${a}</p></div></details>`))}</div>
 </div></section>`;
 }
 
@@ -249,19 +251,19 @@ ${spec ? h`<td data-l="Для чего">${r.spec ?? '—'}</td>` : ''}
 </tr>`))}</tbody></table></div>`;
 }
 
-// Арматура: группы по стали/профилю, внутри диаметры.
+// Арматура: матрица «диаметр × класс и сталь». В ячейке цена за тонну, нажатие подставляет позицию в заявку.
 export function rebarTables(ctx, cat, { keys = false } = {}) {
-  const groups = new Map();
-  for (const r of cat.rows) { const g = r.group || 'Прочее'; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(r); }
-  return join([...groups].map(([g, rows]) => h`<h3 class="tbl-title">Арматура ${g}</h3><div class="table-wrap"><table class="pt">
-<thead><tr><th>Диаметр</th><th>Класс</th><th>Сталь, профиль</th><th class="pr">Цена за т</th><th class="ac"><span class="sr">Заказ</span></th></tr></thead>
-<tbody>${join(rows.sort((a, b) => a.diameter - b.diameter).map((r) => h`<tr${kAttr(cat, r, keys)}>
-<td class="mk" data-l="Диаметр">${r.diameter}${NBSP}мм</td>
-<td data-l="Класс">${r.rebarClass ?? '—'}</td>
-<td data-l="Сталь">${r.steel ?? '—'}</td>
-<td class="pr" data-l="Цена за т"><span class="num">${fmtNum(r.price)}${NBSP}₽</span> <small>/т</small></td>
-<td class="ac">${orderLink(ctx, r.name)}</td>
-</tr>`))}</tbody></table></div>`));
+  const groups = [...new Set(cat.rows.map((r) => r.group || 'Прочее'))];
+  const diams = [...new Set(cat.rows.map((r) => r.diameter))].sort((a, b) => a - b);
+  const cell = (d, g) => {
+    const r = cat.rows.find((x) => x.diameter === d && (x.group || 'Прочее') === g);
+    if (!r) return h`<td class="mx__na">—</td>`;
+    return h`<td class="pr"${kAttr(cat, r, keys)}><a href="${telHref(ctx)}" data-order data-item="${r.name}" aria-label="Заказать: ${r.name}, ${fmtNum(r.price)} рублей за тонну"><span class="num">${fmtNum(r.price)}${NBSP}₽</span></a></td>`;
+  };
+  return h`<div class="table-wrap table-wrap--mx"><table class="mx">
+<thead><tr><th>Диаметр</th>${join(groups.map((g) => h`<th class="pr">${g}</th>`))}</tr></thead>
+<tbody>${join(diams.map((d) => h`<tr><th scope="row">${d}${NBSP}мм</th>${join(groups.map((g) => cell(d, g)))}</tr>`))}</tbody></table></div>
+<p class="after muted small">Цена за тонну. Нажмите на цену, чтобы заказать эту позицию. Прочерк: такого диаметра в этом классе нет в прайсе.</p>`;
 }
 
 export { orderLink };

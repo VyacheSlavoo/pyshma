@@ -7,6 +7,9 @@ export const OPENING_HOURS = 'Mo-Su 00:00-23:59';
 export const orgId = (ctx) => `${ctx.origin}/#organization`;
 export const lbId = (ctx) => `${ctx.origin}/#localbusiness`;
 
+export const mapUrl = (site) => (site.plant.yandex_org_id ? `https://yandex.ru/maps/org/${site.plant.yandex_org_id}/` : site.plant.yandex_url);
+export const orgInline = (ctx) => ({ '@type': 'Organization', '@id': orgId(ctx), name: ctx.site.brand, url: `${ctx.origin}/`, logo: `${ctx.origin}${ctx.assets.logo}` });
+
 export function baseGraph(ctx) {
   const { site, origin } = ctx;
   const cityNames = ctx.cities.map((c) => c.name);
@@ -15,12 +18,12 @@ export function baseGraph(ctx) {
     '@graph': [
       {
         '@type': 'Organization', '@id': orgId(ctx), name: site.brand, url: `${origin}/`,
-        logo: `${origin}${ctx.assets.logo}`, telephone: site.phone.e164, sameAs: [site.plant.yandex_url],
+        logo: `${origin}${ctx.assets.logo}`, telephone: site.phone.e164, sameAs: [mapUrl(site)],
         ...(site.email_public ? { email: site.email_public } : {}),
         ...(site.founded_year ? { foundingDate: String(site.founded_year) } : {})
       },
       {
-        '@type': 'LocalBusiness', '@id': lbId(ctx), name: site.brand, url: `${origin}/`,
+        '@type': 'HomeAndConstructionBusiness', '@id': lbId(ctx), name: site.brand, url: `${origin}/`,
         ...(site.plant.card_name ? { alternateName: site.plant.card_name } : {}),
         image: `${origin}${ctx.assets.og}`, telephone: site.phone.e164,
         ...(site.email_public ? { email: site.email_public } : {}),
@@ -29,7 +32,7 @@ export function baseGraph(ctx) {
           addressRegion: site.plant.region, ...(site.plant.postal_code ? { postalCode: site.plant.postal_code } : {}), addressCountry: 'RU'
         },
         geo: { '@type': 'GeoCoordinates', latitude: site.plant.geo.lat, longitude: site.plant.geo.lon },
-        hasMap: site.plant.yandex_url, sameAs: [site.plant.yandex_url],
+        hasMap: mapUrl(site), sameAs: [mapUrl(site)], priceRange: `от ${ctx.fromPrice} ₽/м³`,
         openingHours: OPENING_HOURS,
         openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: DAYS, opens: '00:00', closes: '23:59' }],
         areaServed: [site.plant.locality, ...cityNames].filter((v, i, a) => a.indexOf(v) === i).map((name) => ({ '@type': 'City', name }))

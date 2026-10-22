@@ -105,8 +105,8 @@ const allText = pages.map((p) => p.text).join('\n');
     const h1count = (p.html.match(/<h1[\s>]/g) || []).length;
     if (h1count !== 1) err(P, p.url, `H1 на странице: ${h1count}, нужен ровно один`);
     if (/Загрузка/i.test(h1s[0]?.t ?? '')) err(P, p.url, 'H1 «Загрузка…»');
-    if (p.canonical.length !== 1) err(P, p.url, `canonical: ${p.canonical.length} шт.`);
-    else if (p.canonical[0] !== ctx.origin + p.url) err(P, p.url, `canonical ${p.canonical[0]} ≠ self ${ctx.origin + p.url}`);
+    if (p.url !== '/404.html' && p.canonical.length !== 1) err(P, p.url, `canonical: ${p.canonical.length} шт.`);
+    else if (p.url !== '/404.html' && p.canonical[0] !== ctx.origin + p.url) err(P, p.url, `canonical ${p.canonical[0]} ≠ self ${ctx.origin + p.url}`);
     if (idx && !p.url.endsWith('/') && p.url !== '/404.html') err(P, p.url, 'канонический URL без слэша');
     if (p.mainText.length < 250 && idx) err(P, p.url, `в серверном HTML мало текста (${p.mainText.length} симв.): SPA-риск`);
     if (/id="root"|id="app"/.test(p.html)) err(P, p.url, 'найден контейнер SPA');
@@ -158,7 +158,7 @@ const allText = pages.map((p) => p.text).join('\n');
   const lbId = `${ctx.origin}/#localbusiness`, orgId = `${ctx.origin}/#organization`;
   for (const p of pages) {
     const graph = p.ld.filter(Boolean).flatMap((j) => (j['@graph'] ? j['@graph'] : [j]));
-    const lb = graph.find((n) => n['@type'] === 'LocalBusiness'), org = graph.find((n) => n['@type'] === 'Organization');
+    const lb = graph.find((n) => ['LocalBusiness', 'HomeAndConstructionBusiness'].includes(n['@type'])), org = graph.find((n) => n['@type'] === 'Organization');
     if (p.noindex) continue;
     if (!lb || !org) { err(P, p.url, 'нет Organization/LocalBusiness'); continue; }
     if (lb['@id'] !== lbId || org['@id'] !== orgId) err(P, p.url, '@id Organization/LocalBusiness нестабилен');
@@ -181,7 +181,7 @@ const allText = pages.map((p) => p.text).join('\n');
       if (j?.['@type'] === 'Product') {
         const o = j.offers;
         const offers = Array.isArray(o) ? o : o?.['@type'] === 'AggregateOffer' ? o.offers : o ? [o] : [];
-        const vis = new Set([...p.main.matchAll(/<td class="pr"[^>]*><span class="num">([^<]*)<\/span>/g)].map((m) => Number(decode(m[1]).replace(/[^\d]/g, ''))));
+        const vis = new Set([...p.main.matchAll(/<td class="pr"[^>]*>(?:<a [^>]*>)?<span class="num">([^<]*)<\/span>/g)].map((m) => Number(decode(m[1]).replace(/[^\d]/g, ''))));
         for (const o of offers) if (!vis.has(Number(o.price))) err(P, p.url, `Offer.price ${o.price} нет среди видимых цен`);
         for (const v of vis) if (!offers.some((o) => Number(o.price) === v)) err(P, p.url, `видимая цена ${v} нет в Offer`);
         if (/Product/.test(JSON.stringify(j)) && p.url.split('/').filter(Boolean).length < 3) err(P, p.url, 'Product на категории');
@@ -226,12 +226,12 @@ const allText = pages.map((p) => p.text).join('\n');
   if (fact !== ctx.fromPrice) err(P, catPage.url, `цена «от» ${fact} ≠ ${ctx.fromPrice}`);
   // все видимые цены есть в данных
   const known = new Set([...ctx.categories.flatMap((c) => c.rows.map((r) => r.price)), ...(ctx.rental ? [...ctx.rental.units, ...ctx.rental.extras].map((u) => u.price) : []), ...ctx.cities.map((c) => c.delivery_cost).filter((v) => v != null)]);
-  for (const p of pages) for (const m of p.main.matchAll(/<td class="pr"[^>]*><span class="num">([^<]*)<\/span>/g)) { const v = Number(decode(m[1]).replace(/[^\d]/g, '')); if (!known.has(v)) err(P, p.url, `цена ${v} не из прайса`); }
+  for (const p of pages) for (const m of p.main.matchAll(/<td class="pr"[^>]*>(?:<a [^>]*>)?<span class="num">([^<]*)<\/span>/g)) { const v = Number(decode(m[1]).replace(/[^\d]/g, '')); if (!known.has(v)) err(P, p.url, `цена ${v} не из прайса`); }
   // конфигуратор: каждая цена в нём есть в таблице той же страницы, а форма содержит капчу
   for (const p of pages.filter((x) => x.main.includes('data-cfg-data'))) {
     const data = (() => { try { return JSON.parse(decode(p.main.match(/<script type="application\/json" data-cfg-data>([\s\S]*?)<\/script>/)[1]).replace(/\\u003c/g, '<')); } catch { return null; } })();
     if (!data) { err(P, p.url, 'данные конфигуратора не парсятся'); continue; }
-    const tablePrices = new Set([...p.main.matchAll(/<td class="pr"[^>]*><span class="num">([^<]*)<\/span>/g)].map((m) => Number(decode(m[1]).replace(/[^\d]/g, ''))));
+    const tablePrices = new Set([...p.main.matchAll(/<td class="pr"[^>]*>(?:<a [^>]*>)?<span class="num">([^<]*)<\/span>/g)].map((m) => Number(decode(m[1]).replace(/[^\d]/g, ''))));
     for (const r of data.rows) if (!tablePrices.has(r.p)) err(P, p.url, `в конфигураторе цена ${r.p} (${r.l}) отсутствует в таблице страницы`);
     for (const r of data.rows) if (!known.has(r.p)) err(P, p.url, `в конфигураторе цена ${r.p} не из прайса`);
     const keys = new Set(data.rows.map((r) => r.k));

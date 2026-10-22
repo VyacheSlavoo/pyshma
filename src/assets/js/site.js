@@ -341,7 +341,7 @@
         b.setAttribute('data-item', cur.l);
         b.setAttribute('data-volume', vol);
       });
-      $$('tr[data-k]').forEach(function (tr) { tr.classList.toggle('is-sel', tr.getAttribute('data-k') === cur.k); });
+      $$('[data-k]').forEach(function (tr) { tr.classList.toggle('is-sel', tr.getAttribute('data-k') === cur.k); });
     }
 
     var chg2 = out('chg2');

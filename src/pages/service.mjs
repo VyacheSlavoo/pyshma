@@ -4,6 +4,7 @@ import { icon, img, telHref, HOURS_TEXT, HOURS_FULL, minVolText, priceNote, conc
 import { markNum } from '../lib/marks.mjs';
 import { rentalSpec, renderConfigurator, slugify } from '../lib/configurator.mjs';
 import { baseGraph, faqLd, lbId } from '../lib/seo.mjs';
+import { relatedArticles } from './catalog.mjs';
 import { T, sh, media, pagehead, ctaBand, cityCards, deliveryLine, deliveryFaq, pickupLine, paymentLine, gallery, photoGrid, reachSpan, maxReach, pagePhoto } from './common.mjs';
 
 // ---------- Аренда автобетононасоса: отдельный шаблон, без бетонных характеристик ----------
@@ -40,23 +41,20 @@ ${extras.length ? h`<h3 class="tbl-title">Дополнительная техн�
 <div class="table-wrap"><table class="pt"><thead><tr><th>Позиция</th><th>Условия</th><th class="pr">Цена</th><th class="ac"><span class="sr">Заказ</span></th></tr></thead>
 <tbody>${join(extras.map((u) => h`<tr><td class="mk nm" data-l="Позиция">${u.name}</td><td data-l="Условия">${u.note ?? '—'}</td><td class="pr" data-l="Цена"><span class="num">${fmtNum(u.price)}${NBSP}₽</span> <small>/${u.unit}</small></td><td class="ac"><a class="rowlink" href="${telHref(ctx)}">Заказать</a></td></tr>`))}</tbody></table></div>` : ''}
 </div></section>
-<section class="section"><div class="container split split--top">
-<div>
-<p class="eyebrow">Площадка</p>
-<h2>Что подготовить к приезду насоса</h2>
-<div class="feat feat--1">
+<section class="section"><div class="container">
+${sh('Площадка', 'Что подготовить к приезду насоса', 'Перед выездом уточняем адрес и условия площадки. Если что-то из списка не выполнить, скажите при заказе: подберём насос с другой стрелой или место установки.', { row: true })}
+<div class="feat">
 <div class="feat__it">${icon(ctx, 'ruler')}<h3>Ровная площадка под опоры</h3><p>Насос стоит на выносных опорах. Размеры площадки зависят от модели: сообщим их при заказе.</p></div>
 <div class="feat__it">${icon(ctx, 'truck')}<h3>Подъезд для насоса и миксеров</h3><p>Миксеры подъезжают к приёмному бункеру насоса по очереди, поэтому нужен разворот или проезд.</p></div>
-<div class="feat__it">${icon(ctx, 'shield')}<h3>Свободно над стрелой</h3><p>Без проводов и веток в зоне работы стрелы. Перед выездом уточняем адрес и условия площадки.</p></div>
+<div class="feat__it">${icon(ctx, 'shield')}<h3>Свободно над стрелой</h3><p>Без проводов и веток в зоне работы стрелы, иначе насос не сможет раскрыть её полностью.</p></div>
 </div>
-</div>
-<div class="card"><h3>Что входит и что нет</h3>
-<ul class="checks"><li>В цену входит работа техники в указанных единицах (час или метр).</li><li>Бетон и доставка миксерами считаются отдельно: <a href="/price/">прайс-лист</a>.</li><li>Насос и миксеры лучше заказывать на одно время: тогда подача идёт без пауз.</li></ul></div>
+<div class="note after"><b>Что входит в цену.</b> Работа техники в указанных единицах, час или метр. Бетон и доставку миксерами считаем отдельно по <a href="/price/">прайс-листу</a>. Насос и миксеры лучше заказывать на одно время: тогда подача идёт без пауз.</div>
 </div></section>
 <section class="section section--band"><div class="container">
 ${sh('Фото', 'Насосы и миксеры на объектах')}
 ${photoGrid(ctx, { roles: ['fleet'], skip: [pagePhoto(ctx, 'arenda-abn')] })}
 </div></section>
+${relatedArticles(ctx, 'arenda-abn')}
 ${faq(ctx, faqItems)}${ctaBand(ctx, { source: 'rental', title: 'Закажите автобетононасос', sub: 'Назовите адрес, дату и высоту подачи. Подберём насос и согласуем время.' })}`;
   const offer = (name, price, unit) => ({ '@type': 'Offer', name, price: String(price), priceCurrency: 'RUB', url: `${ctx.origin}/catalog/arenda-abn/`, priceSpecification: { '@type': 'UnitPriceSpecification', price: String(price), priceCurrency: 'RUB', unitText: unit } });
   const service = {
@@ -94,11 +92,18 @@ export function deliveryPage(ctx) {
   const pumpPhoto = ctx.photos.find((p) => p.file === 'abn-podacha.jpg') ?? ctx.photos.find((p) => p.role === 'fleet');
   const main = h`${pagehead(ctx, {
     h1, eyebrow: 'Доставка', lead: `Завод: ${site.plant.address}. ${deliveryLine(ctx)} ${pickupLine(ctx, { short: true }) ?? ''}`,
-    facts: [['минимальный заказ', minVolText(ctx)], ['отгрузка', `завод ${site.plant.locality_in}`], ['доставка', HOURS_TEXT]], photo: pagePhoto(ctx, 'dostavka')
+    facts: [['минимальный заказ', minVolText(ctx)], ['отгрузка', 'с завода'], ['доставка', '24/7']], photo: pagePhoto(ctx, 'dostavka')
   })}
 ${ctx.cities.length ? h`<section class="section section--tight"><div class="container">
-${sh('Направления', 'Куда возим бетон', 'Для каждого направления есть своя страница с условиями. Другой адрес назовите при заказе.', { row: true })}
+<div class="split split--top">
+<div>
+<p class="eyebrow">Направления</p>
+<h2>Куда возим бетон</h2>
+<p class="lead">Возим по ${site.plant.district_dat}. Если вашего адреса нет в списке, назовите его при заказе: скажем, сколько едет миксер и сколько стоит доставка.</p>
 ${cityCards(ctx, ctx.cities, { origin: true })}
+</div>
+${media(ctx, (ctx.photos.find((p) => p.file === 'abn-gorod.jpg') ?? ctx.photos.find((p) => p.role === 'fleet')).file, { ico: 'truck' })}
+</div>
 ${withCost.length ? h`<div class="after">${priceNote(ctx, { min: false })}</div><div class="table-wrap"><table class="pt"><thead><tr><th>Направление</th><th>Расстояние</th><th>В пути</th><th class="pr">Доставка</th></tr></thead><tbody>${join(withCost.map((c) => h`<tr><td class="mk nm" data-l="Направление"><a href="${c.url}">${c.name}</a></td><td data-l="Расстояние">${c.distance_km != null ? `${fmtNum(c.distance_km)}${NBSP}км` : '—'}</td><td data-l="В пути">${c.travel_time ?? '—'}</td><td class="pr" data-l="Доставка"><span class="num">${fmtNum(c.delivery_cost)}${NBSP}₽</span> <small>${c.delivery_cost_unit ?? ''}</small></td></tr>`))}</tbody></table></div>` : ''}
 </div></section>` : ''}
 <section class="section section--band"><div class="container split split--top">
@@ -205,8 +210,8 @@ ${faq(ctx, faqItems)}${ctaBand(ctx, { source: `city-${c.slug}`, title: `Зака
 export function galleryPage(ctx) {
   const { site } = ctx;
   const h1 = `Фото завода ${site.plant.locality_in} и техники на объектах`;
-  const main = h`${pagehead(ctx, { h1, eyebrow: 'Фото', lead: `Снимки завода, автобетоносмесителей, автобетононасосов и залитых конструкций из карточки завода на Яндекс Картах. Нажмите на фото, чтобы открыть крупнее.`, actions: false, photo: pagePhoto(ctx, 'gallery') })}
-${gallery(ctx, ['hero', 'plant', 'fleet', 'lab', 'object'], { title: `${ctx.photos.length} фото`, band: false })}
+  const main = h`${pagehead(ctx, { h1, eyebrow: 'Фото', lead: `Снимки завода, автобетоносмесителей, автобетононасосов и залитых конструкций из карточки завода на Яндекс Картах. Нажмите на фото, чтобы открыть крупнее.`, actions: false })}
+${gallery(ctx, ['hero', 'plant', 'fleet', 'lab', 'object'], { title: null, band: false })}
 ${ctaBand(ctx, { source: 'gallery' })}`;
   return {
     url: '/gallery/', crumbs: [{ name: 'Фото', url: '/gallery/' }],

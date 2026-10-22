@@ -10,8 +10,8 @@ export const T = (ctx, key, fallback) => (ctx.texts[key] !== undefined ? ctx.tex
 // Фото для шапок страниц: подбираются по смыслу страницы. Если файла нет в photos.json, фото не выводится.
 const PAGE_PHOTO = {
   'tovarnyy-beton': 'plita-opalubka.jpg', 'beton-s-pmd': 'zima-mikser-nasos.jpg', 'fibrobeton': 'plita-svezhaya.jpg',
-  'gidrotehnicheskiy-beton': 'plita-uchastok.jpg', 'beton-na-melkom-share': 'beton-v-tachke.jpg', 'keramzitobeton': 'pol-pomeschenie.jpg',
-  'suhoy-beton': 'opalubka-lenta.jpg', 'rastvory': 'mikser-zhelob.jpg', 'tsps': 'plita-gotovaya.jpg', 'armatura': 'armokarkas.jpg',
+  'gidrotehnicheskiy-beton': 'plita-uchastok.jpg', 'beton-na-melkom-share': 'beton-v-tachke.jpg', 'keramzitobeton': 'plita-vid-sboku.jpg',
+  'suhoy-beton': 'opalubka-lenta.jpg', 'rastvory': 'plita-gotovaya.jpg', 'tsps': 'pol-pomeschenie.jpg', 'armatura': 'armokarkas.jpg',
   'arenda-abn': 'abn-strela-vylet.jpg', 'price': 'abn-podacha.jpg', 'dostavka': 'mikser-v-nasos.jpg', 'about': 'uzel-territoriya.jpg',
   'contacts': 'uzel-silosy.jpg', 'm200': 'opalubka-lenta.jpg', 'm250': 'plita-uchastok.jpg', 'm300': 'plita-svezhaya.jpg', 'm350': 'abn-podacha-plita.jpg',
   'ekaterinburg': 'abn-gorod.jpg', 'stati': 'plita-vid-sboku.jpg', 'gallery': 'abn-mikseri.jpg'
@@ -63,7 +63,7 @@ export function payMethods(ctx) {
   if (pay.includes('наличными')) out.push(['cash', 'Наличными']);
   if (ctx.site.card?.pay_by_card) out.push(['card', 'Банковской картой']);
   if (pay.includes('банковским переводом') || pay.includes('безналичная')) out.push(['swap', 'Безналичный расчёт, банковский перевод']);
-  if (pay.includes('онлайн')) out.push(['card', 'Онлайн-оплата']);
+  if (pay.includes('онлайн')) out.push(['globe', 'Онлайн-оплата']);
   if (pay.includes('предоплата')) out.push(['doc', 'Предоплата']);
   return out;
 }
@@ -91,7 +91,7 @@ export function gallery(ctx, roles = ['hero', 'plant', 'fleet', 'lab', 'object']
   const list = ctx.photos.filter((p) => roles.includes(p.role)).slice(0, max);
   if (list.length < 2) return '';
   return h`<section class="section${band ? ' section--band' : ''}"><div class="container">
-${sh('Фото', title, sub)}
+${title ? sh('Фото', title, sub) : ''}
 <div class="gallery">${join(list.map((p) => h`<a ${lbAttrs(ctx, p)}>${img(ctx, p.file, { sizes: '(max-width:700px) 50vw, 25vw' })}</a>`))}</div>
 </div></section>`;
 }
@@ -103,13 +103,18 @@ export function photoGrid(ctx, { roles = ['hero', 'plant', 'fleet', 'object'], m
   return h`<div class="photos">${join(list.map((p) => h`<a ${lbAttrs(ctx, p)}>${img(ctx, p.file, { sizes: '(max-width:980px) 50vw, 25vw', alt: p.alt })}${p.caption ? h`<span class="cap">${p.caption}</span>` : ''}</a>`))}${ctx.gallery ? h`<a class="photos__more" href="/gallery/">${icon(ctx, 'grid')}Все фото<small>${ctx.photos.length} ${plural(ctx.photos.length, 'снимок', 'снимка', 'снимков')} завода и объектов</small></a>` : ''}</div>`;
 }
 
+// Страница направления открыта для индекса, когда для неё заполнены расстояние, время или цена доставки.
+// Пока она закрыта, из основного текста на неё не ссылаемся: только из подвала.
+export const cityOpen = (c) => c.distance_km != null || c.travel_time != null || c.delivery_cost != null;
+export const cityChip = (c) => (cityOpen(c) ? h`<a class="chip" href="${c.url}">${c.name}</a>` : h`<span class="chip">${c.name}</span>`);
+
 // Направления доставки: строки со ссылками. origin: первой строкой завод.
 export function cityCards(ctx, list = ctx.cities, { origin = false } = {}) {
   const plant = ctx.site.plant;
   if (!list.length && !origin) return '';
   return h`<ul class="dirs">
 ${origin ? h`<li><div class="dirs__row"><b>${plant.locality}</b><span>завод, самовывоз: ${plant.address}</span></div></li>` : ''}
-${join(list.map((c) => h`<li><a href="${c.url}"><b>${c.name}</b><span>${[c.distance_km != null ? `${fmtNum(c.distance_km)}${NBSP}км от завода` : null, c.travel_time, c.distance_km == null && !c.travel_time ? `доставка с завода ${plant.locality_from}` : null].filter(Boolean).join(', ')}</span></a></li>`))}
+${join(list.map((c) => h`<li>${cityOpen(c) ? raw(`<a href="${c.url}">`) : raw('<div class="dirs__row">')}<b>${c.name}</b><span>${[c.distance_km != null ? `${fmtNum(c.distance_km)}${NBSP}км от завода` : null, c.travel_time, c.distance_km == null && !c.travel_time ? `доставка с завода ${plant.locality_from}` : null].filter(Boolean).join(', ')}</span>${raw(cityOpen(c) ? '</a>' : '</div>')}</li>`))}
 </ul>`;
 }
 
@@ -258,11 +263,11 @@ ${t}
 </article></li>`;
 }
 
-export function articleList(ctx, { limit = 99, title, sub, eyebrow = 'Статьи завода', more = false, level = 3, band = false, list = null } = {}) {
+export function articleList(ctx, { limit = 99, title, sub, eyebrow = 'Статьи завода', more = false, level = 3, band = false, list = null, feat = false } = {}) {
   const items = (list ?? ctx.articles ?? []).slice(0, limit);
   if (!items.length) return '';
   return h`<section class="section${band ? ' section--band' : ''}"><div class="container">
 ${more ? h`<div class="sh sh--row"><div><p class="eyebrow">${eyebrow}</p><h2>${title}</h2></div><p class="sh__link">${sub ? h`${sub} ` : ''}<a class="link-arrow" href="/stati/">Все статьи, ${ctx.articles.length}${icon(ctx, 'arrow')}</a></p></div>` : sh(eyebrow, title, sub)}
-<ul class="agrid">${join(items.map((a) => articleCard(ctx, a, { level })))}</ul>
+<ul class="agrid${feat ? ' agrid--feat' : ''}">${join(items.map((a) => articleCard(ctx, a, { level })))}</ul>
 </div></section>`;
 }
