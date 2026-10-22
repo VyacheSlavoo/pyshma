@@ -729,6 +729,15 @@ dialog.modal::backdrop{background:rgba(20,28,38,.6)}
   .sub__h{padding:12px 0 6px;border-bottom-width:1px}
   .hero__in,.pagehead__in{grid-template-columns:minmax(0,1fr)}
   .hero .media img{aspect-ratio:16/11}
+  /* на узком экране фото идёт после описания и перед тремя карточками */
+  .hero__in{gap:0}
+  .hero__in>div{display:contents}
+  .hero .pill{order:1;justify-self:start}
+  .hero h1{order:2}
+  .hero__lead{order:3}
+  .hero .media{order:4;margin:0 0 28px}
+  .hero .facts3{order:5}
+  .hero__cta{order:6}
   .split,.split--wide,.split--media{grid-template-columns:minmax(0,1fr);gap:40px}
   .split--media>.media{order:-1}
   .sh--row{grid-template-columns:minmax(0,1fr)}
