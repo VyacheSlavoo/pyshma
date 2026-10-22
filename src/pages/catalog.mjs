@@ -44,15 +44,15 @@ export function pricePage(ctx) {
   const h1 = `Прайс-лист на бетон и растворы ${site.plant.locality_in}`;
   const main = h`${pagehead(ctx, {
     h1, eyebrow: 'Прайс-лист', lead: `Цены завода ${site.plant.locality_in} на бетон, растворы, арматуру и аренду автобетононасоса. Откройте карточку, выберите марку и характеристики, и цена пересчитается на ваш объём.`,
-    price: { from: ctx.fromPrice, unit: 'м³' },
-    facts: [['позиций в прайсе', String(ctx.positions)], ['минимальный заказ', minVolText(ctx)], ['отгрузка', HOURS_TEXT.replace('Работаем ', '')]], photo: pagePhoto(ctx, 'price')
+    price: { from: ctx.fromPrice, unit: 'м³' }, actions: false
   })}
-<section class="section"><div class="container">
-${sh('Продукция', 'Продукция и цены', 'Карточка ведёт на страницу раздела: там подбор характеристик и расчёт стоимости вашего объёма.', { row: true })}
+<section class="section section--cards" id="cards"><div class="container">
+<h2 class="sr">Продукция и цены по разделам</h2>
+<nav class="jump" aria-label="Разделы страницы"><a href="#cards">Карточки продукции</a><a href="#tables">Все цены таблицами</a>${ctx.rental ? h`<a href="#arenda-abn">Аренда насосов</a>` : ''}<a href="#zayavka">Заявка</a></nav>
 ${priceNote(ctx)}
 ${productGroups(ctx)}
 </div></section>
-<section class="section section--band"><div class="container">
+<section class="section section--band" id="tables"><div class="container">
 ${sh('Списком', 'Все цены в таблицах', 'Те же позиции, что в карточках, без подбора: откройте нужный раздел.', { row: true })}
 ${join(lists)}${rental}
 </div></section>

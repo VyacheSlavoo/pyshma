@@ -78,8 +78,8 @@ export function navItems(ctx) {
     if (!groups.has(ctx.rental.group)) groups.set(ctx.rental.group, []);
     groups.get(ctx.rental.group).push({ name: 'Аренда автобетононасоса', url: '/catalog/arenda-abn/', from: Math.min(...ctx.rental.units.map((u) => u.price)) });
   }
-  const items = [{ name: 'Цены', url: '/price/' }];
-  items.push({ name: 'Продукция', url: '/price/', sub: [...groups].map(([title, links]) => ({ title, links })), mega: true });
+  const items = [{ name: 'Прайс-лист', url: '/price/' }];
+  items.push({ name: 'Продукция', url: '/price/#cards', sub: [...groups].map(([title, links]) => ({ title, links })), mega: true });
   items.push({ name: 'Доставка', url: '/dostavka/' });
   if (ctx.articles?.length) items.push({ name: 'Статьи', url: '/stati/' });
   items.push({ name: 'О заводе', url: '/about/' });
@@ -107,7 +107,7 @@ ${ctx.preview ? h`<div class="fixture-banner fixture-banner--preview">ПРЕДП
 <a class="brand" href="/" aria-label="${site.brand}: на главную">${brandHtml(ctx, h`<small class="brand__sub">Бетонный завод, ${site.plant.locality}</small><small class="brand__hrs">${HOURS_TEXT}</small>`)}</a>
 <nav class="nav" id="nav" aria-label="Основное меню"><ul class="nav__list">${navHtml(ctx, page)}</ul></nav>
 <div class="hdr__r">
-<a class="hdr__tel" href="${telHref(ctx)}"><b>${icon(ctx, 'phone')}${site.phone.display}</b><small>${HOURS_TEXT}, без выходных</small></a>
+<a class="hdr__tel" href="${telHref(ctx)}"><b>${icon(ctx, 'phone')}${site.phone.display}</b><small>${HOURS_TEXT}</small></a>
 <a class="btn btn--primary btn--sm" href="${String(page.main ?? '').includes('id="zayavka"') ? '#zayavka' : '/contacts/#zayavka'}" data-order>Заявка</a>
 </div>
 <a class="btn btn--primary btn--sm callbtn" href="${telHref(ctx)}" aria-label="Позвонить ${site.phone.display}">${icon(ctx, 'phone')}<span class="callbtn__t">Позвонить</span></a>
