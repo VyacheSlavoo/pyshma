@@ -176,7 +176,7 @@ ${tip('truck', 'Подъезд к месту выгрузки', `Миксеру 
 </div></section>`;
 
   // ---------- порядок заказа ----------
-  const stepPhoto = ctx.photos.find((p) => p.file === 'mikser-zhelob.jpg') ?? ctx.photos.find((p) => p.role === 'fleet');
+  const stepPhoto = ctx.photos.find((p) => p.file === 'abn-opalubka.jpg') ?? ctx.photos.find((p) => p.role === 'fleet');
   const steps = [
     ['Заявка', `Позвоните ${site.phone.display} или оставьте заявку: марка, объём, адрес и удобное время.`],
     ['Расчёт', 'Уточняем подвижность и способ подачи, называем стоимость бетона с доставкой.'],
